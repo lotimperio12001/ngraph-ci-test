@@ -43,7 +43,7 @@ WORKDIR /root
 RUN git clone https://github.com/NervanaSystems/ngraph.git
 RUN mkdir /root/ngraph/build
 WORKDIR /root/ngraph/build
-RUN cmake -DNGRAPH_USE_PREBUILT_LLVM=TRUE -DCMAKE_INSTALL_PREFIX=/root/ngraph_dist -DNGRAPH_ONNX_IMPORT_ENABLE=TRUE -DCMAKE_BUILD_TYPE=Release ..
+RUN cmake -DNGRAPH_USE_PREBUILT_LLVM=TRUE -DNGRAPH_CPU_ENABLE=TRUE -DCMAKE_INSTALL_PREFIX=/root/ngraph_dist -DNGRAPH_ONNX_IMPORT_ENABLE=TRUE -DCMAKE_BUILD_TYPE=Release ..
 RUN make -j"$(nproc)"
 RUN make install
 
@@ -67,9 +67,3 @@ RUN pip install -e .
 # Test report dependencies
 RUN pip install --no-cache-dir pytest && \
     pip install --no-cache-dir tabulate
-
-# Run pytest
-WORKDIR /root/test
-COPY ./test/conftest.py /root/test
-COPY ./test/test_backend.py /root/test
-CMD pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend"
