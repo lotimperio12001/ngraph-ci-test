@@ -2,18 +2,17 @@ version: 2
 jobs:
   build:
     machine: true
-    # working_directory: ~/ngraph-ci-test
+    working_directory: ~/ngraph-ci-test
     steps:
+      - checkout
       - run:
-          command: ls
+          name: Build docker image
+          command: docker build -t test_ngraph_onnx .
 
       - run:
-          command: pwd
+          name: Run docker image
+          command: docker run test_ngraph_onnx
 
-      # - run:
-      #     name: Build docker image
-      #     command: docker build -t test_ngraph_onnx .
-
-      # - run:
-      #     name: Run docker image
-      #     command: docker run test_ngraph_onnx
+    # branches:
+    #   only:
+    #     - master
