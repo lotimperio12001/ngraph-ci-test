@@ -4,6 +4,7 @@ jobs:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
+      - checkout
       - run:
           name: Build docker image
           command: docker build -t test_ngraph_onnx .
