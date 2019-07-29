@@ -5,9 +5,15 @@ jobs:
     working_directory: ~/ngraph-ci-test
     steps:
       - run:
-          name: Build docker image
-          command: docker build -t test_ngraph_onnx .
+          command: ls
 
       - run:
-          name: Run docker image
-          command: docker run test_ngraph_onnx
+          command: pwd
+
+      # - run:
+      #     name: Build docker image
+      #     command: docker build -t test_ngraph_onnx .
+
+      # - run:
+      #     name: Run docker image
+      #     command: docker run test_ngraph_onnx
