@@ -5,7 +5,7 @@ jobs:
     steps:
       - run:
           name: Build docker image
-          command: docker build -t test_ngraph_onnx -f Dockerfile .
+          command: docker build -t test_ngraph_onnx .
 
       - run:
           name: Run docker image
