@@ -13,6 +13,6 @@ jobs:
           name: Run docker image
           command: docker run test_ngraph_onnx
 
-    branches:
-      only:
-        - master
+    # branches:
+    #   only:
+    #     - master
