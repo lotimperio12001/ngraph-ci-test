@@ -21,50 +21,83 @@ def pytest_configure(config):
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
-    # Collect results report
-    failed_report = terminalreporter.stats.get('failed', [])
-    passed_report = terminalreporter.stats.get('passed', [])
-    skipped_report = terminalreporter.stats.get('skipped', [])
-
-    report = dict()
-    report['failed_list'] = [test.nodeid for test in failed_report]
-    report['passed_list'] = [test.nodeid for test in passed_report]
-    report['skipped_list'] = [test.nodeid for test in skipped_report]
-    report['date'] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-
+    # Keys for values to save in report (matched with terminalreporter.stats)
+    report_keys = ['passed', 'failed', 'skipped']
     # Set directory for results
     results_dir = os.environ.get('RESULTS_DIR', os.getcwd())
 
-    # Update file with test summary
-    with open(os.path.join(results_dir, 'report.json'), 'w') as report_file:
-        json.dump(report, report_file)
+    # Collect and save the results
+    report = prepare_report(terminalreporter.stats, report_keys)
+    save_report(report, results_dir)
+    summary = prepare_summary(report)
+    trend = load_trend(results_dir)
+    actual_trend = update_trend(summary, trend)
+    save_trend(actual_trend, results_dir)
 
-    # Count amount of failed, passed and skipped tests
+
+def prepare_report(stats, report_keys):
+    # Return results report based on pytest stats values
+    # that match keys listed in report_keys
+    report = dict()
+    report['date'] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    for key in report_keys:
+        stats_group = stats.get(key, [])
+        if isinstance(stats_group, list):
+            report[key] = []
+            for record in stats_group:
+                if hasattr(record, 'nodeid'):
+                    # Remove file name from test id
+                    split_id = record.nodeid.split('::')
+                    clear_id = filter(lambda x: '.py' not in x, split_id)
+                    record_name = '::'.join(clear_id)
+                    report[key].append(record_name)
+            report[key].sort()
+    return report
+
+
+def prepare_summary(report):
+    # Return tests summary including number of failed and passed tests
     summary = dict()
-    summary['failed_sum'] = len(report.get('failed_list'))
-    summary['passed_sum'] = len(report.get('passed_list'))
-    summary['skipped_sum'] = len(report.get('skipped_list'))
-    summary['date'] = report.get('date')
+    for key in report.keys():
+        if isinstance(report.get(key), list):
+            summary[key] = len(report.get(key))
+    summary['date'] = report.get('date',
+                                 datetime.now().strftime("%m/%d/%Y %H:%M:%S"))
+    return summary
 
-    # Open file with test trends
+
+def save_report(report, results_dir, file_name='report.json'):
+    # Save report to the file
+    with open(os.path.join(results_dir, file_name), 'w') as report_file:
+        json.dump(report, report_file, sort_keys=True)
+
+
+def save_trend(trend, results_dir, file_name='trend.json'):
+    # Save trend data to the file
+    with open(os.path.join(results_dir, file_name), 'w') as trend_file:
+        json.dump(trend, trend_file, sort_keys=True)
+
+
+def load_trend(results_dir, file_name='trend.json'):
+    # Return list of summaries loaded from tests trend file
     # If file is broken, empty or not found create new trend list
     try:
-        with open(os.path.join(results_dir, 'trend.json'), 'r') as trend_file:
+        with open(os.path.join(results_dir, file_name), 'r') as trend_file:
             trend = json.load(trend_file)
     except (IOError, json.decoder.JSONDecodeError):
         trend = []
+    return trend
 
+
+def update_trend(summary, trend):
+    # Return updated trend
     # Append result summary if trend has less than two results or
     # the last one result is different than current,
     # otherwise replace last summary
-    if len(trend) < 2 or \
-       trend[-1].get('failed_sum') != summary.get('failed_sum') or \
-       trend[-1].get('passed_sum') != summary.get('passed_sum') or \
-       trend[-1].get('skipped_sum') != summary.get('skipped_sum'):
+    if len(trend) < 2 or len(summary.keys()) != len(trend[-1].keys()) or \
+       any(trend[-1].get(key) != summary.get(key)
+           for key in summary.keys() if key != 'date'):
         trend.append(summary)
     else:
         trend[-1] = summary
-
-    # Save trend data to the file
-    with open(os.path.join(results_dir, 'trend.json'), 'w') as trend_file:
-        json.dump(trend, trend_file)
+    return trend
