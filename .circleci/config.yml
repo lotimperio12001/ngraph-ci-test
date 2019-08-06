@@ -2,17 +2,13 @@ version: 2
 jobs:
   build:
     machine: true
-    working_directory: ~/ngraph-ci-test
+    working_directory: ~/ngraph-ci-test/onnx-backend-scoreboard
     steps:
       - checkout
       - run:
-          name: Build docker image
-          command: docker build -t test_ngraph_onnx .
+          name: Build ONNX-Runtime docker image
+          command: docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
 
       - run:
           name: Run docker image
-          command: docker run test_ngraph_onnx
-
-    # branches:
-    #   only:
-    #     - master
+          command: docker run --name onnx-runtime -it kmitrus/scoreboard-onnx
