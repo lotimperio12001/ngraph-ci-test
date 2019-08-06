@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Build ONNX-Runtime docker image
-          command: docker build -t scoreboard/onnx -f /onnx-backend-scoreboard/runtimes/onnx-runtime/stable/Dockerfile .
+          command: docker build -t scoreboard/onnx -f onnx-backend-scoreboard/runtimes/onnx-runtime/stable/Dockerfile .
 
       - run:
           name: Run docker image
