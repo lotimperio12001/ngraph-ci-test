@@ -7,11 +7,11 @@ jobs:
       - checkout
       - run:
           name: Build ONNX-Runtime docker image
-          command: cd onnx-backend-scoreboard && docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
+          command: cd onnx-backend-scoreboard && | docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
 
       - run:
           name: Run docker image
-          command: cd onnx-backend-scoreboard && docker run --name onnx-runtime -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/onnx-runtime/stable:/root/results scoreboard/onnx
+          command: cd onnx-backend-scoreboard && docker run --name onnx-runtime -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
   build_and_test_ngraph:
     machine: true
