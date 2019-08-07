@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_and_test_onnx:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -12,3 +12,22 @@ jobs:
       - run:
           name: Run docker image
           command: cd onnx-backend-scoreboard && docker run --name onnx-runtime -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/onnx-runtime/stable:/root/results scoreboard/onnx
+
+  build_and_test_ngraph:
+    machine: true
+    working_directory: ~/ngraph-ci-test
+    steps:
+      - run:
+          name: Build nGraph docker image
+          command: cd onnx-backend-scoreboard && docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
+
+      - run:
+          name: Run nGraph docker image
+          command: cd onnx-backend-scoreboard && docker run --name ngraph -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/ngraph/development:/root/results scoreboard/ngraph
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_and_test_onnx
+      - build_and_test_ngraph
