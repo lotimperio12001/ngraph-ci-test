@@ -17,6 +17,7 @@ jobs:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
+      - checkout
       - run:
           name: Build nGraph docker image
           command: cd onnx-backend-scoreboard && docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
