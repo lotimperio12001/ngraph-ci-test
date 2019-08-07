@@ -17,6 +17,18 @@ jobs:
           name: Commit results
           command: cd onnx-backend-scoreboard/results/onnx-runtime/stable && cat trend.json
 
+      - deploy:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/onnx-backend-scoreboard/results
+          command: |
+            # git config credential.helper 'cache --timeout=120'
+            git config --global user.email "katarzyna.mitrus@intel.com"
+            git config --global user.name "mitruska"
+
+            git add .
+            git commit -m "Scoreboard results"
+            git push -f origin "mitruska/scoreboard:remotes/origin/mitruska/scoreboard"
+
   # build_and_test_ngraph:
   #   machine: true
   #   working_directory: ~/ngraph-ci-test
