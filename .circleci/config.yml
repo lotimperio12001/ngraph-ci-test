@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: Run nGraph docker image
-          command: cd onnx-backend-scoreboard && docker run --name ngraph -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/ngraph/development:/root/results scoreboard/ngraph
+          command: cd onnx-backend-scoreboard && docker run --name ngraph -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/ngraph/development:/root/results scoreboard/ngraph || true
 
 workflows:
   version: 2
