@@ -17,13 +17,18 @@ jobs:
           name: Commit results
           command: cd onnx-backend-scoreboard/results/onnx-runtime/stable && cat trend.json
 
-      - deploy:
+      - add_ssh_keys:
+          fingerprints:
+            - "bd:c5:1d:bf:b0:a9:84:77:0c:96:a0:0f:2c:d0:57:b6"
+
+      - run:
           name: Deploy results
           working_directory: ~/ngraph-ci-test/onnx-backend-scoreboard/results
           command: |
+
             # git config credential.helper 'cache --timeout=120'
-            git config --global user.email "katarzyna.mitrus@intel.com"
-            git config --global user.name "mitruska"
+            # git config --global user.email "katarzyna.mitrus@intel.com"
+            # git config --global user.name "mitruska"
 
             git add .
             git commit -m "Scoreboard results"
