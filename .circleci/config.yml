@@ -17,9 +17,9 @@ jobs:
           name: Commit results
           command: cd onnx-backend-scoreboard/results/onnx-runtime/stable && cat trend.json
 
-      - add_ssh_keys:
-          fingerprints:
-            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
 
       - run:
           name: Deploy results
@@ -32,7 +32,7 @@ jobs:
 
             git add .
             git commit -m "Scoreboard results"
-            git push -f origin mitruska/scoreboard
+            git push origin mitruska/scoreboard
 
   # build_and_test_ngraph:
   #   machine: true
