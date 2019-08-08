@@ -32,7 +32,7 @@ jobs:
 
             git add .
             git commit -m "Scoreboard results"
-            git push -f origin "mitruska/scoreboard:remotes/origin/mitruska/scoreboard"
+            git push -f origin mitruska/scoreboard
 
   # build_and_test_ngraph:
   #   machine: true
