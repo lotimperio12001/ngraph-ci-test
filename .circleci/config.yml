@@ -14,7 +14,7 @@ jobs:
           command: cd onnx-backend-scoreboard && docker run --name onnx-runtime -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
       - run:
-          name: Commit results
+          name: Print results
           command: cd onnx-backend-scoreboard/results/onnx-runtime/stable && cat trend.json
 
       - add_ssh_keys:
