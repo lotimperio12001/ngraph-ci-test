@@ -69,13 +69,13 @@ def prepare_summary(report):
 def save_report(report, results_dir, file_name='report.json'):
     # Save report to the file
     with open(os.path.join(results_dir, file_name), 'w') as report_file:
-        json.dump(report, report_file, sort_keys=True, ident=4)
+        json.dump(report, report_file, sort_keys=True, indent=4)
 
 
 def save_trend(trend, results_dir, file_name='trend.json'):
     # Save trend data to the file
     with open(os.path.join(results_dir, file_name), 'w') as trend_file:
-        json.dump(trend, trend_file, sort_keys=True, ident=4)
+        json.dump(trend, trend_file, sort_keys=True, indent=4)
 
 
 def load_trend(results_dir, file_name='trend.json'):
