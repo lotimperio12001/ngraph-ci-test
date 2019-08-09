@@ -235,9 +235,9 @@ def _update_trend(summary, trend):
         for key in summary.keys()
         if key != "date"
     )
-    # If new result summary is the same like the last one in trend
-    # then update the date value by replacing it,
-    # otherwise append new summary to the trend list
+    # If the new result summary is the same as the last one in trend
+    # then replace the old one to save current date,
+    # otherwise append the new summary to the trend list
     if valid_length or equal_values:
         trend[-1] = summary
     else:
