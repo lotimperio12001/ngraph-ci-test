@@ -231,12 +231,15 @@ def _update_trend(summary, trend):
     # Trend should have at least two results
     valid_length = len(trend) < 2 or summary.keys() == len(trend[-1].keys())
     equal_values = all(
-        trend[-1].get(key) == summary.get(key)
+        summary.get(key) == trend[-1].get(key)
         for key in summary.keys()
         if key != "date"
     )
-    if not valid_length or not equal_values:
-        trend.append(summary)
-    else:
+    # If new result summary is the same like the last one in trend
+    # then update the date value by replacing it,
+    # otherwise append new summary to the trend list
+    if valid_length or equal_values:
         trend[-1] = summary
+    else:
+        trend.append(summary)
     return trend
