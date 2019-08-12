@@ -5,15 +5,15 @@ sudo: required
 
 language: python
 
-services:
-  - docker
 
 install:
-  - docker build -t test_ngraph_onnx -f Dockerfile .
+  - pip install --upgrade pip setuptools
+  - pip install -r requirements_dev.txt
 
 script:
-  - docker run test_ngraph_onnx
+  - flake8 test
 
-branches:
-  only:
-    - "master"
+
+# branches:
+#   only:
+#     - "master"
