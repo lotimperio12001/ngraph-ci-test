@@ -27,7 +27,7 @@ jobs:
             git pull
             git add .
             git commit -m "Scoreboard ONNX-Runtime results [ci skip]"
-            git push origin mitruska/scoreboard
+            git push origin master
 
 
   build_and_test_ngraph:
@@ -57,7 +57,7 @@ jobs:
             git pull
             git add .
             git commit -m "Scoreboard nGraph results [ci skip]"
-            git push origin mitruska/scoreboard
+            git push origin master
 
 workflows:
   version: 2
