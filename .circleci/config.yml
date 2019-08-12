@@ -130,9 +130,15 @@ workflows:
       - build_and_test_tensorflow
 
   nightly:
+    jobs:
+      - build_and_test_onnx
+      - build_and_test_ngraph
+      - build_and_test_pytorch
+      - build_and_test_tensorflow
+
     triggers:
       - schedule:
-          cron: "5 13 * * *"
+          cron: "10 13 * * *"
           filters:
             branches:
               only:
