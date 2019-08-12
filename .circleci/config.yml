@@ -1,18 +1,56 @@
 version: 2
 jobs:
-  build:
+  build_and_test_onnx:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
       - checkout
       - run:
-          name: Build docker image
-          command: docker build -t test_ngraph_onnx .
+          name: Build ONNX-Runtime docker image
+          command: cd onnx-backend-scoreboard && docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
 
       - run:
           name: Run docker image
-          command: docker run test_ngraph_onnx
+          command: cd onnx-backend-scoreboard && docker run --name onnx-runtime -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
-    branches:
-      only:
-        - master
+      - run:
+          name: Print results
+          command: cd onnx-backend-scoreboard/results/onnx-runtime/stable && cat trend.json
+
+      - add_ssh_keys:
+          fingerprints:
+            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+
+      - run:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/onnx-backend-scoreboard/results
+          command: |
+
+            # git config credential.helper 'cache --timeout=120'
+            git config --global user.email "scoreboard@circleci.com"
+            git config --global user.name "scoreboard-circleci"
+
+            git add .
+            git commit -m "Scoreboard results [ci skip]"
+            git push origin mitruska/scoreboard
+
+
+  # build_and_test_ngraph:
+  #   machine: true
+  #   working_directory: ~/ngraph-ci-test
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Build nGraph docker image
+  #         command: cd onnx-backend-scoreboard && docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
+
+  #     - run:
+  #         name: Run nGraph docker image
+  #         command: cd onnx-backend-scoreboard && docker run --name ngraph -it -v ~/ngraph-ci-test/onnx-backend-scoreboard/results/ngraph/development:/root/results scoreboard/ngraph || true
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_and_test_onnx
+      # - build_and_test_ngraph
