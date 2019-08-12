@@ -37,11 +37,11 @@ jobs:
       - checkout
       - run:
           name: Build nGraph docker image
-          command: cd onnx-backend-scoreboard && docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
+          command: docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
 
       - run:
           name: Run nGraph docker image
-          command: cd onnx-backend-scoreboard && docker run --name ngraph -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
+          command: docker run --name ngraph -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
 
       - add_ssh_keys:
           fingerprints:
