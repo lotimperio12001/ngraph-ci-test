@@ -19,7 +19,7 @@ jobs:
 
       - run:
           name: Deploy results
-          working_directory: ~/ngraph-ci-test/onnx-backend-scoreboard/results
+          working_directory: ~/ngraph-ci-test/results
           command: |
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
@@ -49,7 +49,7 @@ jobs:
 
       - run:
           name: Deploy results
-          working_directory: ~/ngraph-ci-test/onnx-backend-scoreboard/results
+          working_directory: ~/ngraph-ci-test/results
           command: |
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
