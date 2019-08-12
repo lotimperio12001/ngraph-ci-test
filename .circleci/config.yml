@@ -129,7 +129,7 @@ workflows:
   #     - build_and_test_pytorch
   #     - build_and_test_tensorflow
 
-  nightly:
+  scheduled-workflow:
     jobs:
       - build_and_test_onnx
       - build_and_test_ngraph
@@ -138,7 +138,7 @@ workflows:
 
     triggers:
       - schedule:
-          cron: "35 13 * * *"
+          cron: "45 11 * * *"
           filters:
             branches:
               only:
