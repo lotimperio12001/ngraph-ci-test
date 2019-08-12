@@ -138,7 +138,7 @@ workflows:
 
     triggers:
       - schedule:
-          cron: "10 13 * * *"
+          cron: "20 13 * * *"
           filters:
             branches:
               only:
