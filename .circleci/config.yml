@@ -97,11 +97,11 @@ jobs:
       - checkout
       - run:
           name: Build tensorflow docker image
-          command: docker build -t scoreboard/tensorflow -f runtimes/tensorflow/development/Dockerfile .
+          command: docker build -t scoreboard/tensorflow -f runtimes/tensorflow/stable/Dockerfile .
 
       - run:
           name: Run nGraph docker image
-          command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/development:/root/results scoreboard/tensorflow || true
+          command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
       - add_ssh_keys:
           fingerprints:
