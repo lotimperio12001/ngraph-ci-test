@@ -105,7 +105,18 @@ jobs:
 
       - run:
           name: Run nGraph docker image
-          command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow
+          command: |
+            ulimit -c unlimited
+            docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow
+
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+
+      - store_artifacts:
+          path: /tmp/core_dumps
           # command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
       # - add_ssh_keys:
