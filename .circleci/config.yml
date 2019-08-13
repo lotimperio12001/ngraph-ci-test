@@ -93,7 +93,6 @@ jobs:
   build_and_test_tensorflow:
     machine: true
     working_directory: ~/ngraph-ci-test
-    parallelism: 4
     steps:
       - checkout
       - run:
