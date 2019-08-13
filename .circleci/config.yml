@@ -99,27 +99,29 @@ jobs:
           name: Build tensorflow docker image
           command: docker build -t scoreboard/tensorflow -f runtimes/tensorflow/stable/Dockerfile .
 
+    - run: CPU INFO
+      command: cat /proc/cpuinfo
+
       - run:
           name: Run nGraph docker image
-          command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
-
+          command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow
           # command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
-      - add_ssh_keys:
-          fingerprints:
-            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
 
-      - run:
-          name: Deploy results
-          working_directory: ~/ngraph-ci-test/results
-          command: |
-            git config --global user.email "scoreboard@circleci.com"
-            git config --global user.name "scoreboard-circleci"
+      # - run:
+      #     name: Deploy results
+      #     working_directory: ~/ngraph-ci-test/results
+      #     command: |
+      #       git config --global user.email "scoreboard@circleci.com"
+      #       git config --global user.name "scoreboard-circleci"
 
-            git pull
-            git add .
-            git commit -m "Scoreboard tensorflow results [ci skip]"
-            git push origin master
+      #       git pull
+      #       git add .
+      #       git commit -m "Scoreboard tensorflow results [ci skip]"
+      #       git push origin master
 
 
 workflows:
