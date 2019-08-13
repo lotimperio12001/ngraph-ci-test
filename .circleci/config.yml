@@ -95,7 +95,8 @@ jobs:
     working_directory: ~/ngraph-ci-test
     steps:
       - checkout
-      - run: CPU INFO
+      - run:
+          name: CPU INFO
           command: cat /proc/cpuinfo
 
       - run:
