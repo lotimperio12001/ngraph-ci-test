@@ -5,7 +5,6 @@ sudo: required
 
 language: python
 
-
 install:
   - pip install --upgrade pip setuptools
   - pip install -r requirements_dev.txt
@@ -13,7 +12,6 @@ install:
 script:
   - flake8 test
 
-
-# branches:
-#   only:
-#     - "master"
+branches:
+  only:
+    - master

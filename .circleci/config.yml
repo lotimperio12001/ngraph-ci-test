@@ -103,6 +103,8 @@ jobs:
           name: Run nGraph docker image
           command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
+          # command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
+
       - add_ssh_keys:
           fingerprints:
             - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
@@ -122,24 +124,24 @@ jobs:
 
 workflows:
   version: 2
-  # build_and_test_all:
+  build_and_test_all:
+    jobs:
+  #     - build_and_test_onnx
+  #     - build_and_test_ngraph
+  #     - build_and_test_pytorch
+      - build_and_test_tensorflow
+
+  # scheduled-workflow:
   #   jobs:
   #     - build_and_test_onnx
   #     - build_and_test_ngraph
   #     - build_and_test_pytorch
   #     - build_and_test_tensorflow
 
-  scheduled-workflow:
-    jobs:
-      - build_and_test_onnx
-      - build_and_test_ngraph
-      - build_and_test_pytorch
-      - build_and_test_tensorflow
-
-    triggers:
-      - schedule:
-          cron: "45 11 * * *"
-          filters:
-            branches:
-              only:
-                - master
+  #   triggers:
+  #     - schedule:
+  #         cron: "45 11 * * *"
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
