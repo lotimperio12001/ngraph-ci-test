@@ -97,7 +97,7 @@ jobs:
       - checkout
       - run:
           name: CPU INFO
-          command: cat /proc/cpuinfo && cat /proc/meminfo
+          command: cat /proc/cpuinfo && cat /proc/meminfo && free >> /tmp/memory_before.log
 
       - run:
           name: Build tensorflow docker image
@@ -110,7 +110,7 @@ jobs:
             docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow
 
       - run:
-          command: free >> /tmp/memory.log
+          command: cat /proc/cpuinfo && cat /proc/meminfo && free >> /tmp/memory_after.log
           when: on_fail
 
       - store_artifacts:
