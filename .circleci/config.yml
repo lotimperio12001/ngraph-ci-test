@@ -95,12 +95,12 @@ jobs:
     working_directory: ~/ngraph-ci-test
     steps:
       - checkout
+      - run: CPU INFO
+          command: cat /proc/cpuinfo
+
       - run:
           name: Build tensorflow docker image
           command: docker build -t scoreboard/tensorflow -f runtimes/tensorflow/stable/Dockerfile .
-
-    - run: CPU INFO
-      command: cat /proc/cpuinfo
 
       - run:
           name: Run nGraph docker image
