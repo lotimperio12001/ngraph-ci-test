@@ -97,7 +97,7 @@ jobs:
       - checkout
       - run:
           name: CPU INFO
-          command: cat /proc/cpuinfo && cat /proc/meminfo && free -h -s 10 >> /tmp/memory.log
+          command: cat /proc/cpuinfo && cat /proc/meminfo
 
       - run:
           name: Build tensorflow docker image
