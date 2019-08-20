@@ -140,8 +140,27 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install requirements
+          command: sudo pip install --upgrade -r requirements_web.txt
+      - run:
           name: Generate static page
-          command: sudo pip install --upgrade -r requirements_web.txt && python3 ./website/generator.py
+          command: python3 ./website/generator.py
+
+      - add_ssh_keys:
+          fingerprints:
+            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+
+      - run:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/index.html
+          command: |
+            git config --global user.email "scoreboard@circleci.com"
+            git config --global user.name "scoreboard-circleci"
+
+            git pull
+            git add .
+            git commit -m "Website update [ci skip]"
+            git push origin master
 
 workflows:
   version: 2
