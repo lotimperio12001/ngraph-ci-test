@@ -1,93 +1,93 @@
 version: 2
 jobs:
-  # build_and_test_onnx:
-  #   machine: true
-  #   working_directory: ~/ngraph-ci-test
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Build ONNX-Runtime docker image
-  #         command: docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
+  build_and_test_onnx:
+    machine: true
+    working_directory: ~/ngraph-ci-test
+    steps:
+      - checkout
+      - run:
+          name: Build ONNX-Runtime docker image
+          command: docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
 
-  #     - run:
-  #         name: Run docker image
-  #         command: docker run --name onnx-runtime -it -v ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
+      - run:
+          name: Run docker image
+          command: docker run --name onnx-runtime -it -v ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
-  #     - add_ssh_keys:
-  #         fingerprints:
-  #           - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+      - add_ssh_keys:
+          fingerprints:
+            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
 
-  #     - run:
-  #         name: Deploy results
-  #         working_directory: ~/ngraph-ci-test/results
-  #         command: |
-  #           git config --global user.email "scoreboard@circleci.com"
-  #           git config --global user.name "scoreboard-circleci"
+      - run:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/results
+          command: |
+            git config --global user.email "scoreboard@circleci.com"
+            git config --global user.name "scoreboard-circleci"
 
-  #           git pull
-  #           git add .
-  #           git commit -m "Scoreboard ONNX-Runtime results [ci skip]"
-  #           git push origin master
-
-
-  # build_and_test_ngraph:
-  #   machine: true
-  #   working_directory: ~/ngraph-ci-test
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Build nGraph docker image
-  #         command: docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
-
-  #     - run:
-  #         name: Run nGraph docker image
-  #         command: docker run --name ngraph -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
-
-  #     - add_ssh_keys:
-  #         fingerprints:
-  #           - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
-
-  #     - run:
-  #         name: Deploy results
-  #         working_directory: ~/ngraph-ci-test/results
-  #         command: |
-  #           git config --global user.email "scoreboard@circleci.com"
-  #           git config --global user.name "scoreboard-circleci"
-
-  #           git pull
-  #           git add .
-  #           git commit -m "Scoreboard nGraph results [ci skip]"
-  #           git push origin master
+            git pull
+            git add .
+            git commit -m "Scoreboard ONNX-Runtime results [ci skip]"
+            git push origin master
 
 
-  # build_and_test_pytorch:
-  #   machine: true
-  #   working_directory: ~/ngraph-ci-test
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Build nGraph docker image
-  #         command: docker build -t scoreboard/pytorch -f runtimes/pytorch/development/Dockerfile .
+  build_and_test_ngraph:
+    machine: true
+    working_directory: ~/ngraph-ci-test
+    steps:
+      - checkout
+      - run:
+          name: Build nGraph docker image
+          command: docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
 
-  #     - run:
-  #         name: Run nGraph docker image
-  #         command: docker run --name pytorch -it -v ~/ngraph-ci-test/results/pytorch/development:/root/results scoreboard/pytorch || true
+      - run:
+          name: Run nGraph docker image
+          command: docker run --name ngraph -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
 
-  #     - add_ssh_keys:
-  #         fingerprints:
-  #           - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+      - add_ssh_keys:
+          fingerprints:
+            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
 
-  #     - run:
-  #         name: Deploy results
-  #         working_directory: ~/ngraph-ci-test/results
-  #         command: |
-  #           git config --global user.email "scoreboard@circleci.com"
-  #           git config --global user.name "scoreboard-circleci"
+      - run:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/results
+          command: |
+            git config --global user.email "scoreboard@circleci.com"
+            git config --global user.name "scoreboard-circleci"
 
-  #           git pull
-  #           git add .
-  #           git commit -m "Scoreboard pytorch results [ci skip]"
-  #           git push origin master
+            git pull
+            git add .
+            git commit -m "Scoreboard nGraph results [ci skip]"
+            git push origin master
+
+
+  build_and_test_pytorch:
+    machine: true
+    working_directory: ~/ngraph-ci-test
+    steps:
+      - checkout
+      - run:
+          name: Build nGraph docker image
+          command: docker build -t scoreboard/pytorch -f runtimes/pytorch/development/Dockerfile .
+
+      - run:
+          name: Run nGraph docker image
+          command: docker run --name pytorch -it -v ~/ngraph-ci-test/results/pytorch/development:/root/results scoreboard/pytorch || true
+
+      - add_ssh_keys:
+          fingerprints:
+            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+
+      - run:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/results
+          command: |
+            git config --global user.email "scoreboard@circleci.com"
+            git config --global user.name "scoreboard-circleci"
+
+            git pull
+            git add .
+            git commit -m "Scoreboard pytorch results [ci skip]"
+            git push origin master
 
 
   build_and_test_tensorflow:
@@ -115,45 +115,45 @@ jobs:
 
       - store_artifacts:
           path: /tmp
-          # command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
+          command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
-      # - add_ssh_keys:
-      #     fingerprints:
-      #       - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
+      - add_ssh_keys:
+          fingerprints:
+            - "f6:08:39:54:98:dc:8d:7c:54:37:76:c3:d5:3f:7c:dc"
 
-      # - run:
-      #     name: Deploy results
-      #     working_directory: ~/ngraph-ci-test/results
-      #     command: |
-      #       git config --global user.email "scoreboard@circleci.com"
-      #       git config --global user.name "scoreboard-circleci"
+      - run:
+          name: Deploy results
+          working_directory: ~/ngraph-ci-test/results
+          command: |
+            git config --global user.email "scoreboard@circleci.com"
+            git config --global user.name "scoreboard-circleci"
 
-      #       git pull
-      #       git add .
-      #       git commit -m "Scoreboard tensorflow results [ci skip]"
-      #       git push origin master
+            git pull
+            git add .
+            git commit -m "Scoreboard tensorflow results [ci skip]"
+            git push origin master
 
 
 workflows:
   version: 2
   build_and_test_all:
     jobs:
-  #     - build_and_test_onnx
-  #     - build_and_test_ngraph
-  #     - build_and_test_pytorch
-      - build_and_test_tensorflow
+      - build_and_test_onnx
+      - build_and_test_ngraph
+      - build_and_test_pytorch
+      # - build_and_test_tensorflow
 
-  # scheduled-workflow:
-  #   jobs:
-  #     - build_and_test_onnx
-  #     - build_and_test_ngraph
-  #     - build_and_test_pytorch
+  scheduled-workflow:
+    jobs:
+      - build_and_test_onnx
+      - build_and_test_ngraph
+      - build_and_test_pytorch
   #     - build_and_test_tensorflow
 
-  #   triggers:
-  #     - schedule:
-  #         cron: "45 11 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
+    triggers:
+      - schedule:
+          cron: "45 11 * * *"
+          filters:
+            branches:
+              only:
+                - master

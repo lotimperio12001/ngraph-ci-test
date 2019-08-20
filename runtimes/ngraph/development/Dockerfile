@@ -77,4 +77,4 @@ ENV CSVDIR=/root/results
 WORKDIR /root/test
 COPY ./test/conftest.py /root/test
 COPY ./test/test_backend.py /root/test
-CMD pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda'
+CMD pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
