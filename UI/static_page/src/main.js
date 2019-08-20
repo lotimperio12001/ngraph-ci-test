@@ -1,7 +1,16 @@
 /* chart.js chart examples */
 
+Chart.defaults.global.defaultFontColor = '#8494a4';
+
 // chart colors
-let colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+let palette = {
+    green: '#adff2f',
+    yellow: '#f4a33c',
+    red: '#e93d27',
+    background: '#042c34'
+}
+let colors = [palette.red, palette.green, '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+
 
 let onnx_summary = { "failed": 51, "passed": 507, "skipped": 0, "date": "08/01/2019 20:40:05" }
 let ngraph_summary = { "failed": 105, "passed": 453, "skipped": 0, "date": "08/01/2019 20:03:03" }
@@ -24,17 +33,19 @@ let chartData = {
     labels: ["S", "M", "T", "W", "T", "F", "S"],
     datasets: [{
             data: [589, 445, 483, 503, 689, 692, 634],
+            label: "ONNX-Runtime",
             backgroundColor: 'transparent',
-            borderColor: colors[0],
+            borderColor: palette.green,
             borderWidth: 4,
-            pointBackgroundColor: colors[0]
+            pointBackgroundColor: palette.green
         },
         {
             data: [639, 465, 493, 478, 589, 632, 674],
-            backgroundColor: colors[3],
-            borderColor: colors[1],
+            label: "nGraph",
+            // backgroundColor: colors[3],
+            borderColor: palette.yellow,
             borderWidth: 4,
-            pointBackgroundColor: colors[1]
+            pointBackgroundColor: palette.yellow
         }
     ]
 };
@@ -43,6 +54,7 @@ if (chLine) {
         type: 'line',
         data: chartData,
         options: {
+
             scales: {
                 xAxes: [{
                     ticks: {
@@ -51,7 +63,7 @@ if (chLine) {
                 }]
             },
             legend: {
-                display: false
+                display: true
             },
             responsive: true
         }
@@ -116,6 +128,11 @@ if (chBar) {
                 xAxes: [{
                     barPercentage: 0.4,
                     categoryPercentage: 0.5
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }]
             }
         }
@@ -130,7 +147,7 @@ let donutOptions = {
 
 // ONNX-Runtime - donut1
 let chDonutData1 = {
-    labels: ['Failed', 'Passed', 'Skipped'],
+    labels: ['Failed', 'Passed'],
     datasets: [{
         backgroundColor: colors.slice(0, 3),
         borderWidth: 0,
@@ -153,7 +170,7 @@ if (chDonut1) {
 
 //  nGraph - donut2
 let chDonutData2 = {
-    labels: ['Failed', 'Passed', 'Skipped'],
+    labels: ['Failed', 'Passed'],
     datasets: [{
         backgroundColor: colors.slice(0, 3),
         borderWidth: 0,
@@ -175,7 +192,7 @@ if (chDonut2) {
 
 // Tensorflow - donut3
 let chDonutData3 = {
-    labels: ['Failed', 'Passed', 'Skipped'],
+    labels: ['Failed', 'Passed'],
     datasets: [{
         backgroundColor: colors.slice(0, 3),
         borderWidth: 0,
@@ -197,7 +214,7 @@ if (chDonut3) {
 
 // Pytorch - donut4
 let chDonutData4 = {
-    labels: ['Failed', 'Passed', 'Skipped'],
+    labels: ['Failed', 'Passed'],
     datasets: [{
         backgroundColor: colors.slice(0, 3),
         borderWidth: 0,
@@ -292,9 +309,3 @@ if (chLine3) {
         options: lineOptions
     });
 }
-
-fetch('https://raw.githubusercontent.com/NervanaSystems/onnx-backend-scoreboard/fcb49a6c0b835babfb5ef05743adbe502b5d8a26/results/tensorflow/stable/json/trend.json?token=AEZHMS4JFRGEKXSXD3JQMFS5KFPTI')
-    .then(res => res.json())
-    .then((out) => {
-        console.log('Output: ', out);
-    }).catch(err => console.error(err));

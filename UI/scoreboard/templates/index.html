@@ -1,61 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./css/base.css" />
 </head>
 
-<body>
-    <div class="container-fluid">
-        <div class="row ">
-            <!-- <div class="col-auto"> -->
-            <h2>&nbsp ONNX Backend Scoreboard </h2>
-            <!-- </div> -->
+<body style="background-color: #042c34; color: #c7d4d3">
+    <div id="content">
+        <div id="layout">
+            {%include 'layout.html' %}
         </div>
-        <div class="row my-2">
-            <div class="col-md-6 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chLine" values="{{values}}"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chBar"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-3 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut1"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut2"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut3"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut4"></canvas>
-                    </div>
-                </div>
-            </div>
+        <div id="footer">
+            {% block footer %} &copy; Copyright 2019 by <a href="https://www.intel.com/content/www/us/en/homepage.html">Intel</a>. {% endblock %}
         </div>
     </div>
-    <script src="main.js"></script>
+    <script src="src/main.js"></script>
 </body>
+
+</html>

@@ -1,0 +1,59 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">ONNX-Runtime</th>
+            <th scope="col">nGraph</th>
+            <th scope="col">Tensorflow</th>
+            <th scope="col">Pytorch</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Version</th>
+            <td>0.5.0</td>
+            <td>dev</td>
+            <td>1.14.0</td>
+            <td>dev</td>
+        </tr>
+        <tr>
+            <th scope="row">Test date</th>
+            <td>{{onnxruntime.trend[-1].date}}</td>
+            <td>{{ngraph.trend[-1].date}}</td>
+            <td>{{tensorflow.trend[-1].date}}</td>
+            <td>{{pytorch.trend[-1].date}}</td>
+        </tr>
+
+        <tr>
+            <th scope="row">Score</th>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body" {% if onnxruntime.coverage.passed> 90%} style="color: #adff2f; font-size: 30pt"{% elif onnxruntime.coverage.passed > 80 %} style="color: #fbff00; font-size: 30pt" {% elif onnxruntime.coverage.passed > 70 %} style="color: #ff8800; font-size: 30pt" {% elif onnxruntime.coverage.passed
+                        > 60 %} style="color: #fbff00; font-size: 30pt" {% else %} style="color: #e93d27; font-size: 30pt" {% endif %}> {{ "{:,.2f}%".format(onnxruntime.coverage.passed) }}
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body" {% if ngraph.coverage.passed> 90%} style="color: #adff2f; font-size: 30pt"{% elif ngraph.coverage.passed > 80 %} style="color: #fbff00; font-size: 30pt" {% elif ngraph.coverage.passed > 70 %} style="color: #ff8800; font-size: 30pt" {% elif ngraph.coverage.passed
+                        > 60 %} style="color: #fbff00; font-size: 30pt" {% else %} style="color: #e93d27; font-size: 30pt" {% endif %}> {{ "{:,.2f}%".format(ngraph.coverage.passed) }}
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body" {% if tensorflow.coverage.passed> 90%} style="color: #adff2f; font-size: 30pt"{% elif tensorflow.coverage.passed > 80 %} style="color: #fbff00; font-size: 30pt" {% elif tensorflow.coverage.passed > 70 %} style="color: #ff8800; font-size: 30pt" {% elif tensorflow.coverage.passed
+                        > 60 %} style="color: #fbff00; font-size: 30pt" {% else %} style="color: #e93d27; font-size: 30pt" {% endif %}> {{ "{:,.2f}%".format(tensorflow.coverage.passed) }}
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body" {% if pytorch.coverage.passed> 90%} style="color: #adff2f; font-size: 30pt"{% elif pytorch.coverage.passed > 80 %} style="color: #fbff00; font-size: 30pt" {% elif pytorch.coverage.passed > 70 %} style="color: #ff8800; font-size: 30pt" {% elif pytorch.coverage.passed
+                        > 60 %} style="color: #fbff00; font-size: 30pt" {% else %} style="color: #e93d27; font-size: 30pt" {% endif %}> {{ "{:,.2f}%".format(pytorch.coverage.passed) }}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
