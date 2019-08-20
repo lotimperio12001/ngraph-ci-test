@@ -31,7 +31,7 @@ pytorch_coverage["failed"] = pytorch_trend[-1].get("failed", 0) / pytorch_covera
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 env = Environment(
-    loader=PackageLoader('scoreboard', 'templates'),
+    loader=PackageLoader('templates-module', 'templates'),
     autoescape=select_autoescape(['html'])
 )
 
@@ -43,5 +43,5 @@ scoreboard_data = {"onnxruntime":{"trend": onnxruntime_trend, "coverage":  onnxr
 index_template = env.get_template('index.html')
 index_static = index_template.render(scoreboard_data)
 
-with open("static_page/index.html", "w") as f:
+with open("../index.html", "w") as f:
     f.write(index_static)

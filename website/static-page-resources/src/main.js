@@ -70,39 +70,6 @@ if (chLine) {
     });
 }
 
-/* large pie/donut chart */
-let chPie = document.getElementById("chPie");
-if (chPie) {
-    new Chart(chPie, {
-        type: 'pie',
-        data: {
-            labels: ['Desktop', 'Phone', 'Tablet', 'Unknown'],
-            datasets: [{
-                backgroundColor: [colors[1], colors[0], colors[2], colors[5]],
-                borderWidth: 0,
-                data: [50, 40, 15, 5]
-            }]
-        },
-        plugins: [{
-            beforeDraw: function(chart) {
-                let width = chart.chart.width,
-                    height = chart.chart.height,
-                    ctx = chart.chart.ctx;
-                ctx.restore();
-                let fontSize = (height / 70).toFixed(2);
-                ctx.font = fontSize + "em sans-serif";
-                ctx.textBaseline = "middle";
-                let text = chart.config.data.datasets[0].data[0] + "%",
-                    textX = Math.round((width - ctx.measureText(text).width) / 2),
-                    textY = height / 2;
-                ctx.fillText(text, textX, textY);
-                ctx.save();
-            }
-        }],
-        options: { layout: { padding: 0 }, legend: { display: false }, cutoutPercentage: 80 }
-    });
-}
-
 /* bar chart */
 let chBar = document.getElementById("chBar");
 if (chBar) {
