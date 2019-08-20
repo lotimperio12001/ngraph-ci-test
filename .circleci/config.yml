@@ -159,7 +159,7 @@ jobs:
 
             git pull
             git add ./index.html
-            git commit -m "Website update [ci skip]"
+            git commit --allow-empty -m "Website update [ci skip]"
             git push origin master
 
 workflows:
