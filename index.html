@@ -13,138 +13,138 @@
     <div id="content">
         <div id="layout">
             <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <h2>&nbsp ONNX Backend Scoreboard </h2>
-        </div>
-    </div>
-    <div class="row my-2">
-        <div class="col-md-2 py-1">
-            <div class="card">
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <h2>&nbsp ONNX Backend Scoreboard </h2>
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-2 py-1">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">ONNX-Runtime</th>
+                                            <th scope="col">nGraph</th>
+                                            <th scope="col">Tensorflow</th>
+                                            <th scope="col">Pytorch</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Version</th>
+                                            <td>0.5.0</td>
+                                            <td>dev</td>
+                                            <td>1.14.0</td>
+                                            <td>dev</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Test date</th>
+                                            <td>08/20/2019 09:59:10</td>
+                                            <td>08/06/2019 09:49:34</td>
+                                            <td>08/06/2019 08:00:11</td>
+                                            <td>08/06/2019 06:51:40</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Score</th>
+                                            <td>
+                                                <div class="card" style="width: 18rem;">
+                                                    <div class="card-body" style="color: #adff2f; font-size: 30pt"> 90.86%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="card" style="width: 18rem;">
+                                                    <div class="card-body" style="color: #e93d27; font-size: 30pt"> 0.00%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="card" style="width: 18rem;">
+                                                    <div class="card-body" style="color: #e93d27; font-size: 30pt"> 0.00%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="card" style="width: 18rem;">
+                                                    <div class="card-body" style="color: #e93d27; font-size: 30pt"> 0.00%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 py-1">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row my-2">
+                            <div class="col-md-6 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chLine" values='{"coverage": {"failed": 100.0, "passed": 0.0, "total": 1}, "trend": [{"date": "08/20/2019 12:29:01", "failed": 1, "passed": 0, "skipped": 0}]}'></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chBar"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-3 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chDonut1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chDonut2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chDonut3"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chDonut4"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-        </div>
-        <div class="col-md-8 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">ONNX-Runtime</th>
-            <th scope="col">nGraph</th>
-            <th scope="col">Tensorflow</th>
-            <th scope="col">Pytorch</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">Version</th>
-            <td>0.5.0</td>
-            <td>dev</td>
-            <td>1.14.0</td>
-            <td>dev</td>
-        </tr>
-        <tr>
-            <th scope="row">Test date</th>
-            <td>08/20/2019 09:59:10</td>
-            <td>08/20/2019 12:29:01</td>
-            <td>08/20/2019 12:29:01</td>
-            <td>08/20/2019 12:29:01</td>
-        </tr>
-        <tr>
-            <th scope="row">Score</th>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body"  style="color: #adff2f; font-size: 30pt"> 90.86%
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body"  style="color: #e93d27; font-size: 30pt" > 0.00%
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body"  style="color: #e93d27; font-size: 30pt" > 0.00%
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body"  style="color: #e93d27; font-size: 30pt" > 0.00%
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 py-1">
-            <div class="card">
-
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="container-fluid">
-    <div class="row my-2">
-        <div class="col-md-6 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chLine" values='{"coverage": {"failed": 100.0, "passed": 0.0, "total": 1}, "trend": [{"date": "08/20/2019 12:29:01", "failed": 1, "passed": 0, "skipped": 0}]}'></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chBar"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row py-2">
-        <div class="col-md-3 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut1"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut2"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut3"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut4"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    </div>
-
-</div>
         </div>
         <div id="footer">
-             &copy; Made by <a href="https://www.intel.com/content/www/us/en/homepage.html">Intel AI</a>. 
+            &copy; Made by <a href="https://www.intel.com/content/www/us/en/homepage.html">Intel AI</a>.
         </div>
     </div>
     <script src="./website/static-page-resources/src/main.js"></script>
