@@ -183,11 +183,11 @@ workflows:
       - build_and_test_ngraph
       - build_and_test_pytorch
   #     - build_and_test_tensorflow
-    - generate_static_page:
-          requires:
-            - build_and_test_onnx
-            - build_and_test_ngraph
-            - build_and_test_pytorch
+      - generate_static_page:
+            requires:
+              - build_and_test_onnx
+              - build_and_test_ngraph
+              - build_and_test_pytorch
 
     triggers:
       - schedule:
