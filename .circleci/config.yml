@@ -136,7 +136,7 @@ jobs:
   generate_static_page:
     working_directory: ~/ngraph-ci-test
     docker:
-      - image: circleci/python:3.6.4  # primary container for the build job
+      - image: circleci/python:3.6.4
     steps:
       - checkout
       - run:
@@ -148,9 +148,9 @@ workflows:
   build_and_test_all:
     jobs:
       - generate_static_page
-      - build_and_test_onnx
-      - build_and_test_ngraph
-      - build_and_test_pytorch
+      # - build_and_test_onnx
+      # - build_and_test_ngraph
+      # - build_and_test_pytorch
       # - build_and_test_tensorflow
 
   scheduled-workflow:
