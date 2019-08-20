@@ -1,14 +1,22 @@
 import json
 
+from datetime import datetime
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 def _load_trend(path):
+    dummy_trend =  [{
+    "date": datetime.now().strftime("%m/%d/%Y %H:%M:%S"),
+    "failed": 1,
+    "passed": 1,
+    "skipped": 1
+    }]
+
     try:
         with open(path, "r") as trend_file:
                 trend = json.load(trend_file)
     except (IOError, json.decoder.JSONDecodeError):
-        trend = []
+        trend = dummy_trend
     return trend
 
 
@@ -18,6 +26,9 @@ ngraph_trend =  [{
     "passed": 453,
     "skipped": 0
 }]
+
+
+
 
 onnxruntime_trend = _load_trend("../results/onnx-runtime/stable/trend.json")
 print(onnxruntime_trend)
