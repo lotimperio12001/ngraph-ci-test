@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./website/static-page-resources/css/base.css" />
+</head>
+
+<body style="background-color: #042c34; color: #c7d4d3">
+    <div id="content">
+        <div id="layout">
+            {%include 'layout.html' %}
+        </div>
+        <div id="footer">
+            {% block footer %} &copy; Made by <a href="https://www.intel.com/content/www/us/en/homepage.html">Intel AI</a>. {% endblock %}
+        </div>
+    </div>
+    <script src="./website/static-page-resources/src/main.js"></script>
+</body>
+
+</html>
