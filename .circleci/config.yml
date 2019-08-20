@@ -140,9 +140,8 @@ jobs:
     steps:
       - checkout
       - run:
-        command: |
-            sudo pip install -r requirements_web.txt
-            python3 ./website/generator.py
+        name: Generate static page
+        command: pip install -r requirements_web.txt && python3 ./website/generator.py
 
 workflows:
   version: 2
