@@ -8,8 +8,8 @@ def _load_trend(path):
     dummy_trend =  [{
     "date": datetime.now().strftime("%m/%d/%Y %H:%M:%S"),
     "failed": 1,
-    "passed": 1,
-    "skipped": 1
+    "passed": 0,
+    "skipped": 0
     }]
 
     try:
@@ -19,42 +19,25 @@ def _load_trend(path):
         trend = dummy_trend
     return trend
 
+def _get_coverage_percentage(trend):
+    coverage = {"total": (trend[-1].get("failed", 0) + trend[-1].get("passed", 0))}
+    coverage["passed"] = trend[-1].get("passed", 0) / coverage.get("total", 1) * 100
+    coverage["failed"] = trend[-1].get("failed", 0) / coverage.get("total", 1) * 100
+    return coverage
 
-ngraph_trend =  [{
-    "date": "08/06/2019 09:49:34",
-    "failed": 105,
-    "passed": 453,
-    "skipped": 0
-}]
-
-
-
-
+# Load trend from file
 onnxruntime_trend = _load_trend("../results/onnx-runtime/stable/trend.json")
-print(onnxruntime_trend)
-
-tensorflow_trend =  [{"date": "08/06/2019 07:29:55", "failed": 64, "passed": 494, "skipped": 0}, {"date": "08/06/2019 08:00:11", "failed": 64, "passed": 494, "skipped": 0}]
-pytorch_trend =  [{"date": "08/06/2019 06:51:40", "failed": 151, "passed": 407, "skipped": 0}]
-
+ngraph_trend =  _load_trend("../results/ngraph/dev/trend.json")
+tensorflow_trend = _load_trend("../results/tensorflow/stable/trend.json")
+pytorch_trend = _load_trend("../results/pytorch/development/trend.json")
 
 # Coverage percentages
-ngraph_coverage = {"total": (ngraph_trend[-1].get("failed", 0) + ngraph_trend[-1].get("passed", 0) + ngraph_trend[-1].get("skipped", 0))}
-ngraph_coverage["passed"] = ngraph_trend[-1].get("passed", 0) / ngraph_coverage.get("total", 1) * 100
-ngraph_coverage["failed"] = ngraph_trend[-1].get("failed", 0) / ngraph_coverage.get("total", 1) * 100
+onnxruntime_coverage = _get_coverage_percentage(onnxruntime_trend)
+ngraph_coverage = _get_coverage_percentage(ngraph_trend)
+tensorflow_coverage = _get_coverage_percentage(tensorflow_trend)
+pytorch_coverage = _get_coverage_percentage(pytorch_trend)
 
-onnxruntime_coverage = {"total": (onnxruntime_trend[-1].get("failed", 0) + onnxruntime_trend[-1].get("passed", 0) + onnxruntime_trend[-1].get("skipped", 0))}
-onnxruntime_coverage["passed"] = onnxruntime_trend[-1].get("passed", 0) / onnxruntime_coverage.get("total", 1) * 100
-onnxruntime_coverage["failed"] = onnxruntime_trend[-1].get("failed", 0) / onnxruntime_coverage.get("total", 1) * 100
-
-tensorflow_coverage = {"total": (tensorflow_trend[-1].get("failed", 0) + tensorflow_trend[-1].get("passed", 0) + tensorflow_trend[-1].get("skipped", 0))}
-tensorflow_coverage["passed"] = tensorflow_trend[-1].get("passed", 0) / tensorflow_coverage.get("total", 1) * 100
-tensorflow_coverage["failed"] = tensorflow_trend[-1].get("failed", 0) / tensorflow_coverage.get("total", 1) * 100
-
-pytorch_coverage = {"total": (pytorch_trend[-1].get("failed", 0) + pytorch_trend[-1].get("passed", 0) + pytorch_trend[-1].get("skipped", 0))}
-pytorch_coverage["passed"] = pytorch_trend[-1].get("passed", 0) / pytorch_coverage.get("total", 1) * 100
-pytorch_coverage["failed"] = pytorch_trend[-1].get("failed", 0) / pytorch_coverage.get("total", 1) * 100
-
-
+# Jinja templates environment
 env = Environment(
     loader=PackageLoader('templates-module', 'templates'),
     autoescape=select_autoescape(['html'])
