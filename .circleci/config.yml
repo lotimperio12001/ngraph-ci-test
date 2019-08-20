@@ -141,7 +141,7 @@ jobs:
       - checkout
       - run:
         command: |
-            sudo pip install -r requirements.web
+            sudo pip install -r requirements_web.txt
             python3 ./website/generator.py
 
 workflows:
