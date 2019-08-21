@@ -24,9 +24,9 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
-            git pull
             git add .
             git commit -m "Scoreboard ONNX-Runtime results [ci skip]"
+            git pull
             git push origin master
 
 
@@ -54,9 +54,10 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
-            git pull
+
             git add .
             git commit -m "Scoreboard nGraph results [ci skip]"
+            git pull
             git push origin master
 
 
@@ -84,9 +85,9 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
-            git pull
             git add .
             git commit -m "Scoreboard pytorch results [ci skip]"
+            git pull
             git push origin master
 
 
@@ -128,9 +129,9 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
-            git pull
             git add .
             git commit -m "Scoreboard tensorflow results [ci skip]"
+            git pull
             git push origin master
 
   generate_static_page:
@@ -157,9 +158,9 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
-            git pull
             git add ./index.html
             git commit --allow-empty -m "Website update [ci skip]"
+            git pull
             git push origin master
 
 

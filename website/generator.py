@@ -70,7 +70,7 @@ def _get_coverage_percentage(trend):
 
 # Load trend from file
 onnxruntime_trend = _load_trend("../results/onnx-runtime/stable/trend.json")
-ngraph_trend = _load_trend("../results/ngraph/dev/trend.json")
+ngraph_trend = _load_trend("../results/ngraph/development/trend.json")
 tensorflow_trend = _load_trend("../results/tensorflow/stable/trend.json")
 pytorch_trend = _load_trend("../results/pytorch/development/trend.json")
 
