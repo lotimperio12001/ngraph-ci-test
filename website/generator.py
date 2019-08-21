@@ -88,10 +88,10 @@ env = Environment(
 
 # Prepare data for templates
 scoreboard_data = {
-    "onnxruntime": {"trend": onnxruntime_trend, "coverage": onnxruntime_coverage},
-    "ngraph": {"trend": ngraph_trend, "coverage": ngraph_coverage},
-    "tensorflow": {"trend": tensorflow_trend, "coverage": tensorflow_coverage},
-    "pytorch": {"trend": pytorch_trend, "coverage": pytorch_coverage},
+    "onnxruntime": {"name": "ONNX-Runtime", "trend": onnxruntime_trend, "coverage": onnxruntime_coverage},
+    "ngraph": {"name": "nGraph", "trend": ngraph_trend, "coverage": ngraph_coverage},
+    "tensorflow": {"name": "Tensorflow", "trend": tensorflow_trend, "coverage": tensorflow_coverage},
+    "pytorch": {"name": "Pytorch", "trend": pytorch_trend, "coverage": pytorch_coverage},
 }
 
 # Generate static page
