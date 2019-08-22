@@ -168,7 +168,7 @@ workflows:
   version: 2
   build_and_test_all:
     jobs:
-      - onnx_build_and_test
+      - onnxruntime_build_and_test
       - ngraph_build_and_test
       - pytorch_build_and_test
       # - tensorflow_build_and_test
@@ -180,7 +180,7 @@ workflows:
 
   scheduled-workflow:
     jobs:
-      - onnx_build_and_test
+      - onnxruntime_build_and_test
       - ngraph_build_and_test
       - pytorch_build_and_test
   #     - tensorflow_build_and_test
