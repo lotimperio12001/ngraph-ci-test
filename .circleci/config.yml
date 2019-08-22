@@ -56,7 +56,7 @@ jobs:
 
             git add .
             git commit -m "Scoreboard nGraph results [ci skip]"
-            git pull origin master --no-edit
+            git pull --rebase
             git push origin master
 
 
