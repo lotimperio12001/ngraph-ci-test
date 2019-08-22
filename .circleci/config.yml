@@ -105,7 +105,7 @@ jobs:
           command: docker build -t scoreboard/tensorflow -f runtimes/tensorflow/stable/Dockerfile .
 
       - run:
-          name: Run nGraph docker image
+          name: Run tensorflow docker container
           command: |
             ulimit -c unlimited
             docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true

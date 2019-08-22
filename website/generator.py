@@ -5,6 +5,7 @@ Jinja2 docs: https://jinja.palletsprojects.com/en/2.10.x/api/
 
 import json
 
+from collections import OrderedDict
 from datetime import datetime
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -54,6 +55,27 @@ def _load_trend(path):
     return trend
 
 
+def _mark_coverage(percentage):
+    """Return mark from A to F based on passed tests percentage.
+
+    :param percentage: Percentage of passed unit tests.
+    :type percentage: float
+    :return: Mark from A to F.
+    :rtype: str
+    """
+    mark_table = {
+        "A": (90, 101),
+        "B": (80, 90),
+        "C": (70, 80),
+        "D": (60, 70),
+        "E": (50, 60),
+        "F": (0, 50),
+    }
+    for mark, mark_range in mark_table.items():
+        if int(percentage) in range(*mark_range):
+            return mark
+
+
 def _get_coverage_percentage(trend):
     """Create and return dict with passed and failed tests percentage.
 
@@ -65,6 +87,7 @@ def _get_coverage_percentage(trend):
     coverage = {"total": (trend[-1].get("failed", 0) + trend[-1].get("passed", 0))}
     coverage["passed"] = trend[-1].get("passed", 0) / coverage.get("total", 1) * 100
     coverage["failed"] = trend[-1].get("failed", 0) / coverage.get("total", 1) * 100
+    coverage["mark"] = _mark_coverage(coverage["passed"])
     return coverage
 
 
@@ -87,16 +110,69 @@ env = Environment(
 )
 
 # Prepare data for templates
-scoreboard_data = {
-    "onnxruntime": {"name": "ONNX-Runtime", "trend": onnxruntime_trend, "coverage": onnxruntime_coverage},
-    "ngraph": {"name": "nGraph", "trend": ngraph_trend, "coverage": ngraph_coverage},
-    "tensorflow": {"name": "Tensorflow", "trend": tensorflow_trend, "coverage": tensorflow_coverage},
-    "pytorch": {"name": "Pytorch", "trend": pytorch_trend, "coverage": pytorch_coverage},
-}
+database_stable = OrderedDict(
+    {
+        "onnxruntime": {
+            "version": {"onnx": "1.5", "backend": "0.5.0"},
+            "name": "ONNX-Runtime",
+            "trend": onnxruntime_trend,
+            "coverage": onnxruntime_coverage,
+        },
+        "ngraph": {
+            "version": {"onnx": "1.5", "backend": "dev"},
+            "name": "nGraph",
+            "trend": ngraph_trend,
+            "coverage": ngraph_coverage,
+        },
+        "tensorflow": {
+            "version": {"onnx": "1.5", "backend": "1.14.0"},
+            "name": "Tensorflow",
+            "trend": tensorflow_trend,
+            "coverage": tensorflow_coverage,
+        },
+        "pytorch": {
+            "version": {"onnx": "1.5", "backend": "dev"},
+            "name": "Pytorch",
+            "trend": pytorch_trend,
+            "coverage": pytorch_coverage,
+        },
+    }
+)
+
+database_dev = OrderedDict(
+    {
+        "onnxruntime": {
+            "version": {"onnx": "1.5", "backend": "0.5.0"},
+            "name": "ONNX-Runtime",
+            "trend": onnxruntime_trend,
+            "coverage": onnxruntime_coverage,
+        },
+        "ngraph": {
+            "version": {"onnx": "1.5", "backend": "dev"},
+            "name": "nGraph",
+            "trend": ngraph_trend,
+            "coverage": ngraph_coverage,
+        },
+        "tensorflow": {
+            "version": {"onnx": "1.5", "backend": "1.14.0"},
+            "name": "Tensorflow",
+            "trend": tensorflow_trend,
+            "coverage": tensorflow_coverage,
+        },
+        "pytorch": {
+            "version": {"onnx": "1.5", "backend": "dev"},
+            "name": "Pytorch",
+            "trend": pytorch_trend,
+            "coverage": pytorch_coverage,
+        },
+    }
+)
 
 # Generate static page
 index_template = env.get_template("index.html")
-index_static = index_template.render(scoreboard_data)
+index_static = index_template.render(
+    database_dev=database_dev, database_stable=database_stable
+)
 
 # Save static page to file
 with open("../index.html", "w") as f:
