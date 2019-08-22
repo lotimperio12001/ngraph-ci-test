@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_and_test_onnx:
+  onnxruntime_build_and_test:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -10,7 +10,7 @@ jobs:
           command: docker build -t scoreboard/onnx -f runtimes/onnx-runtime/stable/Dockerfile .
 
       - run:
-          name: Run docker image
+          name: Run docker container
           command: docker run --name onnx-runtime -it -v ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
       - add_ssh_keys:
@@ -30,7 +30,7 @@ jobs:
             git push origin master
 
 
-  build_and_test_ngraph:
+  ngraph_build_and_test:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -40,7 +40,7 @@ jobs:
           command: docker build -t scoreboard/ngraph -f runtimes/ngraph/development/Dockerfile .
 
       - run:
-          name: Run nGraph docker image
+          name: Run nGraph docker container
           command: docker run --name ngraph -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
 
       - add_ssh_keys:
@@ -54,24 +54,23 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
-
             git add .
-            git commit -m "Scoreboard nGraph results [ci skip]"
             git pull origin master
+            git commit -m "Scoreboard nGraph results [ci skip]"
             git push origin master
 
 
-  build_and_test_pytorch:
+  pytorch_build_and_test:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
       - checkout
       - run:
-          name: Build nGraph docker image
+          name: Build Pytorch docker image
           command: docker build -t scoreboard/pytorch -f runtimes/pytorch/development/Dockerfile .
 
       - run:
-          name: Run nGraph docker image
+          name: Run Pytorch docker container
           command: docker run --name pytorch -it -v ~/ngraph-ci-test/results/pytorch/development:/root/results scoreboard/pytorch || true
 
       - add_ssh_keys:
@@ -88,10 +87,11 @@ jobs:
             git add .
             git commit -m "Scoreboard pytorch results [ci skip]"
             git pull origin master
-            git push origin master -f
+            git merge --no-edit
+            git push origin master
 
 
-  build_and_test_tensorflow:
+  tensorflow_build_and_test:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
