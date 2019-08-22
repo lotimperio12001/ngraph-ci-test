@@ -174,7 +174,7 @@ workflows:
       # - tensorflow_build_and_test
       - generate_static_page:
           requires:
-            - onnx_build_and_test
+            - onnxruntime_build_and_test
             - ngraph_build_and_test
             - pytorch_build_and_test
 
@@ -186,7 +186,7 @@ workflows:
   #     - tensorflow_build_and_test
       - generate_static_page:
             requires:
-              - onnx_build_and_test
+              - onnxruntime_build_and_test
               - ngraph_build_and_test
               - pytorch_build_and_test
 
