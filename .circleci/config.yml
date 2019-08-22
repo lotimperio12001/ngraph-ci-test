@@ -55,8 +55,8 @@ jobs:
             git config --global user.name "scoreboard-circleci"
 
             git add .
-            git pull origin master
             git commit -m "Scoreboard nGraph results [ci skip]"
+            git pull origin master --no-edit
             git push origin master
 
 
