@@ -7,7 +7,7 @@
     <div class="row justify-content-center my-1">
         <div>
             {% with database=database_stable %}
-                {%include "table.html" %}
+                {%include "score_table.html" %}
             {% endwith %}
         </div>
     </div>
@@ -15,6 +15,18 @@
         <div>
             {% with database=database_stable %}
                 {%include "charts.html" %}
+            {% endwith %}
+        </div>
+    </div>
+     <div class="row justify-content-center">
+        <div class="col-auto">
+            <h2>Operators coverage</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center my-1">
+        <div>
+            {% with database=database_stable %}
+                {%include "ops_table.html" %}
             {% endwith %}
         </div>
     </div>

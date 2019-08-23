@@ -1,0 +1,16 @@
+<table class="table transposed">
+    <tr>
+        <th scope="col">&nbsp</th>
+        {% for op_name, _ in database.onnxruntime.ops.items() %}
+            <th scope="row">{{ op_name }}</th>
+        {% endfor %}
+    </tr>
+    {% for framework, data in database.items() %}
+    <tr>
+        <th scope="row">{{ data.name }}</th>
+        {% for op_name, output in data.ops.items() %}
+            <td class='{{ output }}'>{{ output |capitalize }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>

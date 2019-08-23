@@ -3,6 +3,16 @@ body {
     background-color: #042c34;
 }
 
+h1 {
+    margin: 2vh;
+    padding: 3vh;
+}
+
+h2 {
+    margin: 1vh;
+    padding: 3vh;
+}
+
 .table {
     color: #c7d4d3;
 }
@@ -18,6 +28,14 @@ body {
 
 .transposed td {
     display: block;
+}
+
+.Passed {
+    color: #adff2f;
+}
+
+.Failed {
+    color: #f81f1f;
 }
 
 .A {

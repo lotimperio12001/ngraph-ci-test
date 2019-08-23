@@ -3,6 +3,7 @@
 Jinja2 docs: https://jinja.palletsprojects.com/en/2.10.x/api/
 """
 
+import csv
 import json
 
 from collections import OrderedDict
@@ -91,7 +92,22 @@ def _get_coverage_percentage(trend):
     return coverage
 
 
-# Load trend from file
+def _load_ops_csv(path):
+    ops_table = OrderedDict()
+    with open(path, newline="") as csv_file:
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            ops_table[row["Op"]] = row.get("None").replace("!", "")
+    return ops_table
+
+
+# Load Ops coverage table from csv file
+onnxruntime_ops = _load_ops_csv("../results/onnx-runtime/stable/nodes.csv")
+ngraph_ops = _load_ops_csv("../results/ngraph/development/nodes.csv")
+tensorflow_ops = _load_ops_csv("../results/tensorflow/stable/nodes.csv")
+pytorch_ops = _load_ops_csv("../results/pytorch/development/nodes.csv")
+
+# Load trend from json file
 onnxruntime_trend = _load_trend("../results/onnx-runtime/stable/trend.json")
 ngraph_trend = _load_trend("../results/ngraph/development/trend.json")
 tensorflow_trend = _load_trend("../results/tensorflow/stable/trend.json")
@@ -103,12 +119,6 @@ ngraph_coverage = _get_coverage_percentage(ngraph_trend)
 tensorflow_coverage = _get_coverage_percentage(tensorflow_trend)
 pytorch_coverage = _get_coverage_percentage(pytorch_trend)
 
-# Create Jinja2 templates environment
-env = Environment(
-    loader=PackageLoader("templates-module", "templates"),
-    autoescape=select_autoescape(["html"]),
-)
-
 # Prepare data for templates
 database_stable = OrderedDict(
     {
@@ -117,24 +127,28 @@ database_stable = OrderedDict(
             "name": "ONNX-Runtime",
             "trend": onnxruntime_trend,
             "coverage": onnxruntime_coverage,
+            "ops": onnxruntime_ops,
         },
         "ngraph": {
             "version": {"onnx": "1.5", "backend": "dev"},
             "name": "nGraph",
             "trend": ngraph_trend,
             "coverage": ngraph_coverage,
+            "ops": ngraph_ops,
         },
         "tensorflow": {
             "version": {"onnx": "1.5", "backend": "1.14.0"},
             "name": "Tensorflow",
             "trend": tensorflow_trend,
             "coverage": tensorflow_coverage,
+            "ops": onnxruntime_ops,
         },
         "pytorch": {
             "version": {"onnx": "1.5", "backend": "dev"},
             "name": "Pytorch",
             "trend": pytorch_trend,
             "coverage": pytorch_coverage,
+            "ops": onnxruntime_ops,
         },
     }
 )
@@ -166,6 +180,30 @@ database_dev = OrderedDict(
             "coverage": pytorch_coverage,
         },
     }
+)
+
+# Sort data by score
+database_stable = OrderedDict(
+    sorted(
+        database_stable.items(),
+        key=lambda item: item[1]["coverage"]["passed"],
+        reverse=True,
+    )
+)
+database_dev = OrderedDict(
+    sorted(
+        database_dev.items(),
+        key=lambda item: item[1]["coverage"]["passed"],
+        reverse=True,
+    )
+)
+
+
+# Website
+# Create Jinja2 templates environment
+env = Environment(
+    loader=PackageLoader("templates-module", "templates"),
+    autoescape=select_autoescape(["html"]),
 )
 
 # Generate static page
