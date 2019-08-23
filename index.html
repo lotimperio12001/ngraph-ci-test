@@ -23,7 +23,7 @@
     <div class="row justify-content-center my-1">
         <div>
             
-                <table class="table transposed">
+                <table class="table">
     <tr>
         <th scope="col">&nbsp</th>
         <th scope="row">Version</th>
@@ -34,21 +34,10 @@
     <tr>
         <th scope="row">ONNX-Runtime</th>
         <td>0.5.0</td>
-        <td>08/22/2019 08:02:57</td>
+        <td>08/12/2019 21:49:13</td>
         <td>
             <div class='A'>
                 90.86%
-            </div>
-        </td>
-    </tr>
-    
-    <tr>
-        <th scope="row">nGraph</th>
-        <td>dev</td>
-        <td>08/20/2019 11:57:27</td>
-        <td>
-            <div class='B'>
-                81.18%
             </div>
         </td>
     </tr>
@@ -65,9 +54,20 @@
     </tr>
     
     <tr>
+        <th scope="row">nGraph</th>
+        <td>dev</td>
+        <td>08/06/2019 09:49:34</td>
+        <td>
+            <div class='B'>
+                81.18%
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
         <th scope="row">Pytorch</th>
         <td>dev</td>
-        <td>08/20/2019 15:03:02</td>
+        <td>08/06/2019 06:51:40</td>
         <td>
             <div class='C'>
                 72.94%
@@ -82,7 +82,7 @@
     <div class="row justify-content-center my-1">
         <div>
             
-                <div id="charts" database='{"ngraph": {"coverage": {"failed": 18.817204301075268, "mark": "B", "passed": 81.18279569892472, "total": 558}, "name": "nGraph", "trend": [{"date": "08/20/2019 11:57:27", "failed": 105, "passed": 453, "skipped": 0}], "version": {"backend": "dev", "onnx": "1.5"}}, "onnxruntime": {"coverage": {"failed": 9.13978494623656, "mark": "A", "passed": 90.86021505376344, "total": 558}, "name": "ONNX-Runtime", "trend": [{"date": "08/22/2019 08:02:57", "failed": 51, "passed": 507, "skipped": 0}], "version": {"backend": "0.5.0", "onnx": "1.5"}}, "pytorch": {"coverage": {"failed": 27.060931899641577, "mark": "C", "passed": 72.93906810035843, "total": 558}, "name": "Pytorch", "trend": [{"date": "08/20/2019 15:03:02", "failed": 151, "passed": 407, "skipped": 0}], "version": {"backend": "dev", "onnx": "1.5"}}, "tensorflow": {"coverage": {"failed": 11.469534050179211, "mark": "B", "passed": 88.5304659498208, "total": 558}, "name": "Tensorflow", "trend": [{"date": "08/06/2019 07:29:55", "failed": 64, "passed": 494, "skipped": 0}, {"date": "08/06/2019 08:00:11", "failed": 64, "passed": 494, "skipped": 0}], "version": {"backend": "1.14.0", "onnx": "1.5"}}}'>
+                <div id="charts" database='{"ngraph": {"coverage": {"failed": 18.817204301075268, "mark": "B", "passed": 81.18279569892472, "total": 558}, "name": "nGraph", "ops": {"Abs": "Passed", "Acos": "Passed", "Acosh": "Passed", "Add": "Passed", "And": "Passed", "ArgMax": "Passed", "ArgMin": "Passed", "Asin": "Passed", "Asinh": "Passed", "Atan": "Passed", "Atanh": "Passed", "AveragePool": "Passed", "BatchNormalization": "Passed", "Cast": "Passed", "Ceil": "Passed", "Clip": "Passed", "Compress": "Failed", "Concat": "Passed", "Constant": "Passed", "ConstantOfShape": "Failed", "Conv": "Passed", "ConvInteger": "Failed", "ConvTranspose": "Passed", "Cos": "Passed", "Cosh": "Passed", "DepthToSpace": "Passed", "DequantizeLinear": "Failed", "Div": "Passed", "Dropout": "Passed", "Elu": "Passed", "Equal": "Passed", "Erf": "Passed", "Exp": "Passed", "Expand": "Failed", "EyeLike": "Passed", "Flatten": "Passed", "Floor": "Passed", "GRU": "Failed", "Gather": "Passed", "Gemm": "Passed", "GlobalAveragePool": "Passed", "GlobalLpPool": "Failed", "GlobalMaxPool": "Passed", "Greater": "Passed", "HardSigmoid": "Passed", "Hardmax": "Passed", "Identity": "Passed", "If": "Failed", "InstanceNormalization": "Passed", "IsInf": "Failed", "IsNaN": "Failed", "LRN": "Passed", "LSTM": "Passed", "LeakyRelu": "Passed", "Less": "Passed", "Log": "Passed", "LogSoftmax": "Passed", "Loop": "Failed", "LpNormalization": "Failed", "LpPool": "Failed", "MatMul": "Passed", "MatMulInteger": "Failed", "Max": "Passed", "MaxPool": "Passed", "MaxRoiPool": "Failed", "MaxUnpool": "Failed", "Mean": "Passed", "MeanVarianceNormalization": "Passed", "Min": "Passed", "Mod": "Failed", "Mul": "Passed", "Multinomial": "Failed", "Neg": "Passed", "NonMaxSuppression": "Failed", "NonZero": "Failed", "Not": "Passed", "OneHot": "Failed", "Or": "Passed", "PRelu": "Passed", "Pad": "Passed", "Pow": "Passed", "QLinearConv": "Failed", "QLinearMatMul": "Failed", "QuantizeLinear": "Failed", "RNN": "Failed", "RandomNormal": "Failed", "RandomNormalLike": "Failed", "RandomUniform": "Failed", "RandomUniformLike": "Failed", "Reciprocal": "Passed", "ReduceL1": "Passed", "ReduceL2": "Passed", "ReduceLogSum": "Passed", "ReduceLogSumExp": "Passed", "ReduceMax": "Passed", "ReduceMean": "Passed", "ReduceMin": "Passed", "ReduceProd": "Passed", "ReduceSum": "Passed", "ReduceSumSquare": "Passed", "Relu": "Passed", "Reshape": "Passed", "Resize": "Failed", "ReverseSequence": "Passed", "RoiAlign": "Failed", "Scan": "Failed", "Scatter": "Failed", "Selu": "Passed", "Shape": "Passed", "Shrink": "Passed", "Sigmoid": "Passed", "Sign": "Passed", "Sin": "Passed", "Sinh": "Passed", "Size": "Passed", "Slice": "Passed", "Softmax": "Passed", "Softplus": "Passed", "Softsign": "Passed", "SpaceToDepth": "Failed", "Split": "Passed", "Sqrt": "Passed", "Squeeze": "Passed", "StringNormalizer": "Failed", "Sub": "Passed", "Sum": "Passed", "Summary": "98/137 node tests passed", "Tan": "Passed", "Tanh": "Passed", "TfIdfVectorizer": "Failed", "ThresholdedRelu": "Passed", "Tile": "Failed", "TopK": "Failed", "Transpose": "Passed", "Unsqueeze": "Passed", "Upsample": "Failed", "Where": "Passed", "Xor": "Passed"}, "trend": [{"date": "08/06/2019 09:49:34", "failed": 105, "passed": 453, "skipped": 0}], "version": {"backend": "dev", "onnx": "1.5"}}, "onnxruntime": {"coverage": {"failed": 9.13978494623656, "mark": "A", "passed": 90.86021505376344, "total": 558}, "name": "ONNX-Runtime", "ops": {"Abs": "Passed", "Acos": "Passed", "Acosh": "Passed", "Add": "Passed", "And": "Passed", "ArgMax": "Passed", "ArgMin": "Passed", "Asin": "Passed", "Asinh": "Passed", "Atan": "Passed", "Atanh": "Passed", "AveragePool": "Passed", "BatchNormalization": "Passed", "Cast": "Passed", "Ceil": "Passed", "Clip": "Passed", "Compress": "Passed", "Concat": "Passed", "Constant": "Passed", "ConstantOfShape": "Passed", "Conv": "Passed", "ConvInteger": "Passed", "ConvTranspose": "Passed", "Cos": "Passed", "Cosh": "Passed", "DepthToSpace": "Passed", "DequantizeLinear": "Passed", "Div": "Passed", "Dropout": "Passed", "Elu": "Passed", "Equal": "Passed", "Erf": "Passed", "Exp": "Passed", "Expand": "Passed", "EyeLike": "Passed", "Flatten": "Passed", "Floor": "Passed", "GRU": "Passed", "Gather": "Passed", "Gemm": "Passed", "GlobalAveragePool": "Passed", "GlobalLpPool": "Failed", "GlobalMaxPool": "Passed", "Greater": "Passed", "HardSigmoid": "Passed", "Hardmax": "Passed", "Identity": "Passed", "If": "Failed", "InstanceNormalization": "Passed", "IsInf": "Passed", "IsNaN": "Passed", "LRN": "Passed", "LSTM": "Passed", "LeakyRelu": "Passed", "Less": "Passed", "Log": "Passed", "LogSoftmax": "Passed", "Loop": "Failed", "LpNormalization": "Failed", "LpPool": "Failed", "MatMul": "Passed", "MatMulInteger": "Passed", "Max": "Passed", "MaxPool": "Passed", "MaxRoiPool": "Failed", "MaxUnpool": "Passed", "Mean": "Passed", "MeanVarianceNormalization": "Passed", "Min": "Passed", "Mod": "Passed", "Mul": "Passed", "Multinomial": "Failed", "Neg": "Passed", "NonMaxSuppression": "Passed", "NonZero": "Passed", "Not": "Passed", "OneHot": "Passed", "Or": "Passed", "PRelu": "Passed", "Pad": "Passed", "Pow": "Passed", "QLinearConv": "Passed", "QLinearMatMul": "Passed", "QuantizeLinear": "Passed", "RNN": "Passed", "RandomNormal": "Failed", "RandomNormalLike": "Failed", "RandomUniform": "Failed", "RandomUniformLike": "Failed", "Reciprocal": "Passed", "ReduceL1": "Passed", "ReduceL2": "Passed", "ReduceLogSum": "Passed", "ReduceLogSumExp": "Passed", "ReduceMax": "Passed", "ReduceMean": "Passed", "ReduceMin": "Passed", "ReduceProd": "Passed", "ReduceSum": "Passed", "ReduceSumSquare": "Passed", "Relu": "Passed", "Reshape": "Passed", "Resize": "Passed", "ReverseSequence": "Passed", "RoiAlign": "Passed", "Scan": "Passed", "Scatter": "Passed", "Selu": "Passed", "Shape": "Passed", "Shrink": "Passed", "Sigmoid": "Passed", "Sign": "Passed", "Sin": "Passed", "Sinh": "Passed", "Size": "Passed", "Slice": "Passed", "Softmax": "Passed", "Softplus": "Passed", "Softsign": "Passed", "SpaceToDepth": "Failed", "Split": "Passed", "Sqrt": "Passed", "Squeeze": "Passed", "StringNormalizer": "Failed", "Sub": "Passed", "Sum": "Passed", "Summary": "124/137 node tests passed", "Tan": "Passed", "Tanh": "Passed", "TfIdfVectorizer": "Passed", "ThresholdedRelu": "Passed", "Tile": "Passed", "TopK": "Passed", "Transpose": "Passed", "Unsqueeze": "Passed", "Upsample": "Passed", "Where": "Passed", "Xor": "Passed"}, "trend": [{"date": "08/12/2019 21:49:13", "failed": 51, "passed": 507, "skipped": 0}], "version": {"backend": "0.5.0", "onnx": "1.5"}}, "pytorch": {"coverage": {"failed": 27.060931899641577, "mark": "C", "passed": 72.93906810035843, "total": 558}, "name": "Pytorch", "ops": {"Abs": "Passed", "Acos": "Passed", "Acosh": "Passed", "Add": "Passed", "And": "Passed", "ArgMax": "Passed", "ArgMin": "Passed", "Asin": "Passed", "Asinh": "Passed", "Atan": "Passed", "Atanh": "Passed", "AveragePool": "Passed", "BatchNormalization": "Passed", "Cast": "Passed", "Ceil": "Passed", "Clip": "Passed", "Compress": "Passed", "Concat": "Passed", "Constant": "Passed", "ConstantOfShape": "Passed", "Conv": "Passed", "ConvInteger": "Passed", "ConvTranspose": "Passed", "Cos": "Passed", "Cosh": "Passed", "DepthToSpace": "Passed", "DequantizeLinear": "Passed", "Div": "Passed", "Dropout": "Passed", "Elu": "Passed", "Equal": "Passed", "Erf": "Passed", "Exp": "Passed", "Expand": "Passed", "EyeLike": "Passed", "Flatten": "Passed", "Floor": "Passed", "GRU": "Passed", "Gather": "Passed", "Gemm": "Passed", "GlobalAveragePool": "Passed", "GlobalLpPool": "Failed", "GlobalMaxPool": "Passed", "Greater": "Passed", "HardSigmoid": "Passed", "Hardmax": "Passed", "Identity": "Passed", "If": "Failed", "InstanceNormalization": "Passed", "IsInf": "Passed", "IsNaN": "Passed", "LRN": "Passed", "LSTM": "Passed", "LeakyRelu": "Passed", "Less": "Passed", "Log": "Passed", "LogSoftmax": "Passed", "Loop": "Failed", "LpNormalization": "Failed", "LpPool": "Failed", "MatMul": "Passed", "MatMulInteger": "Passed", "Max": "Passed", "MaxPool": "Passed", "MaxRoiPool": "Failed", "MaxUnpool": "Passed", "Mean": "Passed", "MeanVarianceNormalization": "Passed", "Min": "Passed", "Mod": "Passed", "Mul": "Passed", "Multinomial": "Failed", "Neg": "Passed", "NonMaxSuppression": "Passed", "NonZero": "Passed", "Not": "Passed", "OneHot": "Passed", "Or": "Passed", "PRelu": "Passed", "Pad": "Passed", "Pow": "Passed", "QLinearConv": "Passed", "QLinearMatMul": "Passed", "QuantizeLinear": "Passed", "RNN": "Passed", "RandomNormal": "Failed", "RandomNormalLike": "Failed", "RandomUniform": "Failed", "RandomUniformLike": "Failed", "Reciprocal": "Passed", "ReduceL1": "Passed", "ReduceL2": "Passed", "ReduceLogSum": "Passed", "ReduceLogSumExp": "Passed", "ReduceMax": "Passed", "ReduceMean": "Passed", "ReduceMin": "Passed", "ReduceProd": "Passed", "ReduceSum": "Passed", "ReduceSumSquare": "Passed", "Relu": "Passed", "Reshape": "Passed", "Resize": "Passed", "ReverseSequence": "Passed", "RoiAlign": "Passed", "Scan": "Passed", "Scatter": "Passed", "Selu": "Passed", "Shape": "Passed", "Shrink": "Passed", "Sigmoid": "Passed", "Sign": "Passed", "Sin": "Passed", "Sinh": "Passed", "Size": "Passed", "Slice": "Passed", "Softmax": "Passed", "Softplus": "Passed", "Softsign": "Passed", "SpaceToDepth": "Failed", "Split": "Passed", "Sqrt": "Passed", "Squeeze": "Passed", "StringNormalizer": "Failed", "Sub": "Passed", "Sum": "Passed", "Summary": "124/137 node tests passed", "Tan": "Passed", "Tanh": "Passed", "TfIdfVectorizer": "Passed", "ThresholdedRelu": "Passed", "Tile": "Passed", "TopK": "Passed", "Transpose": "Passed", "Unsqueeze": "Passed", "Upsample": "Passed", "Where": "Passed", "Xor": "Passed"}, "trend": [{"date": "08/06/2019 06:51:40", "failed": 151, "passed": 407, "skipped": 0}], "version": {"backend": "dev", "onnx": "1.5"}}, "tensorflow": {"coverage": {"failed": 11.469534050179211, "mark": "B", "passed": 88.5304659498208, "total": 558}, "name": "Tensorflow", "ops": {"Abs": "Passed", "Acos": "Passed", "Acosh": "Passed", "Add": "Passed", "And": "Passed", "ArgMax": "Passed", "ArgMin": "Passed", "Asin": "Passed", "Asinh": "Passed", "Atan": "Passed", "Atanh": "Passed", "AveragePool": "Passed", "BatchNormalization": "Passed", "Cast": "Passed", "Ceil": "Passed", "Clip": "Passed", "Compress": "Passed", "Concat": "Passed", "Constant": "Passed", "ConstantOfShape": "Passed", "Conv": "Passed", "ConvInteger": "Passed", "ConvTranspose": "Passed", "Cos": "Passed", "Cosh": "Passed", "DepthToSpace": "Passed", "DequantizeLinear": "Passed", "Div": "Passed", "Dropout": "Passed", "Elu": "Passed", "Equal": "Passed", "Erf": "Passed", "Exp": "Passed", "Expand": "Passed", "EyeLike": "Passed", "Flatten": "Passed", "Floor": "Passed", "GRU": "Passed", "Gather": "Passed", "Gemm": "Passed", "GlobalAveragePool": "Passed", "GlobalLpPool": "Failed", "GlobalMaxPool": "Passed", "Greater": "Passed", "HardSigmoid": "Passed", "Hardmax": "Passed", "Identity": "Passed", "If": "Failed", "InstanceNormalization": "Passed", "IsInf": "Passed", "IsNaN": "Passed", "LRN": "Passed", "LSTM": "Passed", "LeakyRelu": "Passed", "Less": "Passed", "Log": "Passed", "LogSoftmax": "Passed", "Loop": "Failed", "LpNormalization": "Failed", "LpPool": "Failed", "MatMul": "Passed", "MatMulInteger": "Passed", "Max": "Passed", "MaxPool": "Passed", "MaxRoiPool": "Failed", "MaxUnpool": "Passed", "Mean": "Passed", "MeanVarianceNormalization": "Passed", "Min": "Passed", "Mod": "Passed", "Mul": "Passed", "Multinomial": "Failed", "Neg": "Passed", "NonMaxSuppression": "Passed", "NonZero": "Passed", "Not": "Passed", "OneHot": "Passed", "Or": "Passed", "PRelu": "Passed", "Pad": "Passed", "Pow": "Passed", "QLinearConv": "Passed", "QLinearMatMul": "Passed", "QuantizeLinear": "Passed", "RNN": "Passed", "RandomNormal": "Failed", "RandomNormalLike": "Failed", "RandomUniform": "Failed", "RandomUniformLike": "Failed", "Reciprocal": "Passed", "ReduceL1": "Passed", "ReduceL2": "Passed", "ReduceLogSum": "Passed", "ReduceLogSumExp": "Passed", "ReduceMax": "Passed", "ReduceMean": "Passed", "ReduceMin": "Passed", "ReduceProd": "Passed", "ReduceSum": "Passed", "ReduceSumSquare": "Passed", "Relu": "Passed", "Reshape": "Passed", "Resize": "Passed", "ReverseSequence": "Passed", "RoiAlign": "Passed", "Scan": "Passed", "Scatter": "Passed", "Selu": "Passed", "Shape": "Passed", "Shrink": "Passed", "Sigmoid": "Passed", "Sign": "Passed", "Sin": "Passed", "Sinh": "Passed", "Size": "Passed", "Slice": "Passed", "Softmax": "Passed", "Softplus": "Passed", "Softsign": "Passed", "SpaceToDepth": "Failed", "Split": "Passed", "Sqrt": "Passed", "Squeeze": "Passed", "StringNormalizer": "Failed", "Sub": "Passed", "Sum": "Passed", "Summary": "124/137 node tests passed", "Tan": "Passed", "Tanh": "Passed", "TfIdfVectorizer": "Passed", "ThresholdedRelu": "Passed", "Tile": "Passed", "TopK": "Passed", "Transpose": "Passed", "Unsqueeze": "Passed", "Upsample": "Passed", "Where": "Passed", "Xor": "Passed"}, "trend": [{"date": "08/06/2019 07:29:55", "failed": 64, "passed": 494, "skipped": 0}, {"date": "08/06/2019 08:00:11", "failed": 64, "passed": 494, "skipped": 0}], "version": {"backend": "1.14.0", "onnx": "1.5"}}}'>
     <div class="row justify-content-center">
         <div class="col-auto">
             <h2>Backend unit tests</h2>
@@ -96,11 +96,11 @@
             </div>
         
             <div class="col-lg-3 col-md-6 col-sm-1 justify-self-center">
-                <canvas id='circle_nGraph'></canvas>
+                <canvas id='circle_Tensorflow'></canvas>
             </div>
         
             <div class="col-lg-3 col-md-6 col-sm-1 justify-self-center">
-                <canvas id='circle_Tensorflow'></canvas>
+                <canvas id='circle_nGraph'></canvas>
             </div>
         
             <div class="col-lg-3 col-md-6 col-sm-1 justify-self-center">
@@ -118,12 +118,1430 @@
             
         </div>
     </div>
+     <div class="row justify-content-center">
+        <div class="col-auto">
+            <h2>Operators coverage</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center my-1">
+        <div>
+            
+                <table class="table transposed">
+    <tr>
+        <th scope="col">&nbsp</th>
+        
+            <th scope="row">Abs</th>
+        
+            <th scope="row">Acos</th>
+        
+            <th scope="row">Acosh</th>
+        
+            <th scope="row">Add</th>
+        
+            <th scope="row">And</th>
+        
+            <th scope="row">ArgMax</th>
+        
+            <th scope="row">ArgMin</th>
+        
+            <th scope="row">Asin</th>
+        
+            <th scope="row">Asinh</th>
+        
+            <th scope="row">Atan</th>
+        
+            <th scope="row">Atanh</th>
+        
+            <th scope="row">AveragePool</th>
+        
+            <th scope="row">BatchNormalization</th>
+        
+            <th scope="row">Cast</th>
+        
+            <th scope="row">Ceil</th>
+        
+            <th scope="row">Clip</th>
+        
+            <th scope="row">Compress</th>
+        
+            <th scope="row">Concat</th>
+        
+            <th scope="row">Constant</th>
+        
+            <th scope="row">ConstantOfShape</th>
+        
+            <th scope="row">Conv</th>
+        
+            <th scope="row">ConvInteger</th>
+        
+            <th scope="row">ConvTranspose</th>
+        
+            <th scope="row">Cos</th>
+        
+            <th scope="row">Cosh</th>
+        
+            <th scope="row">DepthToSpace</th>
+        
+            <th scope="row">DequantizeLinear</th>
+        
+            <th scope="row">Div</th>
+        
+            <th scope="row">Dropout</th>
+        
+            <th scope="row">Elu</th>
+        
+            <th scope="row">Equal</th>
+        
+            <th scope="row">Erf</th>
+        
+            <th scope="row">Exp</th>
+        
+            <th scope="row">Expand</th>
+        
+            <th scope="row">EyeLike</th>
+        
+            <th scope="row">Flatten</th>
+        
+            <th scope="row">Floor</th>
+        
+            <th scope="row">GRU</th>
+        
+            <th scope="row">Gather</th>
+        
+            <th scope="row">Gemm</th>
+        
+            <th scope="row">GlobalAveragePool</th>
+        
+            <th scope="row">GlobalLpPool</th>
+        
+            <th scope="row">GlobalMaxPool</th>
+        
+            <th scope="row">Greater</th>
+        
+            <th scope="row">HardSigmoid</th>
+        
+            <th scope="row">Hardmax</th>
+        
+            <th scope="row">Identity</th>
+        
+            <th scope="row">If</th>
+        
+            <th scope="row">InstanceNormalization</th>
+        
+            <th scope="row">IsInf</th>
+        
+            <th scope="row">IsNaN</th>
+        
+            <th scope="row">LRN</th>
+        
+            <th scope="row">LSTM</th>
+        
+            <th scope="row">LeakyRelu</th>
+        
+            <th scope="row">Less</th>
+        
+            <th scope="row">Log</th>
+        
+            <th scope="row">LogSoftmax</th>
+        
+            <th scope="row">Loop</th>
+        
+            <th scope="row">LpNormalization</th>
+        
+            <th scope="row">LpPool</th>
+        
+            <th scope="row">MatMul</th>
+        
+            <th scope="row">MatMulInteger</th>
+        
+            <th scope="row">Max</th>
+        
+            <th scope="row">MaxPool</th>
+        
+            <th scope="row">MaxRoiPool</th>
+        
+            <th scope="row">MaxUnpool</th>
+        
+            <th scope="row">Mean</th>
+        
+            <th scope="row">MeanVarianceNormalization</th>
+        
+            <th scope="row">Min</th>
+        
+            <th scope="row">Mod</th>
+        
+            <th scope="row">Mul</th>
+        
+            <th scope="row">Multinomial</th>
+        
+            <th scope="row">Neg</th>
+        
+            <th scope="row">NonMaxSuppression</th>
+        
+            <th scope="row">NonZero</th>
+        
+            <th scope="row">Not</th>
+        
+            <th scope="row">OneHot</th>
+        
+            <th scope="row">Or</th>
+        
+            <th scope="row">PRelu</th>
+        
+            <th scope="row">Pad</th>
+        
+            <th scope="row">Pow</th>
+        
+            <th scope="row">QLinearConv</th>
+        
+            <th scope="row">QLinearMatMul</th>
+        
+            <th scope="row">QuantizeLinear</th>
+        
+            <th scope="row">RNN</th>
+        
+            <th scope="row">RandomNormal</th>
+        
+            <th scope="row">RandomNormalLike</th>
+        
+            <th scope="row">RandomUniform</th>
+        
+            <th scope="row">RandomUniformLike</th>
+        
+            <th scope="row">Reciprocal</th>
+        
+            <th scope="row">ReduceL1</th>
+        
+            <th scope="row">ReduceL2</th>
+        
+            <th scope="row">ReduceLogSum</th>
+        
+            <th scope="row">ReduceLogSumExp</th>
+        
+            <th scope="row">ReduceMax</th>
+        
+            <th scope="row">ReduceMean</th>
+        
+            <th scope="row">ReduceMin</th>
+        
+            <th scope="row">ReduceProd</th>
+        
+            <th scope="row">ReduceSum</th>
+        
+            <th scope="row">ReduceSumSquare</th>
+        
+            <th scope="row">Relu</th>
+        
+            <th scope="row">Reshape</th>
+        
+            <th scope="row">Resize</th>
+        
+            <th scope="row">ReverseSequence</th>
+        
+            <th scope="row">RoiAlign</th>
+        
+            <th scope="row">Scan</th>
+        
+            <th scope="row">Scatter</th>
+        
+            <th scope="row">Selu</th>
+        
+            <th scope="row">Shape</th>
+        
+            <th scope="row">Shrink</th>
+        
+            <th scope="row">Sigmoid</th>
+        
+            <th scope="row">Sign</th>
+        
+            <th scope="row">Sin</th>
+        
+            <th scope="row">Sinh</th>
+        
+            <th scope="row">Size</th>
+        
+            <th scope="row">Slice</th>
+        
+            <th scope="row">Softmax</th>
+        
+            <th scope="row">Softplus</th>
+        
+            <th scope="row">Softsign</th>
+        
+            <th scope="row">SpaceToDepth</th>
+        
+            <th scope="row">Split</th>
+        
+            <th scope="row">Sqrt</th>
+        
+            <th scope="row">Squeeze</th>
+        
+            <th scope="row">StringNormalizer</th>
+        
+            <th scope="row">Sub</th>
+        
+            <th scope="row">Sum</th>
+        
+            <th scope="row">Tan</th>
+        
+            <th scope="row">Tanh</th>
+        
+            <th scope="row">TfIdfVectorizer</th>
+        
+            <th scope="row">ThresholdedRelu</th>
+        
+            <th scope="row">Tile</th>
+        
+            <th scope="row">TopK</th>
+        
+            <th scope="row">Transpose</th>
+        
+            <th scope="row">Unsqueeze</th>
+        
+            <th scope="row">Upsample</th>
+        
+            <th scope="row">Where</th>
+        
+            <th scope="row">Xor</th>
+        
+            <th scope="row">Summary</th>
+        
+    </tr>
+    
+    <tr>
+        <th scope="row">ONNX-Runtime</th>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='124/137 node tests passed'>124/137 node tests passed</td>
+        
+    </tr>
+    
+    <tr>
+        <th scope="row">Tensorflow</th>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='124/137 node tests passed'>124/137 node tests passed</td>
+        
+    </tr>
+    
+    <tr>
+        <th scope="row">nGraph</th>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='98/137 node tests passed'>98/137 node tests passed</td>
+        
+    </tr>
+    
+    <tr>
+        <th scope="row">Pytorch</th>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Failed'>Failed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='Passed'>Passed</td>
+        
+            <td class='124/137 node tests passed'>124/137 node tests passed</td>
+        
+    </tr>
+    
+</table>
+            
+        </div>
+    </div>
 </div>
 </div>
 
     </div>
     <div id="footer">
-         &copy; Made by <a href="">...</a>. 
+         &copy;<a href=""></a>. 
     </div>
     <script src="./website/static-page-resources/src/main.js"></script>
 </body>
