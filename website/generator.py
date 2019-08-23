@@ -97,8 +97,28 @@ def _load_ops_csv(path):
     with open(path, newline="") as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
-            ops_table[row["Op"]] = row.get("None").replace("!", "")
+            ops_table[row["Op"]] = row.get("None").replace("!", "").lower()
     return ops_table
+
+
+def _load_report(path):
+    dummy_report = {"failed": [], "passed": [], "skipped": []}
+    try:
+        with open(path, "r") as report_file:
+            report = json.load(report_file)
+            del report["date"]
+    except (IOError, json.decoder.JSONDecodeError):
+        report = dummy_report
+
+    swapped_report = OrderedDict()
+    for status, test_names in report.items():
+        for test in test_names:
+            swapped_report[test] = status
+
+    swapped_report = OrderedDict(
+        sorted(swapped_report.items(), key=lambda item: item[0])
+    )
+    return swapped_report
 
 
 # Load Ops coverage table from csv file
@@ -106,6 +126,12 @@ onnxruntime_ops = _load_ops_csv("../results/onnx-runtime/stable/nodes.csv")
 ngraph_ops = _load_ops_csv("../results/ngraph/development/nodes.csv")
 tensorflow_ops = _load_ops_csv("../results/tensorflow/stable/nodes.csv")
 pytorch_ops = _load_ops_csv("../results/pytorch/development/nodes.csv")
+
+# Load report from json file
+onnxruntime_report = _load_report("../results/onnx-runtime/stable/report.json")
+ngraph_report = _load_report("../results/ngraph/development/report.json")
+tensorflow_report = _load_report("../results/tensorflow/stable/report.json")
+pytorch_report = _load_report("../results/pytorch/development/report.json")
 
 # Load trend from json file
 onnxruntime_trend = _load_trend("../results/onnx-runtime/stable/trend.json")
@@ -128,6 +154,7 @@ database_stable = OrderedDict(
             "trend": onnxruntime_trend,
             "coverage": onnxruntime_coverage,
             "ops": onnxruntime_ops,
+            "report": onnxruntime_report,
         },
         "ngraph": {
             "version": {"onnx": "1.5", "backend": "dev"},
@@ -135,20 +162,23 @@ database_stable = OrderedDict(
             "trend": ngraph_trend,
             "coverage": ngraph_coverage,
             "ops": ngraph_ops,
+            "report": ngraph_report,
         },
         "tensorflow": {
             "version": {"onnx": "1.5", "backend": "1.14.0"},
             "name": "Tensorflow",
             "trend": tensorflow_trend,
             "coverage": tensorflow_coverage,
-            "ops": onnxruntime_ops,
+            "ops": tensorflow_ops,
+            "report": tensorflow_report,
         },
         "pytorch": {
             "version": {"onnx": "1.5", "backend": "dev"},
             "name": "Pytorch",
             "trend": pytorch_trend,
             "coverage": pytorch_coverage,
-            "ops": onnxruntime_ops,
+            "ops": pytorch_ops,
+            "report": pytorch_report,
         },
     }
 )

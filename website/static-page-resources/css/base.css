@@ -30,11 +30,11 @@ h2 {
     display: block;
 }
 
-.Passed {
+.passed {
     color: #adff2f;
 }
 
-.Failed {
+.failed {
     color: #f81f1f;
 }
 
