@@ -2,7 +2,7 @@
     <tr>
         <th scope="col">&nbsp</th>
         {% for test_name, _ in database.onnxruntime.report.items() %}
-            <th scope="row">{{ test_name }}</th>
+            <th scope="row">{{ test_name |replace("::", " :: ")}}</th>
         {% endfor %}
     </tr>
     {% for framework, data in database.items() %}

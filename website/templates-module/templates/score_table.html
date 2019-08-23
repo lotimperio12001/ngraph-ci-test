@@ -7,7 +7,7 @@
     </tr>
     {% for framework, data in database.items() %}
     <tr>
-        <th scope="row">{{ data.name }}</th>
+        <th scope="row">{{loop.index}}.&nbsp&nbsp{{ data.name }}</th>
         <td>{{ data.version.backend }}</td>
         <td>{{ data.trend[-1].date }}</td>
         <td>

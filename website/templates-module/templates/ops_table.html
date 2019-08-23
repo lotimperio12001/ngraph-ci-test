@@ -9,7 +9,7 @@
     <tr>
         <th scope="row">{{ data.name }}</th>
         {% for op_name, output in data.ops.items() %}
-            <td class='{{ output }}'>{{ output |capitalize }}</td>
+            <td class='{{ output }}'>{{ output |capitalize |replace("node tests passed", "")}}</td>
         {% endfor %}
     </tr>
     {% endfor %}
