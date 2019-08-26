@@ -157,41 +157,42 @@ jobs:
             git config --global user.email "scoreboard@circleci.com"
             git config --global user.name "scoreboard-circleci"
 
+            git pull origin master
             git add ./index.html
             git commit --allow-empty -m "Website update [ci skip]"
-            git pull
             git push origin master
 
 
 workflows:
   version: 2
-  build_and_test_all:
-    jobs:
-      - onnxruntime_build_and_test
-      - ngraph_build_and_test
-      - pytorch_build_and_test
-      # - tensorflow_build_and_test
-      - generate_static_page:
-          requires:
-            - onnxruntime_build_and_test
-            - ngraph_build_and_test
-            - pytorch_build_and_test
+  # build_and_test_all:
+  #   jobs:
+  #     - onnxruntime_build_and_test
+  #     - ngraph_build_and_test
+  #     - pytorch_build_and_test
+  #     # - tensorflow_build_and_test
+  #     - generate_static_page:
+  #         requires:
+  #           - onnxruntime_build_and_test
+  #           - ngraph_build_and_test
+  #           - pytorch_build_and_test
 
-  scheduled-workflow:
+  daily-workflow:
     jobs:
+      - generate_static_page
       - onnxruntime_build_and_test
       - ngraph_build_and_test
       - pytorch_build_and_test
   #     - tensorflow_build_and_test
-      - generate_static_page:
-            requires:
-              - onnxruntime_build_and_test
-              - ngraph_build_and_test
-              - pytorch_build_and_test
+      # - generate_static_page:
+      #       requires:
+      #         - onnxruntime_build_and_test
+      #         - ngraph_build_and_test
+      #         - pytorch_build_and_test
 
     triggers:
       - schedule:
-          cron: "45 11 * * *"
+          cron: "40 10 * * *"
           filters:
             branches:
               only:
