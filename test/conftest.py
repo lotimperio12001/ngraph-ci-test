@@ -246,7 +246,7 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version(results_dir, file_name="version.json"):
+def _load_version():
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
     try:
         with open(os.path.join(results_dir, file_name), "r") as version_file:
