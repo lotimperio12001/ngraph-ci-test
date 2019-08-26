@@ -28,6 +28,10 @@ RUN mkdir -p /root/results
 ENV RESULTS_DIR=/root/results
 ENV CSVDIR=/root/results
 
+# Save version
+WORKDIR /root/results
+RUN pip3 list --format=json
+
 # Run pytest
 WORKDIR /root/test
 COPY ./test/conftest.py /root/test

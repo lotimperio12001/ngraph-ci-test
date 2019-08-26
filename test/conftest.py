@@ -40,6 +40,8 @@ def pytest_configure(config):
     onnx_backend_module = config.getvalue("onnx_backend")
     test.ONNX_BACKEND_MODULE = onnx_backend_module
 
+    save_version=
+
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
@@ -101,6 +103,7 @@ def _prepare_summary(report):
     :rtype: dict
     """
     summary = {"date": report.get("date", datetime.now().strftime("%m/%d/%Y %H:%M:%S"))}
+    summary["version"] = _load_version()
     for key in report.keys():
         if isinstance(report.get(key), list):
             summary[key] = len(report.get(key))
@@ -243,3 +246,13 @@ def _update_trend(summary, trend):
     else:
         trend.append(summary)
     return trend
+
+
+def _load_version(results_dir, file_name="version.json"):
+    results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
+    try:
+        with open(os.path.join(results_dir, file_name), "r") as version_file:
+            version = json.load(version_file)
+    except (IOError, json.decoder.JSONDecodeError):
+        version = [{"name": "Unknown", "version": "0.0.0"}]
+    return version
