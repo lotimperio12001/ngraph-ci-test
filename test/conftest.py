@@ -40,8 +40,6 @@ def pytest_configure(config):
     onnx_backend_module = config.getvalue("onnx_backend")
     test.ONNX_BACKEND_MODULE = onnx_backend_module
 
-    save_version=
-
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
