@@ -45,11 +45,12 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
     # Set directory for results
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
+    version_dir = os.environ.get("VERSION_DIR", os.getcwd())
 
     # Collect and save the results
     report = _prepare_report(terminalreporter.stats)
     _save_report(report, results_dir)
-    version = _load_version(results_dir)
+    version = _load_version(version_dir)
     summary = _prepare_summary(report, version)
     trend = _load_trend(results_dir)
     current_trend = _update_trend(summary, trend)
@@ -250,7 +251,7 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version(version_dir="/root/version", file_name="version.json"):
+def _load_version(version_dir="../version", file_name="version.json"):
     # try:
     with open(os.path.join(version_dir, file_name), "r", encoding='us-ascii') as version_file:
         version = json.load(version_file)

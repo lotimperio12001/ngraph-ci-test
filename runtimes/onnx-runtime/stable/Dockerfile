@@ -30,6 +30,7 @@ ENV CSVDIR=/root/results
 
 # Save version
 RUN mkdir -p /root/version
+ENV VERSION_DIR=/root/results
 WORKDIR /root/version
 RUN pip3 list --format=json > /root/version/version.json
 
