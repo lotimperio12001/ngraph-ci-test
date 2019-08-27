@@ -43,7 +43,7 @@ def pytest_configure(config):
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
-    # Set directory for results
+    # Set directory for resources
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
     version_dir = os.environ.get("VERSION_DIR", os.getcwd())
 
