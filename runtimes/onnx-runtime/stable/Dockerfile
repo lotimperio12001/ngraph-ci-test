@@ -30,7 +30,7 @@ ENV CSVDIR=/root/results
 
 # Save version
 WORKDIR /root/results
-RUN pip3 list --format=json > version.json
+RUN pip3 list --format=json > version.json -p
 RUN cat version.json
 
 # Run pytest
