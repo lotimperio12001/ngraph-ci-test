@@ -31,7 +31,7 @@ ENV CSVDIR=/root/results
 # Save version
 RUN mkdir -p /root/version
 WORKDIR /root/version
-RUN pip3 list --format=json > /root/version/version.json
+RUN pip3 list --format=json > /root/version/version.json :e ++enc=utf16le
 
 # Run pytest
 WORKDIR /root/test
