@@ -250,7 +250,7 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version(version_dir="../version", file_name="version.json"):
+def _load_version(version_dir="/root/version", file_name="version.json"):
     try:
         with open(os.path.join(version_dir, file_name), "r") as version_file:
             version = json.load(version_file)

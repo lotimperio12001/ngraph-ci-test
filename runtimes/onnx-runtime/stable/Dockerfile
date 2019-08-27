@@ -37,4 +37,5 @@ RUN pip3 list --format=json > /root/version/version.json
 WORKDIR /root/test
 COPY ./test/conftest.py /root/test
 COPY ./test/test_backend.py /root/test
-CMD pytest test_backend.py --onnx_backend="onnxruntime.backend.backend" -k 'not _cuda' -v
+CMD cat /root/version/version.json
+# CMD pytest test_backend.py --onnx_backend="onnxruntime.backend.backend" -k 'not _cuda' -v
