@@ -4,5 +4,17 @@
         "failed": 51,
         "passed": 507,
         "skipped": 0
+    },
+    {
+        "date": "08/27/2019 11:14:53",
+        "failed": 51,
+        "passed": 507,
+        "skipped": 0,
+        "version": [
+            {
+                "name": "Unknown",
+                "version": "0.0.0"
+            }
+        ]
     }
 ]
