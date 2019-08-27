@@ -5,13 +5,14 @@ Jinja2 docs: https://jinja.palletsprojects.com/en/2.10.x/api/
 
 import csv
 import json
+import os
 
 from collections import OrderedDict
 from datetime import datetime
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
-def _load_trend(path):
+def _load_trend(file_dir, file_name="trend.json"):
     """Load and return trend list from json file.
 
     Return list of summaries loaded from tests trend json file.
@@ -34,7 +35,9 @@ def _load_trend(path):
         }
     ]
 
-    :param path: Path to file with results.
+    :param file_dir: Path to dir with trend file.
+    :type path: str
+    :param file_name: Name of trend file.
     :type path: str
     :return: List of summaries.
     :rtype: list
@@ -49,7 +52,7 @@ def _load_trend(path):
     ]
 
     try:
-        with open(path, "r") as trend_file:
+        with open(os.path.join(file_dir, file_name), "r") as trend_file:
             trend = json.load(trend_file)
     except (IOError, json.decoder.JSONDecodeError):
         trend = dummy_trend
@@ -92,24 +95,25 @@ def _get_coverage_percentage(trend):
     return coverage
 
 
-def _load_ops_csv(path):
+def _load_ops_csv(file_dir, file_name="nodes.csv"):
     ops_table = OrderedDict()
-    with open(path, newline="") as csv_file:
+    with open(os.path.join(file_dir, file_name), newline="") as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             ops_table[row["Op"]] = row.get("None").replace("!", "").lower()
     return ops_table
 
 
-def _load_report(path):
+def _load_report(file_dir, file_name="report.json"):
     dummy_report = {"failed": [], "passed": [], "skipped": []}
     try:
-        with open(path, "r") as report_file:
+        with open(os.path.join(file_dir, file_name), "r") as report_file:
             report = json.load(report_file)
             del report["date"]
     except (IOError, json.decoder.JSONDecodeError):
         report = dummy_report
 
+    # Swap value with keys to easier displaying data
     swapped_report = OrderedDict()
     for status, test_names in report.items():
         for test in test_names:
@@ -121,96 +125,51 @@ def _load_report(path):
     return swapped_report
 
 
-# Load Ops coverage table from csv file
-onnxruntime_ops = _load_ops_csv("../results/onnx-runtime/stable/nodes.csv")
-ngraph_ops = _load_ops_csv("../results/ngraph/development/nodes.csv")
-tensorflow_ops = _load_ops_csv("../results/tensorflow/stable/nodes.csv")
-pytorch_ops = _load_ops_csv("../results/pytorch/development/nodes.csv")
+def _load_config(file_dir="./", file_name="config.json"):
+    try:
+        with open(os.path.join(file_dir, file_name), "r") as config_file:
+            config = json.load(config_file)
+    except (IOError, json.decoder.JSONDecodeError) as err:
+        raise IOError("Can't load config file !", err)
+    return config
 
-# Load report from json file
-onnxruntime_report = _load_report("../results/onnx-runtime/stable/report.json")
-ngraph_report = _load_report("../results/ngraph/development/report.json")
-tensorflow_report = _load_report("../results/tensorflow/stable/report.json")
-pytorch_report = _load_report("../results/pytorch/development/report.json")
 
-# Load trend from json file
-onnxruntime_trend = _load_trend("../results/onnx-runtime/stable/trend.json")
-ngraph_trend = _load_trend("../results/ngraph/development/trend.json")
-tensorflow_trend = _load_trend("../results/tensorflow/stable/trend.json")
-pytorch_trend = _load_trend("../results/pytorch/development/trend.json")
+def _prepare_database(state="stable"):
+    config = _load_config()
+    config = config[state]
 
-# Calculate coverage percentages
-onnxruntime_coverage = _get_coverage_percentage(onnxruntime_trend)
-ngraph_coverage = _get_coverage_percentage(ngraph_trend)
-tensorflow_coverage = _get_coverage_percentage(tensorflow_trend)
-pytorch_coverage = _get_coverage_percentage(pytorch_trend)
+    database = OrderedDict()
+    for framework, conf in config.items():
+        results_dir = conf.get("results_dir")
+        name = conf.get("name", framework)
+        trend = _load_trend(results_dir)
+        version = _get_version(config, trend)
+        coverage = _get_coverage_percentage(trend)
+        ops = _load_ops_csv(results_dir)
+        report = _load_report(results_dir)
+
+        database[framework] = {
+            "name": name,
+            "version": version,
+            "trend": trend,
+            "coverage": coverage,
+            "ops": ops,
+            "report": report
+        }
+    return database
+
+
+def _get_version(config, trend):
+    track_version = config.get("track_version")
+    modules_version = trend[-1].get("version")
+    version = [module for module in modules_version if module.get("name") in track_version]
+    print(version)
+    return version
+
 
 # Prepare data for templates
-database_stable = OrderedDict(
-    {
-        "onnxruntime": {
-            "version": {"onnx": "1.5", "backend": "0.5.0"},
-            "name": "ONNX-Runtime",
-            "trend": onnxruntime_trend,
-            "coverage": onnxruntime_coverage,
-            "ops": onnxruntime_ops,
-            "report": onnxruntime_report,
-        },
-        "ngraph": {
-            "version": {"onnx": "1.5", "backend": "dev"},
-            "name": "nGraph",
-            "trend": ngraph_trend,
-            "coverage": ngraph_coverage,
-            "ops": ngraph_ops,
-            "report": ngraph_report,
-        },
-        "tensorflow": {
-            "version": {"onnx": "1.5", "backend": "1.14.0"},
-            "name": "Tensorflow",
-            "trend": tensorflow_trend,
-            "coverage": tensorflow_coverage,
-            "ops": tensorflow_ops,
-            "report": tensorflow_report,
-        },
-        "pytorch": {
-            "version": {"onnx": "1.5", "backend": "dev"},
-            "name": "Pytorch",
-            "trend": pytorch_trend,
-            "coverage": pytorch_coverage,
-            "ops": pytorch_ops,
-            "report": pytorch_report,
-        },
-    }
-)
-
-database_dev = OrderedDict(
-    {
-        "onnxruntime": {
-            "version": {"onnx": "1.5", "backend": "0.5.0"},
-            "name": "ONNX-Runtime",
-            "trend": onnxruntime_trend,
-            "coverage": onnxruntime_coverage,
-        },
-        "ngraph": {
-            "version": {"onnx": "1.5", "backend": "dev"},
-            "name": "nGraph",
-            "trend": ngraph_trend,
-            "coverage": ngraph_coverage,
-        },
-        "tensorflow": {
-            "version": {"onnx": "1.5", "backend": "1.14.0"},
-            "name": "Tensorflow",
-            "trend": tensorflow_trend,
-            "coverage": tensorflow_coverage,
-        },
-        "pytorch": {
-            "version": {"onnx": "1.5", "backend": "dev"},
-            "name": "Pytorch",
-            "trend": pytorch_trend,
-            "coverage": pytorch_coverage,
-        },
-    }
-)
+database_stable = _prepare_database(state="stable")
+database_dev = _prepare_database(state="development")
 
 # Sort data by score
 database_stable = OrderedDict(
@@ -227,7 +186,6 @@ database_dev = OrderedDict(
         reverse=True,
     )
 )
-
 
 # Website
 # Create Jinja2 templates environment

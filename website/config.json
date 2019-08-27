@@ -1,0 +1,36 @@
+{
+    "stable": {
+        "onnxruntime": {
+            "name": "ONNX-Runtime",
+            "results_dir": "../results/onnx-runtime/stable",
+            "track_version": ["onnx", "onnxruntime"]
+        },
+        "ngraph": {
+            "name": "nGraph",
+            "results_dir": "../results/ngraph/development",
+            "track_version": ["onnx"]
+        },
+        "tensorflow": {
+            "name": "Tensorflow",
+            "results_dir": "../results/tensorflow/stable",
+            "track_version": ["onnx"]
+        },
+        "pytorch": {
+            "name": "Pytorch",
+            "results_dir": "../results/pytorch/development",
+            "track_version": ["onnx"]
+        }
+    },
+    "development": {
+        "ngraph": {
+            "name": "nGraph",
+            "results_dir": "../results/ngraph/development",
+            "track_version": ["onnx"]
+        },
+        "pytorch": {
+            "name": "Pytorch",
+            "results_dir": "../results/pytorch/development",
+            "track_version": ["onnx"]
+        }
+    }
+}
