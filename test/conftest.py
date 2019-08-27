@@ -49,7 +49,8 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     # Collect and save the results
     report = _prepare_report(terminalreporter.stats)
     _save_report(report, results_dir)
-    summary = _prepare_summary(report)
+    version = _load_version(results_dir)
+    summary = _prepare_summary(report, version)
     trend = _load_trend(results_dir)
     current_trend = _update_trend(summary, trend)
     _save_trend(current_trend, results_dir)
@@ -83,7 +84,7 @@ def _prepare_report(stats):
     return report
 
 
-def _prepare_summary(report):
+def _prepare_summary(report, version=None):
     """Return tests summary including number of failed and passed tests.
 
     Return summary with length of each list in report.
@@ -100,8 +101,11 @@ def _prepare_summary(report):
     :return: Summary with length of each list in report.
     :rtype: dict
     """
+    if not version:
+        version = []
+
     summary = {"date": report.get("date", datetime.now().strftime("%m/%d/%Y %H:%M:%S"))}
-    summary["version"] = _load_version()
+    summary["version"] = version
     for key in report.keys():
         if isinstance(report.get(key), list):
             summary[key] = len(report.get(key))
@@ -246,7 +250,7 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version():
+def _load_version(results_dir, file_name="version.json"):
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
     try:
         with open(os.path.join(results_dir, file_name), "r") as version_file:
