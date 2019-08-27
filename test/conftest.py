@@ -250,10 +250,9 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version(results_dir, file_name="version.json"):
-    results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
+def _load_version(version_dir="../version", file_name="version.json"):
     try:
-        with open(os.path.join(results_dir, file_name), "r") as version_file:
+        with open(os.path.join(verision_dir, file_name), "r") as version_file:
             version = json.load(version_file)
     except (IOError, json.decoder.JSONDecodeError):
         version = [{"name": "Unknown", "version": "0.0.0"}]
