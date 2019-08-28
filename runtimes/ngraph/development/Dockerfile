@@ -73,6 +73,12 @@ RUN mkdir -p /root/results
 ENV RESULTS_DIR=/root/results
 ENV CSVDIR=/root/results
 
+# Save packages version
+RUN mkdir -p /root/version
+ENV VERSION_DIR=/root/version
+WORKDIR /root/version
+RUN pip3 list --format=json > /root/version/pip-list.json
+
 # Run pytest
 WORKDIR /root/test
 COPY ./test/conftest.py /root/test

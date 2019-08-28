@@ -165,18 +165,13 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test_all:
-    jobs:
-      - generate_static_page
-      - onnxruntime_build_and_test
+  # build_and_test_all:
+  #   jobs:
+  #     - generate_static_page
+  #     - onnxruntime_build_and_test
       # - ngraph_build_and_test
       # - pytorch_build_and_test
-  #     # - tensorflow_build_and_test
-  #     - generate_static_page:
-  #         requires:
-  #           - onnxruntime_build_and_test
-  #           - ngraph_build_and_test
-  #           - pytorch_build_and_test
+      # - tensorflow_build_and_test
 
   daily-workflow:
     jobs:
@@ -185,11 +180,6 @@ workflows:
       - ngraph_build_and_test
       - pytorch_build_and_test
   #     - tensorflow_build_and_test
-      # - generate_static_page:
-      #       requires:
-      #         - onnxruntime_build_and_test
-      #         - ngraph_build_and_test
-      #         - pytorch_build_and_test
 
     triggers:
       - schedule:

@@ -28,6 +28,12 @@ RUN pip3 install --no-cache-dir \
     pytest \
     tabulate
 
+# Save packages version
+RUN mkdir -p /root/version
+ENV VERSION_DIR=/root/version
+WORKDIR /root/version
+RUN pip3 list --format=json > /root/version/pip-list.json
+
 # ONNX-backend test results dir
 RUN mkdir -p /root/results
 ENV RESULTS_DIR=/root/results
