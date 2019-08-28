@@ -1,5 +1,5 @@
 {
-    "date": "08/28/2019 09:55:25",
+    "date": "08/28/2019 10:41:22",
     "failed": [
         "OnnxBackendNodeModelTest::test_cast_FLOAT_to_STRING_cpu",
         "OnnxBackendNodeModelTest::test_convtranspose_1d_cpu",
