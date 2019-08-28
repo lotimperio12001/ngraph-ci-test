@@ -162,7 +162,7 @@ def _prepare_database(state="stable"):
 def _get_version(conf, trend):
     core_packages = conf.get("core_packages")
     packages_version = trend[-1].get("version")
-    if core_packages or packages_version:
+    if core_packages and packages_version:
         version = [package for package in packages_version if package.get("name") in core_packages]
         return version
     return []
