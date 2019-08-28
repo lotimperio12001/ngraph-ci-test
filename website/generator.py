@@ -143,7 +143,7 @@ def _prepare_database(state="stable"):
         results_dir = conf.get("results_dir")
         name = conf.get("name", framework)
         trend = _load_trend(results_dir)
-        version = _get_version(config, trend)
+        version = _get_version(conf, trend)
         coverage = _get_coverage_percentage(trend)
         ops = _load_ops_csv(results_dir)
         report = _load_report(results_dir)
@@ -159,12 +159,13 @@ def _prepare_database(state="stable"):
     return database
 
 
-def _get_version(config, trend):
-    track_version = config.get("track_version")
-    modules_version = trend[-1].get("version")
-    version = [module for module in modules_version if module.get("name") in track_version]
-    print(version)
-    return version
+def _get_version(conf, trend):
+    core_packages = conf.get("core_packages")
+    packages_version = trend[-1].get("version")
+    if core_packages or packages_version:
+        version = [package for package in packages_version if package.get("name") in core_packages]
+        return version
+    return []
 
 
 # Prepare data for templates

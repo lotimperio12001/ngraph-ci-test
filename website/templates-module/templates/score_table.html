@@ -7,8 +7,12 @@
     </tr>
     {% for framework, data in database.items() %}
     <tr>
-        <th scope="row">{{loop.index}}.&nbsp&nbsp{{ data.name }}</th>
-        <td>{{ data.version.backend }}</td>
+        <th scope="row">{{ loop.index }}.&nbsp&nbsp{{ data.name }}</th>
+        <td>
+        {% for package in data.version %}
+            {{ package.name }}:&nbsp{{ package.version }}<br>
+        {% endfor %}
+        </td>
         <td>{{ data.trend[-1].date }}</td>
         <td>
             <div class='{{data.coverage.mark}}'>

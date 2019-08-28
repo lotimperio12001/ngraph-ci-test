@@ -251,11 +251,11 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version(version_dir, file_name="version.json"):
+def _load_version(version_dir, file_name="pip-list.json"):
     try:
         with open(os.path.join(version_dir, file_name), "r") as version_file:
             version = json.load(version_file)
             print(version)
     except (IOError, json.decoder.JSONDecodeError):
-        version = [{"name": "Unknown", "version": "0.0.0"}]
+        version = []
     return version
