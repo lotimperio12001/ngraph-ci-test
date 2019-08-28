@@ -308,6 +308,29 @@ def _update_trend(summary, trend):
 
 
 def _load_version(version_dir, file_name="pip-list.json"):
+    """Load and return python packages versions from json file.
+
+    Use `pip list --format=json > pip-list.json` to generate and
+    save installed python packages versions.
+    Version example:
+    [
+        {
+            "name": "onnx",
+            "version": "1.5.0"
+        },
+        {
+            "name": "onnxruntime",
+            "version": "0.5.0"
+        },
+    ]
+
+    :param version_dir: Directory of json file with pip list.
+    :type version_dir: str
+    :param file_name: Name of json file with pip list, defaults to "pip-list.json".
+    :type file_name: str, optional
+    :return: List of installed python packages names and versions.
+    :rtype: list
+    """
     try:
         with open(os.path.join(version_dir, file_name), "r") as version_file:
             version = json.load(version_file)
