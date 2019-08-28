@@ -28,7 +28,7 @@ RUN mkdir -p /root/results
 ENV RESULTS_DIR=/root/results
 ENV CSVDIR=/root/results
 
-# Save version
+# Save packages version
 RUN mkdir -p /root/version
 ENV VERSION_DIR=/root/version
 WORKDIR /root/version
