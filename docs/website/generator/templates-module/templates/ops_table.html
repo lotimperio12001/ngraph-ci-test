@@ -1,0 +1,18 @@
+<table class="table transposed">
+    {% for framework, data in database.items() %}
+    {% if loop.index == 1 %}
+    <tr>
+        <th scope="col">&nbsp</th>
+        {% for op_name, _ in database.ngraph.ops.items() %}
+            <th scope="row">{{ op_name }}</th>
+        {% endfor %}
+    </tr>
+    {% endif %}
+    <tr>
+        <th scope="row">{{ data.name }}</th>
+        {% for op_name, output in data.ops.items() %}
+            <td class='{{ output }}'>{{ output |capitalize |replace("node tests passed", "")}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>

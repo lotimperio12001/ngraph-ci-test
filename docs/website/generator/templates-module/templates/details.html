@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="index.html">Scoreboard</a>
+<div id="content">
+    {% with database=framework_data %}
+        {%include "home.html" %}
+    {% endwith %}
+</div>
+{% endblock %}
