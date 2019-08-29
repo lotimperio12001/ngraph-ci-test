@@ -1,11 +1,13 @@
 <table class="table transposed">
+    {% for framework, data in database.items() %}
+    {% if loop.index0 == 0 %}
     <tr>
         <th scope="col">&nbsp</th>
-        {% for test_name, _ in database.onnxruntime.report.items() %}
+        {% for test_name, output in data.report.items() %}
             <th scope="row">{{ test_name |replace("::", " :: ")}}</th>
         {% endfor %}
     </tr>
-    {% for framework, data in database.items() %}
+    {% endif %}
     <tr>
         <th scope="row">{{ data.name }}</th>
         {% for test_name, output in data.report.items() %}

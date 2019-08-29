@@ -211,6 +211,7 @@ env = Environment(
     autoescape=select_autoescape(["html"]),
 )
 
+# Stable frameworks builds
 # Generate static page
 index_template = env.get_template("index.html")
 index_static = index_template.render(
@@ -219,4 +220,15 @@ index_static = index_template.render(
 
 # Save static page to file
 with open("../index.html", "w") as f:
+    f.write(index_static)
+
+# Development frameworks builds
+# Generate static page
+index_template = env.get_template("index_dev.html")
+index_static = index_template.render(
+    database_dev=database_dev, database_stable=database_stable
+)
+
+# Save static page to file
+with open("../index_dev.html", "w") as f:
     f.write(index_static)

@@ -7,7 +7,7 @@
     </tr>
     {% for framework, data in database.items() %}
     <tr>
-        <th scope="row">{{ loop.index }}.&nbsp&nbsp{{ data.name }}</th>
+        <th scope="row">{{loop.index}}.&nbsp&nbsp{{ data.name }}</th>
         <td>
         {% for package in data.version %}
             {{ package.name }}:&nbsp{{ package.version }}<br>

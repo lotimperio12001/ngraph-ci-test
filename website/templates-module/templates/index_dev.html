@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<a href="index_dev.html">Check score for development builds</a>
+<a href="index.html">Check score for stable builds</a>
 <div id="content">
-    {% with database=database_stable %}
+    {% with database=database_dev %}
         {%include "home.html" %}
     {% endwith %}
 </div>
