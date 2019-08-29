@@ -32,5 +32,11 @@
             "results_dir": "./results/pytorch/development",
             "core_packages": ["onnx"]
         }
+    },
+    "deploy_paths": {
+        "index": "./docs",
+        "subpages": "./docs",
+        "css": "./docs/css",
+        "js": "./docs/src"
     }
 }

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head_stylesheet %}
+    <link rel="stylesheet" href="./css/base.css" />
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <h1>ONNX Backend Scoreboard</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <p>Score is based on ONNX backend unit tests</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+            <div class="col-auto">
+                {% if dev %}
+                    <h5>Development builds</h5>
+                {% else %}
+                    <h5>Stable builds</h5>
+                {% endif %}
+            </div>
+        </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            {% if dev %}
+                <a href="index.html">Back to stable builds</a>
+            {% else %}
+                <a href="index_dev.html">Check development builds</a>
+            {% endif %}
+        </div>
+    </div>
+
+<div id="content">
+    {%include "home.html" %}
+</div>
+{% endblock %}
+
+{% block body_scripts %}
+    <script src="./src/main.js"></script>
+{% endblock %}

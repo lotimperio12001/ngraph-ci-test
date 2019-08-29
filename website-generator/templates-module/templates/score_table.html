@@ -4,10 +4,11 @@
         <th scope="row">Version</th>
         <th scope="row">Date</th>
         <th scope="row">Score</th>
+        <th scope="row">Details</th>
     </tr>
     {% for framework, data in database.items() %}
     <tr>
-        <th scope="row">{{loop.index}}.&nbsp&nbsp{{ data.name }}</th>
+        <th scope="row">{{ data.name }}</th>
         <td>
         {% for package in data.version %}
             {{ package.name }}:&nbsp{{ package.version }}<br>
@@ -18,6 +19,17 @@
             <div class='{{data.coverage.mark}}'>
                 {{ "{:,.2f}%".format(data.coverage.passed) }}
             </div>
+        </td>
+        <td>
+            {% if dev %}
+                <a href='{{ framework }}_details_dev.html'>
+                >>
+                </a>
+            {% else %}
+                <a href='{{ framework }}_details_stable.html'>
+                >>
+                </a>
+            {% endif %}
         </td>
     </tr>
     {% endfor %}

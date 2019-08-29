@@ -3,7 +3,7 @@
     {% if loop.index == 1 %}
     <tr>
         <th scope="col">&nbsp</th>
-        {% for op_name, _ in database.ngraph.ops.items() %}
+        {% for op_name, _ in data.ops.items() %}
             <th scope="row">{{ op_name }}</th>
         {% endfor %}
     </tr>

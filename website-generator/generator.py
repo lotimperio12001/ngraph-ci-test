@@ -137,7 +137,7 @@ def _load_report(file_dir, file_name="report.json"):
     return swapped_report
 
 
-def _load_config(file_dir="./", file_name="config.json"):
+def _load_config(file_dir="./website-generator", file_name="config.json"):
     try:
         with open(os.path.join(file_dir, file_name), "r") as config_file:
             config = json.load(config_file)
@@ -146,11 +146,10 @@ def _load_config(file_dir="./", file_name="config.json"):
     return config
 
 
-def _prepare_database(state="stable"):
-    config = _load_config()
-    config = config[state]
-
+def _prepare_database(config, state="stable"):
+    config = config.get(state, {})
     database = OrderedDict()
+
     for framework, conf in config.items():
         results_dir = conf.get("results_dir")
         name = conf.get("name", framework)
@@ -168,6 +167,8 @@ def _prepare_database(state="stable"):
             "ops": ops,
             "report": report,
         }
+
+    database = _sort_by_score(database)
     return database
 
 
@@ -184,51 +185,76 @@ def _get_version(conf, trend):
     return []
 
 
-# Prepare data for templates
-database_stable = _prepare_database(state="stable")
-database_dev = _prepare_database(state="development")
+def _generate_page(template, output_dir, name, **template_args):
+    page = template.render(template_args)
 
-# Sort data by score
-database_stable = OrderedDict(
-    sorted(
-        database_stable.items(),
-        key=lambda item: item[1]["coverage"]["passed"],
-        reverse=True,
+    # Save static page to file
+    with open(os.path.join(output_dir, name), "w") as f:
+        f.write(page)
+
+
+def _generate_pages(template, database, suffix):
+    for framework, _ in database.items():
+        framework_data = OrderedDict({framework: database.get(framework)})
+        output_name = "{}_{}".format(framework, suffix)
+        _generate_page(
+            template,
+            deploy_paths.get("subpages", "./"),
+            output_name,
+            framework_data=framework_data,
+        )
+
+
+def _sort_by_score(database):
+    database = OrderedDict(
+        sorted(
+            database.items(),
+            key=lambda item: item[1]["coverage"]["passed"],
+            reverse=True,
+        )
     )
-)
-database_dev = OrderedDict(
-    sorted(
-        database_dev.items(),
-        key=lambda item: item[1]["coverage"]["passed"],
-        reverse=True,
+    return database
+
+
+if __name__ == "__main__":
+    # Load configuration from file
+    config = _load_config()
+
+    # Prepare data for templates
+    database_stable = _prepare_database(config, state="stable")
+    database_dev = _prepare_database(config, state="development")
+
+    # Website
+    # Create Jinja2 templates environment
+    env = Environment(
+        loader=PackageLoader("templates-module", "templates"),
+        autoescape=select_autoescape(["html"]),
     )
-)
 
-# Website
-# Create Jinja2 templates environment
-env = Environment(
-    loader=PackageLoader("templates-module", "templates"),
-    autoescape=select_autoescape(["html"]),
-)
+    # Load paths from config.json file
+    config = _load_config()
+    deploy_paths = config.get("deploy_paths")
 
-# Stable frameworks builds
-# Generate static page
-index_template = env.get_template("index.html")
-index_static = index_template.render(
-    database_dev=database_dev, database_stable=database_stable
-)
+    # Create index.html file
+    template = env.get_template("index.html")
+    _generate_page(
+        template,
+        deploy_paths.get("index", "./"),
+        "index.html",
+        database=database_stable,
+    )
 
-# Save static page to file
-with open("../index.html", "w") as f:
-    f.write(index_static)
+    # Create dev subpage
+    template = env.get_template("index.html")
+    _generate_page(
+        template,
+        deploy_paths.get("subpages", "./"),
+        "index_dev.html",
+        database=database_dev,
+        dev=True,
+    )
 
-# Development frameworks builds
-# Generate static page
-index_template = env.get_template("index_dev.html")
-index_static = index_template.render(
-    database_dev=database_dev, database_stable=database_stable
-)
-
-# Save static page to file
-with open("../index_dev.html", "w") as f:
-    f.write(index_static)
+    # Create details page for each framework
+    template = env.get_template("details.html")
+    _generate_pages(template, database_stable, "details_stable.html")
+    _generate_pages(template, database_dev, "details_dev.html")
