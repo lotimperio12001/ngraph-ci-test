@@ -25,13 +25,25 @@ def _load_trend(file_dir, file_name="trend.json"):
             "date": "08/06/2019 09:37:45",
             "failed": 61,
             "passed": 497,
-            "skipped": 0
+            "skipped": 0,
+            "version": [
+                {
+                    "name": "onnx",
+                    "version": "1.5.0"
+                }
+            ]
         },
         {
             "date": "08/08/2019 08:34:18",
             "failed": 51,
             "passed": 507,
-            "skipped": 0
+            "skipped": 0,
+            "version": [
+                {
+                    "name": "onnx",
+                    "version": "1.6.0"
+                }
+            ]
         }
     ]
 
