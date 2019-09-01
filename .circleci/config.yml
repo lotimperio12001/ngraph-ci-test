@@ -144,7 +144,7 @@ jobs:
           command: sudo pip install --upgrade -r requirements_web.txt
       - run:
           name: Generate static page
-          command: python3 docs/website/generator/generator.py
+          command: python3 website-generator/generator.py
 
       - add_ssh_keys:
           fingerprints:
