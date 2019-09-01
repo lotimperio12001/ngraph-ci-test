@@ -43,7 +43,7 @@ def pytest_configure(config):
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
-    # Set directory for resources
+    # Set directories
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
     version_dir = os.environ.get("VERSION_DIR", os.getcwd())
 
@@ -291,7 +291,7 @@ def _update_trend(summary, trend):
     :rtype: list
     """
     # Trend should have at least two results
-    valid_length = len(trend) > 2 and summary.keys() == len(trend[-1].keys())
+    valid_length = len(trend) >= 2 and summary.keys() == len(trend[-1].keys())
     equal_values = trend and all(
         summary.get(key) == trend[-1].get(key)
         for key in summary.keys()
@@ -300,7 +300,7 @@ def _update_trend(summary, trend):
     # If the new result summary is the same as the last one in trend
     # then replace the old one to save current date,
     # otherwise append the new summary to the trend list
-    if valid_length or equal_values:
+    if valid_length and equal_values:
         trend[-1] = summary
     else:
         trend.append(summary)
