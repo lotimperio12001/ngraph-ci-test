@@ -17,24 +17,24 @@
         </div>
     </div>
     <div class="row justify-content-center">
-            <div class="col-auto">
-                {% if dev %}
-                    <h5>Development builds</h5>
-                {% else %}
-                    <h5>Stable builds</h5>
-                {% endif %}
-            </div>
-        </div>
-    <div class="row justify-content-center">
         <div class="col-auto">
             {% if dev %}
-                <a href="index.html">Back to stable builds</a>
+                <h5>Development Builds</h5>
             {% else %}
-                <a href="index_dev.html">Check development builds</a>
+                <h5>Stable Builds</h5>
             {% endif %}
         </div>
     </div>
-
+        <div class="row justify-content-center">
+        <div class="col-auto">
+            {% if dev %}
+                <a href="index.html">switch to stable builds</a>
+            {% else %}
+                <a href="index_dev.html">switch to development builds</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 <div id="content">
     {%include "home.html" %}
 </div>

@@ -7,6 +7,7 @@ import csv
 import json
 import os
 
+from argparse import ArgumentParser
 from collections import OrderedDict
 from datetime import datetime
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -137,9 +138,9 @@ def _load_report(file_dir, file_name="report.json"):
     return swapped_report
 
 
-def _load_config(file_dir="./website-generator", file_name="config.json"):
+def _load_config(file_path="./website-generator/config.json"):
     try:
-        with open(os.path.join(file_dir, file_name), "r") as config_file:
+        with open(file_path, "r") as config_file:
             config = json.load(config_file)
     except (IOError, json.decoder.JSONDecodeError) as err:
         raise IOError("Can't load config file !", err)
@@ -217,8 +218,16 @@ def _sort_by_score(database):
 
 
 if __name__ == "__main__":
+    parser = ArgumentParser()
+    parser.add_argument(
+        "--config",
+        dest="config",
+        help="Load configuration from the specified json file",
+    )
+    args = parser.parse_args()
+
     # Load configuration from file
-    config = _load_config()
+    config = _load_config(args.config)
 
     # Prepare data for templates
     database_stable = _prepare_database(config, state="stable")

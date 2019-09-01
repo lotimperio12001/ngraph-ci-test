@@ -4,7 +4,9 @@
         <th scope="row">Version</th>
         <th scope="row">Date</th>
         <th scope="row">Score</th>
+        {% if not in_details %}
         <th scope="row">Details</th>
+        {% endif %}
     </tr>
     {% for framework, data in database.items() %}
     <tr>
@@ -20,6 +22,7 @@
                 {{ "{:,.2f}%".format(data.coverage.passed) }}
             </div>
         </td>
+        {% if not in_details %}
         <td>
             {% if dev %}
                 <a href='{{ framework }}_details_dev.html'>
@@ -31,6 +34,7 @@
                 </a>
             {% endif %}
         </td>
+        {% endif %}
     </tr>
     {% endfor %}
 </table>
