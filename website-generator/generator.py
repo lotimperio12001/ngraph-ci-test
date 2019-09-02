@@ -110,10 +110,13 @@ def _get_coverage_percentage(trend):
 
 def _load_ops_csv(file_dir, file_name="nodes.csv"):
     ops_table = OrderedDict()
-    with open(os.path.join(file_dir, file_name), newline="") as csv_file:
-        reader = csv.DictReader(csv_file)
-        for row in reader:
-            ops_table[row["Op"]] = row.get("None").replace("!", "").lower()
+    try:
+        with open(os.path.join(file_dir, file_name), newline="") as csv_file:
+            reader = csv.DictReader(csv_file)
+            for row in reader:
+                ops_table[row["Op"]] = row.get("None").replace("!", "").lower()
+    except IOError:
+        pass  # Return empty dict
     return ops_table
 
 

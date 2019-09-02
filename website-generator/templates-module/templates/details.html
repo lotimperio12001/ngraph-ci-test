@@ -8,14 +8,26 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-auto">
-                {% for data in framework_data.values() %}
-                <h1>{{ data.name }}</h1>
+                {% for key, data in database.items() %}
+                    <h1>{{ data.name }}</h1>
                 {% endfor %}
             </div>
         </div>
         <div class="row justify-content-center">
             <div>
                 {%include "score_table.html" %}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <h2>Passed unit tests trend</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                {% for key, data in database.items() %}
+                    <canvas id="line_trend" framework_data='{{ data|tojson }}' style="width: 50vw"></canvas>
+                {% endfor %}
             </div>
         </div>
         <div class="row justify-content-center">
@@ -44,11 +56,16 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div>
+            <div class="col-auto">
                 {%include "ops_table.html" %}
             </div>
         </div>
     </div>
     {% endwith %}
 </div>
+{% endblock %}
+
+{% block body_scripts %}
+    <script src='./src/main.js'></script>
+    <script src='./src/details.js'></script>
 {% endblock %}
