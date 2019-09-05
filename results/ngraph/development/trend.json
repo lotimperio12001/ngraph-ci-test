@@ -1104,5 +1104,225 @@
                 "version": "0.6.0"
             }
         ]
+    },
+    {
+        "date": "09/05/2019 12:32:38",
+        "failed": 105,
+        "passed": 453,
+        "skipped": 0,
+        "version": [
+            {
+                "name": "asn1crypto",
+                "version": "0.24.0"
+            },
+            {
+                "name": "atomicwrites",
+                "version": "1.3.0"
+            },
+            {
+                "name": "attrs",
+                "version": "19.1.0"
+            },
+            {
+                "name": "cachetools",
+                "version": "3.1.1"
+            },
+            {
+                "name": "cryptography",
+                "version": "2.1.4"
+            },
+            {
+                "name": "entrypoints",
+                "version": "0.3"
+            },
+            {
+                "name": "filelock",
+                "version": "3.0.12"
+            },
+            {
+                "name": "flake8",
+                "version": "3.7.8"
+            },
+            {
+                "name": "flake8-commas",
+                "version": "2.0.0"
+            },
+            {
+                "name": "flake8-comprehensions",
+                "version": "2.1.0"
+            },
+            {
+                "name": "flake8-docstrings",
+                "version": "1.3.0"
+            },
+            {
+                "name": "flake8-polyfill",
+                "version": "1.0.2"
+            },
+            {
+                "name": "flake8-quotes",
+                "version": "2.0.1"
+            },
+            {
+                "name": "idna",
+                "version": "2.6"
+            },
+            {
+                "name": "importlib-metadata",
+                "version": "0.20"
+            },
+            {
+                "name": "keyring",
+                "version": "10.6.0"
+            },
+            {
+                "name": "keyrings.alt",
+                "version": "3.0"
+            },
+            {
+                "name": "mccabe",
+                "version": "0.6.1"
+            },
+            {
+                "name": "more-itertools",
+                "version": "7.2.0"
+            },
+            {
+                "name": "mypy",
+                "version": "0.720"
+            },
+            {
+                "name": "mypy-extensions",
+                "version": "0.4.1"
+            },
+            {
+                "name": "ngraph-core",
+                "version": "0.25.0"
+            },
+            {
+                "name": "ngraph-onnx",
+                "version": "0.24.0"
+            },
+            {
+                "name": "numpy",
+                "version": "1.17.1"
+            },
+            {
+                "name": "onnx",
+                "version": "1.5.0"
+            },
+            {
+                "name": "packaging",
+                "version": "19.1"
+            },
+            {
+                "name": "pip",
+                "version": "19.2.3"
+            },
+            {
+                "name": "pluggy",
+                "version": "0.12.0"
+            },
+            {
+                "name": "protobuf",
+                "version": "3.9.1"
+            },
+            {
+                "name": "py",
+                "version": "1.8.0"
+            },
+            {
+                "name": "pycodestyle",
+                "version": "2.5.0"
+            },
+            {
+                "name": "pycrypto",
+                "version": "2.6.1"
+            },
+            {
+                "name": "pydocstyle",
+                "version": "3.0.0"
+            },
+            {
+                "name": "pyflakes",
+                "version": "2.1.1"
+            },
+            {
+                "name": "pygobject",
+                "version": "3.26.1"
+            },
+            {
+                "name": "pyparsing",
+                "version": "2.4.2"
+            },
+            {
+                "name": "pytest",
+                "version": "5.0.1"
+            },
+            {
+                "name": "pytest-timeout",
+                "version": "1.3.3"
+            },
+            {
+                "name": "pyxdg",
+                "version": "0.25"
+            },
+            {
+                "name": "SecretStorage",
+                "version": "2.3.1"
+            },
+            {
+                "name": "setuptools",
+                "version": "41.2.0"
+            },
+            {
+                "name": "six",
+                "version": "1.12.0"
+            },
+            {
+                "name": "snowballstemmer",
+                "version": "1.9.0"
+            },
+            {
+                "name": "tabulate",
+                "version": "0.8.3"
+            },
+            {
+                "name": "toml",
+                "version": "0.10.0"
+            },
+            {
+                "name": "tox",
+                "version": "3.13.2"
+            },
+            {
+                "name": "typed-ast",
+                "version": "1.4.0"
+            },
+            {
+                "name": "typing",
+                "version": "3.7.4.1"
+            },
+            {
+                "name": "typing-extensions",
+                "version": "3.7.4"
+            },
+            {
+                "name": "virtualenv",
+                "version": "16.7.5"
+            },
+            {
+                "name": "wcwidth",
+                "version": "0.1.7"
+            },
+            {
+                "name": "wheel",
+                "version": "0.33.6"
+            },
+            {
+                "name": "zipp",
+                "version": "0.6.0"
+            }
+        ]
     }
 ]
