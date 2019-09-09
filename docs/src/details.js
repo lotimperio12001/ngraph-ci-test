@@ -5,10 +5,11 @@ let trend_data = framework_data.trend;
 
 let labels = trend_data.map(summary => summary.date.split(' ')[0]);
 let data = trend_data.map(summary => summary.passed);
+let display_data_count = 15;
 let line_chart_data = {
-    labels: [""].concat(labels),
+    labels: [""].concat(labels.slice(-display_data_count)),
     datasets: [{
-        data: [0].concat(data),
+        data: [0].concat(data.slice(-display_data_count)),
         label: "Passed",
         fill: true,
         backgroundColor: 'transparent',
@@ -36,7 +37,9 @@ let line_chart = new Chart(line_trend, {
             xAxes: [{}],
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: framework_data.coverage.total,
                 },
                 scaleLabel: {
                     fontSize: 20,
@@ -44,6 +47,11 @@ let line_chart = new Chart(line_trend, {
                     labelString: "passed unit tests"
                 }
             }]
+        },
+        elements: {
+            line: {
+                tension: 0 // Disables bezier curves
+            }
         }
     }
 });
