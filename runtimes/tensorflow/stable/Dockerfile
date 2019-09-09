@@ -39,13 +39,9 @@ RUN mkdir -p /root/results
 ENV RESULTS_DIR=/root/results
 ENV CSVDIR=/root/results
 
-RUN apt-get install time
-
 # Run pytest
 WORKDIR /root/test
 COPY ./test/conftest.py /root/test
 COPY ./test/test_backend.py /root/test
 
 CMD /usr/bin/time -v pytest test_backend.py --onnx_backend="onnx_tf.backend" -k 'not _cuda' -v
-# CMD pytest test_backend.py --onnx_backend="onnx_tf.backend" -k 'not _cuda' -v
-# CMD /usr/bin/time -v pytest test_backend.py --onnx_backend="onnx_tf.backend" -k 'test_vgg19_cpu' -v

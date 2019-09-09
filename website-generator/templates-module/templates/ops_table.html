@@ -1,13 +1,13 @@
 <table class="table transposed">
     {% for framework, data in database.items() %}
-    {% if loop.index == 1 %}
-    <tr>
-        <th scope="col">&nbsp</th>
-        {% for op_name, _ in data.ops.items() %}
-            <th scope="row">{{ op_name }}</th>
-        {% endfor %}
-    </tr>
-    {% endif %}
+        {% if loop.index == 1 %}
+        <tr>
+            <th scope="col">&nbsp</th>
+            {% for op_name, _ in data.ops.items() %}
+                <th scope="row">{{ op_name }}</th>
+            {% endfor %}
+        </tr>
+        {% endif %}
     <tr>
         <th scope="row">{{ data.name }}</th>
         {% for op_name, output in data.ops.items() %}

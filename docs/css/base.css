@@ -13,6 +13,21 @@ h2 {
     padding: 3vh;
 }
 
+h5 {
+    margin: 1vh;
+    padding: 2vh;
+}
+
+a {
+    font-size: 9pt;
+    color: #00ffea;
+}
+
+a:hover {
+    color: #00998c;
+    text-decoration: none;
+}
+
 .table {
     color: #c7d4d3;
 }

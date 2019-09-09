@@ -12,33 +12,9 @@
         "skipped": 0
     },
     {
-        "date": "08/12/2019 20:52:25",
-        "failed": 0,
-        "passed": 0,
-        "skipped": 0
-    },
-    {
         "date": "08/12/2019 21:18:18",
         "failed": 64,
         "passed": 494,
-        "skipped": 0
-    },
-    {
-        "date": "08/13/2019 08:04:44",
-        "failed": 53,
-        "passed": 368,
-        "skipped": 0
-    },
-    {
-        "date": "08/13/2019 08:18:54",
-        "failed": 64,
-        "passed": 494,
-        "skipped": 0
-    },
-    {
-        "date": "08/13/2019 11:42:38",
-        "failed": 3,
-        "passed": 62,
         "skipped": 0
     },
     {
