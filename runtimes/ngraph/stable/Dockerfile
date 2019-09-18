@@ -40,29 +40,32 @@ RUN apt-get update && apt-get -y install \
 
 # Install nGraph in root/ngraph
 WORKDIR /root
-RUN git clone https://github.com/NervanaSystems/ngraph.git
-RUN mkdir /root/ngraph/build
-WORKDIR /root/ngraph/build
-RUN cmake -DNGRAPH_USE_PREBUILT_LLVM=TRUE -DNGRAPH_CPU_ENABLE=TRUE  -DCMAKE_INSTALL_PREFIX=/root/ngraph_dist -DNGRAPH_ONNX_IMPORT_ENABLE=TRUE -DCMAKE_BUILD_TYPE=Release ..
-RUN make -j"$(nproc)"
-RUN make install
+RUN pip install ngraph-core
+# RUN git clone https://github.com/NervanaSystems/ngraph.git
+# RUN mkdir /root/ngraph/build
+# WORKDIR /root/ngraph/build
+# RUN cmake -DNGRAPH_USE_PREBUILT_LLVM=TRUE -DNGRAPH_CPU_ENABLE=TRUE  -DCMAKE_INSTALL_PREFIX=/root/ngraph_dist -DNGRAPH_ONNX_IMPORT_ENABLE=TRUE -DCMAKE_BUILD_TYPE=Release ..
+# RUN make -j"$(nproc)"
+# RUN make install
 
 # Build Python package (Binary wheel) for nGraph
-WORKDIR /root/ngraph/python
-RUN git clone https://github.com/pybind/pybind11.git
-ENV NGRAPH_ONNX_IMPORT_ENABLE=TRUE
-ENV PYBIND_HEADERS_PATH=/root/ngraph/python/pybind11
-ENV NGRAPH_CPP_BUILD_PATH=/root/ngraph_dist
-ENV LD_LIBRARY_PATH=/root/ngraph_dist/lib
-RUN python3 setup.py develop
+# WORKDIR /root/ngraph/python
+# RUN git clone https://github.com/pybind/pybind11.git
+# ENV NGRAPH_ONNX_IMPORT_ENABLE=TRUE
+# ENV PYBIND_HEADERS_PATH=/root/ngraph/python/pybind11
+# ENV NGRAPH_CPP_BUILD_PATH=/root/ngraph_dist
+# ENV LD_LIBRARY_PATH=/root/ngraph_dist/lib
+# RUN python3 setup.py develop
 
 # Install nGraph-ONNX
-WORKDIR /root
-RUN git clone -b master --single-branch --depth 1 https://github.com/NervanaSystems/ngraph-onnx.git
-WORKDIR /root/ngraph-onnx
-RUN pip install -r requirements.txt --ignore-installed
-RUN pip install -r requirements_test.txt --ignore-installed
-RUN pip install -e . --ignore-installed
+RUN pip install ngraph-onnx
+
+# WORKDIR /root
+# RUN git clone -b master --single-branch --depth 1 https://github.com/NervanaSystems/ngraph-onnx.git
+# WORKDIR /root/ngraph-onnx
+# RUN pip install -r requirements.txt --ignore-installed
+# RUN pip install -r requirements_test.txt --ignore-installed
+# RUN pip install -e . --ignore-installed
 
 # Test report dependencies
 RUN pip install --no-cache-dir pytest && \
