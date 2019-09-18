@@ -30,7 +30,7 @@ jobs:
             git push origin master
 
 
-  ngraphonnx_dev:
+  ngraph_dev:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -61,7 +61,7 @@ jobs:
             git push origin master
 
 
-  ngraphonnx_stable:
+  ngraph_stable:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -187,9 +187,9 @@ workflows:
   on-commit:
     jobs:
       - generate_static_page
-      - onnxruntime_stable
-      - ngraphonnx_stable
-      # - ngraphonnx_dev
+      # - onnxruntime_stable
+      - ngraph_stable
+      # - ngraph_dev
       # - pytorch_dev
   #     - tensorflow_stable  # Core dump on CircleCI
 
@@ -197,7 +197,7 @@ workflows:
     jobs:
       - generate_static_page
       - onnxruntime_stable
-      - ngraphonnx_dev
+      - ngraph_dev
       - pytorch_dev
   #     - tensorflow_stable  # Core dump on CircleCI
 
