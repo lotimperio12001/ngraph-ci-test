@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  onnxruntime_build_and_test:
+  onnxruntime_stable:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -26,11 +26,11 @@ jobs:
 
             git pull origin master
             git add .
-            git commit -m "Scoreboard ONNX-Runtime results [ci skip]"
+            git commit -m "Scoreboard ONNX-Runtime stable results [ci skip]"
             git push origin master
 
 
-  ngraph_build_and_test:
+  ngraph_dev:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -57,11 +57,11 @@ jobs:
 
             git pull origin master
             git add .
-            git commit -m "Scoreboard nGraph results [ci skip]"
+            git commit -m "Scoreboard nGraph dev results [ci skip]"
             git push origin master
 
 
-  pytorch_build_and_test:
+  pytorch_dev:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
@@ -87,35 +87,21 @@ jobs:
 
             git pull origin master
             git add .
-            git commit -m "Scoreboard pytorch results [ci skip]"
+            git commit -m "Scoreboard pytorch dev results [ci skip]"
             git push origin master
 
 
-  tensorflow_build_and_test:
+  tensorflow_stable:
     machine: true
     working_directory: ~/ngraph-ci-test
     steps:
       - checkout
-      - run:
-          name: CPU INFO
-          command: cat /proc/cpuinfo && cat /proc/meminfo && free >> /tmp/memory_before.log
-
       - run:
           name: Build tensorflow docker image
           command: docker build -t scoreboard/tensorflow -f runtimes/tensorflow/stable/Dockerfile .
 
       - run:
           name: Run tensorflow docker container
-          command: |
-            ulimit -c unlimited
-            docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
-
-      - run:
-          command: cat /proc/cpuinfo && cat /proc/meminfo && free >> /tmp/memory_after.log
-          when: on_fail
-
-      - store_artifacts:
-          path: /tmp
           command: docker run --name tensorflow -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
       - add_ssh_keys:
@@ -131,8 +117,9 @@ jobs:
 
             git pull origin master
             git add .
-            git commit -m "Scoreboard tensorflow results [ci skip]"
+            git commit -m "Scoreboard tensorflow stable results [ci skip]"
             git push origin master
+
 
   generate_static_page:
     working_directory: ~/ngraph-ci-test
@@ -166,21 +153,21 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test_all:
+  on-commit:
     jobs:
       - generate_static_page
-      - onnxruntime_build_and_test
-      # - ngraph_build_and_test
-      # - pytorch_build_and_test
-      # - tensorflow_build_and_test
+      - onnxruntime_stable
+      # - ngraph_dev
+      # - pytorch_dev
+  #     - tensorflow_stable  # Core dump on CircleCI
 
-  daily-workflow:
+  daily-update:
     jobs:
       - generate_static_page
-      - onnxruntime_build_and_test
-      - ngraph_build_and_test
-      - pytorch_build_and_test
-  #     - tensorflow_build_and_test
+      - onnxruntime_stable
+      - ngraph_dev
+      - pytorch_dev
+  #     - tensorflow_stable  # Core dump on CircleCI
 
     triggers:
       - schedule:
