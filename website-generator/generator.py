@@ -216,7 +216,7 @@ def _generate_page(template, output_dir, name, **template_args):
 def _generate_pages(template, database, suffix):
     for framework, _ in database.items():
         framework_data = OrderedDict({framework: database.get(framework)})
-        output_name = "{}_{}".format(framework, suffix)
+        output_name = "{name}_{suffix}".format(name=framework, suffix=suffix)
         _generate_page(
             template,
             deploy_paths.get("subpages", "./"),
