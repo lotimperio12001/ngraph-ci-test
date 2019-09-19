@@ -22,6 +22,7 @@ Jinja2 docs: https://jinja.palletsprojects.com/en/2.10.x/api/
 import csv
 import json
 import os
+import shutil
 
 from argparse import ArgumentParser
 from collections import OrderedDict
@@ -29,7 +30,7 @@ from datetime import datetime
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
-def _load_trend(file_dir, file_name="trend.json"):
+def load_trend(file_dir, file_name="trend.json"):
     """Load and return trend list from json file.
 
     Return list of summaries loaded from tests trend json file.
@@ -74,7 +75,7 @@ def _load_trend(file_dir, file_name="trend.json"):
     dummy_trend = [
         {
             "date": datetime.now().strftime("%m/%d/%Y %H:%M:%S"),
-            "failed": 1,
+            "failed": 0,
             "passed": 0,
             "skipped": 0,
         }
@@ -88,7 +89,7 @@ def _load_trend(file_dir, file_name="trend.json"):
     return trend
 
 
-def _mark_coverage(percentage):
+def mark_coverage(percentage):
     """Return mark from A to F based on passed tests percentage.
 
     :param percentage: Percentage of passed unit tests.
@@ -101,15 +102,14 @@ def _mark_coverage(percentage):
         "B": (80, 90),
         "C": (70, 80),
         "D": (60, 70),
-        "E": (50, 60),
-        "F": (0, 50),
+        "F": (0, 59),
     }
     for mark, mark_range in mark_table.items():
         if int(percentage) in range(*mark_range):
             return mark
 
 
-def _get_coverage_percentage(trend):
+def get_coverage_percentage(trend):
     """Create and return dict with passed and failed tests percentage.
 
     :param trend: Trend is a list of report summaries per date.
@@ -118,13 +118,17 @@ def _get_coverage_percentage(trend):
     :rtype: dict
     """
     coverage = {"total": (trend[-1].get("failed", 0) + trend[-1].get("passed", 0))}
-    coverage["passed"] = trend[-1].get("passed", 0) / coverage.get("total", 1) * 100
-    coverage["failed"] = trend[-1].get("failed", 0) / coverage.get("total", 1) * 100
-    coverage["mark"] = _mark_coverage(coverage["passed"])
+    try:
+        coverage["passed"] = trend[-1].get("passed", 0) / coverage.get("total", 0) * 100
+        coverage["failed"] = trend[-1].get("failed", 0) / coverage.get("total", 0) * 100
+    except ZeroDivisionError:
+        coverage["passed"] = 0
+        coverage["failed"] = 0
+    coverage["mark"] = mark_coverage(coverage["passed"])
     return coverage
 
 
-def _load_ops_csv(file_dir, file_name="nodes.csv"):
+def load_ops_csv(file_dir, file_name="nodes.csv"):
     ops_table = OrderedDict()
     try:
         with open(os.path.join(file_dir, file_name), newline="") as csv_file:
@@ -136,7 +140,7 @@ def _load_ops_csv(file_dir, file_name="nodes.csv"):
     return ops_table
 
 
-def _load_report(file_dir, file_name="report.json"):
+def load_report(file_dir, file_name="report.json"):
     dummy_report = {"failed": [], "passed": [], "skipped": []}
     try:
         with open(os.path.join(file_dir, file_name), "r") as report_file:
@@ -157,7 +161,7 @@ def _load_report(file_dir, file_name="report.json"):
     return swapped_report
 
 
-def _load_config(file_path="./website-generator/config.json"):
+def load_config(file_path="./website-generator/config.json"):
     try:
         with open(file_path, "r") as config_file:
             config = json.load(config_file)
@@ -166,20 +170,20 @@ def _load_config(file_path="./website-generator/config.json"):
     return config
 
 
-def _prepare_database(config, state="stable"):
+def prepare_database(config, state="stable"):
     config = config.get(state, {})
     database = OrderedDict()
 
-    for framework, conf in config.items():
-        results_dir = conf.get("results_dir")
-        name = conf.get("name", framework)
-        trend = _load_trend(results_dir)
-        version = _get_version(conf, trend)
-        coverage = _get_coverage_percentage(trend)
-        ops = _load_ops_csv(results_dir)
-        report = _load_report(results_dir)
+    for framework_name, framework_config in config.items():
+        results_dir = framework_config.get("results_dir")
+        name = framework_config.get("name", framework_name)
+        trend = load_trend(results_dir)
+        version = get_version(framework_config, trend)
+        coverage = get_coverage_percentage(trend)
+        ops = load_ops_csv(results_dir)
+        report = load_report(results_dir)
 
-        database[framework] = {
+        database[framework_name] = {
             "name": name,
             "version": version,
             "trend": trend,
@@ -188,11 +192,11 @@ def _prepare_database(config, state="stable"):
             "report": report,
         }
 
-    database = _sort_by_score(database)
+    database = sort_by_score(database)
     return database
 
 
-def _get_version(conf, trend):
+def get_version(conf, trend):
     core_packages = conf.get("core_packages")
     packages_version = trend[-1].get("version")
     if core_packages and packages_version:
@@ -205,7 +209,7 @@ def _get_version(conf, trend):
     return []
 
 
-def _generate_page(template, output_dir, name, **template_args):
+def generate_page(template, output_dir, name, **template_args):
     page = template.render(template_args)
 
     # Save static page to file
@@ -213,11 +217,11 @@ def _generate_page(template, output_dir, name, **template_args):
         f.write(page)
 
 
-def _generate_pages(template, database, suffix):
+def generate_pages(template, database, suffix):
     for framework, _ in database.items():
         framework_data = OrderedDict({framework: database.get(framework)})
         output_name = "{name}_{suffix}".format(name=framework, suffix=suffix)
-        _generate_page(
+        generate_page(
             template,
             deploy_paths.get("subpages", "./"),
             output_name,
@@ -225,7 +229,7 @@ def _generate_pages(template, database, suffix):
         )
 
 
-def _sort_by_score(database):
+def sort_by_score(database):
     database = OrderedDict(
         sorted(
             database.items(),
@@ -246,11 +250,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Load configuration from file
-    config = _load_config(args.config)
+    config = load_config(args.config)
 
     # Prepare data for templates
-    database_stable = _prepare_database(config, state="stable")
-    database_dev = _prepare_database(config, state="development")
+    database_stable = prepare_database(config, state="stable")
+    database_dev = prepare_database(config, state="development")
 
     # Website
     # Create Jinja2 templates environment
@@ -260,12 +264,12 @@ if __name__ == "__main__":
     )
 
     # Load paths from config.json file
-    config = _load_config()
+    config = load_config()
     deploy_paths = config.get("deploy_paths")
 
     # Create index.html file
     template = env.get_template("index.html")
-    _generate_page(
+    generate_page(
         template,
         deploy_paths.get("index", "./"),
         "index.html",
@@ -274,7 +278,7 @@ if __name__ == "__main__":
 
     # Create dev subpage
     template = env.get_template("index.html")
-    _generate_page(
+    generate_page(
         template,
         deploy_paths.get("subpages", "./"),
         "index_dev.html",
@@ -284,5 +288,15 @@ if __name__ == "__main__":
 
     # Create details page for each framework
     template = env.get_template("details.html")
-    _generate_pages(template, database_stable, "details_stable.html")
-    _generate_pages(template, database_dev, "details_dev.html")
+    generate_pages(template, database_stable, "details_stable.html")
+    generate_pages(template, database_dev, "details_dev.html")
+
+    # Copy resources to deploy dir
+    # shutil.copytree function raises error if destination path exists
+    resources_path = os.path.abspath("./website-generator/resources")
+    deploy_resources_path = os.path.abspath(
+        deploy_paths.get("resources", "./docs/resources")
+    )
+    if os.path.exists(deploy_resources_path):
+        shutil.rmtree(deploy_resources_path)
+    shutil.copytree(resources_path, deploy_resources_path)

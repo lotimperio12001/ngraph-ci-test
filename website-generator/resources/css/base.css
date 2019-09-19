@@ -1,0 +1,89 @@
+body {
+    color: #c7d4d3;
+    background-color: #042c34;
+}
+
+h1 {
+    margin: 2vh;
+    padding: 3vh;
+}
+
+h2 {
+    margin: 1vh;
+    padding: 3vh;
+}
+
+h5 {
+    margin: 1vh;
+    padding: 2vh;
+}
+
+a {
+    font-size: 9pt;
+    color: #00ffea;
+}
+
+a:hover {
+    color: #00998c;
+    text-decoration: none;
+}
+
+.navigation {
+    font-size: 9pt;
+    fill: #00ffea;
+}
+
+.navigation:hover {
+    font-size: 9pt;
+    fill: #00998c;
+}
+
+.table {
+    color: #c7d4d3;
+}
+
+.transposed tr {
+    display: block;
+    float: left;
+}
+
+.transposed th {
+    display: block;
+}
+
+.transposed td {
+    display: block;
+}
+
+.passed {
+    color: #adff2f;
+}
+
+.failed {
+    color: #f81f1f;
+}
+
+.A {
+    color: #adff2f;
+    font-size: 30pt;
+}
+
+.B {
+    color: #fbff00;
+    font-size: 30pt;
+}
+
+.C {
+    color: #ff8800;
+    font-size: 30pt;
+}
+
+.D {
+    color: #e93e27;
+    font-size: 30pt;
+}
+
+.F {
+    color: #f81f1f;
+    font-size: 30pt;
+}

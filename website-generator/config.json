@@ -36,7 +36,6 @@
     "deploy_paths": {
         "index": "./docs",
         "subpages": "./docs",
-        "css": "./docs/css",
-        "js": "./docs/src"
+        "resources": "./docs/resources"
     }
 }
