@@ -60,9 +60,9 @@ RUN python3 setup.py develop
 WORKDIR /root
 RUN git clone -b master --single-branch --depth 1 https://github.com/NervanaSystems/ngraph-onnx.git
 WORKDIR /root/ngraph-onnx
-RUN pip install -r requirements.txt --ignore-installed
-RUN pip install -r requirements_test.txt --ignore-installed
-RUN pip install -e . --ignore-installed
+RUN pip install -r requirements.txt
+RUN pip install -r requirements_test.txt
+RUN pip install -e .
 
 # Test report dependencies
 RUN pip install --no-cache-dir pytest && \

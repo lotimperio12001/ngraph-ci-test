@@ -15,7 +15,6 @@
 # ******************************************************************************
 
 """Static page generator based on jinja2 templates API.
-
 Jinja2 docs: https://jinja.palletsprojects.com/en/2.10.x/api/
 """
 
@@ -32,7 +31,6 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 def load_trend(file_dir, file_name="trend.json"):
     """Load and return trend list from json file.
-
     Return list of summaries loaded from tests trend json file.
     If file is broken, empty or not found then create and return new dummy trend.
     Trend is a list of report summaries per date.
@@ -64,7 +62,6 @@ def load_trend(file_dir, file_name="trend.json"):
             ]
         }
     ]
-
     :param file_dir: Path to dir with trend file.
     :type path: str
     :param file_name: Name of trend file.
@@ -91,7 +88,6 @@ def load_trend(file_dir, file_name="trend.json"):
 
 def mark_coverage(percentage):
     """Return mark from A to F based on passed tests percentage.
-
     :param percentage: Percentage of passed unit tests.
     :type percentage: float
     :return: Mark from A to F.
@@ -111,7 +107,6 @@ def mark_coverage(percentage):
 
 def get_coverage_percentage(trend):
     """Create and return dict with passed and failed tests percentage.
-
     :param trend: Trend is a list of report summaries per date.
     :type trend: list
     :return: Dictionary with passed and failed tests percentage
@@ -161,7 +156,8 @@ def load_report(file_dir, file_name="report.json"):
     return swapped_report
 
 
-def load_config(file_path="./website-generator/config.json"):
+def load_config(file_path):
+    file_path = os.path.abspath(file_path)
     try:
         with open(file_path, "r") as config_file:
             config = json.load(config_file)
@@ -246,11 +242,13 @@ if __name__ == "__main__":
         "--config",
         dest="config",
         help="Load configuration from the specified json file",
+        type=str
     )
     args = parser.parse_args()
 
     # Load configuration from file
     config = load_config(args.config)
+    deploy_paths = config.get("deploy_paths")
 
     # Prepare data for templates
     database_stable = prepare_database(config, state="stable")
@@ -262,10 +260,6 @@ if __name__ == "__main__":
         loader=PackageLoader("templates-module", "templates"),
         autoescape=select_autoescape(["html"]),
     )
-
-    # Load paths from config.json file
-    config = load_config()
-    deploy_paths = config.get("deploy_paths")
 
     # Create index.html file
     template = env.get_template("index.html")
