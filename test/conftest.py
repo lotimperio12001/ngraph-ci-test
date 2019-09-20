@@ -52,7 +52,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     _save_report(report, results_dir)
     package_versions = _load_version(version_dir)
     print(package_versions)
-    scoreboard_config = _load_scoreboard_config("../config.json")
+    scoreboard_config = _load_scoreboard_config("./config.json")
     core_package_versions = _filter_packages(package_versions, scoreboard_config)
     summary = _prepare_summary(report, core_package_versions)
     trend = _load_trend(results_dir)
@@ -358,7 +358,7 @@ def _filter_packages(package_versions, scoreboard_config):
     return core_packages
 
 
-def _load_scoreboard_config(file_path="../config.json"):
+def _load_scoreboard_config(file_path="./config.json"):
     file_path = os.path.abspath(file_path)
     try:
         with open(file_path, "r") as config_file:
