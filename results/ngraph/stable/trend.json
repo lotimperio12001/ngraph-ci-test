@@ -966,5 +966,17 @@
         ],
         "passed": 0,
         "skipped": 0
+    },
+    {
+        "date": "09/20/2019 14:35:30",
+        "failed": 0,
+        "package_versions": [
+            {
+                "name": "onnx",
+                "version": "1.5.0"
+            }
+        ],
+        "passed": 0,
+        "skipped": 0
     }
 ]
