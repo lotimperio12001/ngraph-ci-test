@@ -35,9 +35,9 @@ def pytest_addoption(parser):
     )
 
 
-def pytest_configure(pytest_config):
+def pytest_configure(config):
     """Pytest hook function."""
-    onnx_backend_module = pytest_config.getvalue("onnx_backend")
+    onnx_backend_module = config.getvalue("onnx_backend")
     test.ONNX_BACKEND_MODULE = onnx_backend_module
 
 
