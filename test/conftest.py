@@ -351,7 +351,7 @@ def _filter_packages(package_versions, scoreboard_config):
             ).items()
         ]
     core_packages = [
-        package for package in package_versions.keys() if package in core_packages
+        package for package in package_versions if package.get("name") in core_packages
     ]
     return core_packages
 
