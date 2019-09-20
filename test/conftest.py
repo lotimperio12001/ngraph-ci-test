@@ -346,7 +346,7 @@ def _filter_packages(package_versions, scoreboard_config):
     core_packages = ["onnx"]
     for state in ["stable", "development"]:
         core_packages += [
-            framework_config.get("core_packages", ["bu"])
+            framework_config.get("core_packages", [])
             for framework_config in scoreboard_config.get(
                 state, {}
             ).values()
@@ -363,7 +363,6 @@ def _load_scoreboard_config(file_path="../config.json"):
     try:
         with open(file_path, "r") as config_file:
             scoreboard_config = json.load(config_file)
-    except (IOError, json.decoder.JSONDecodeError) as err:
-        # scoreboard_config = {}
-        raise err
+    except (IOError, json.decoder.JSONDecodeError):
+        scoreboard_config = {}
     return scoreboard_config
