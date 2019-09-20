@@ -346,7 +346,7 @@ def _filter_packages(package_versions, scoreboard_config):
     core_packages = ["onnx"]
     for state in ["stable", "development"]:
         core_packages += [
-            framework_config.get("core_packages", [])
+            framework_config.get("core_packages", ["bu"])
             for framework_config in scoreboard_config.get(
                 state, {}
             ).values()
