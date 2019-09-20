@@ -363,6 +363,7 @@ def _load_scoreboard_config(file_path="../config.json"):
     try:
         with open(file_path, "r") as config_file:
             scoreboard_config = json.load(config_file)
-    except (IOError, json.decoder.JSONDecodeError):
-        scoreboard_config = {}
+    except (IOError, json.decoder.JSONDecodeError) as err:
+        # scoreboard_config = {}
+        raise err
     return scoreboard_config
