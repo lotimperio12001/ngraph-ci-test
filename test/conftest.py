@@ -35,9 +35,9 @@ def pytest_addoption(parser):
     )
 
 
-def pytest_configure(config):
+def pytest_configure(pytest_config):
     """Pytest hook function."""
-    onnx_backend_module = config.getvalue("onnx_backend")
+    onnx_backend_module = pytest_config.getvalue("onnx_backend")
     test.ONNX_BACKEND_MODULE = onnx_backend_module
 
 
@@ -50,8 +50,10 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     # Collect and save the results
     report = _prepare_report(terminalreporter.stats)
     _save_report(report, results_dir)
-    version = _load_version(version_dir)
-    summary = _prepare_summary(report, version)
+    package_versions = _load_version(version_dir)
+    scoreboard_config = _load_scoreboard_config("./config")
+    core_package_versions = _filter_packages(package_versions, scoreboard_config)
+    summary = _prepare_summary(report, core_package_versions)
     trend = _load_trend(results_dir)
     current_trend = _update_trend(summary, trend)
     _save_trend(current_trend, results_dir)
@@ -85,7 +87,7 @@ def _prepare_report(stats):
     return report
 
 
-def _prepare_summary(report, version=None):
+def _prepare_summary(report, package_versions=None):
     """Return tests summary including number of failed and passed tests.
 
     Return summary with length of each list in report.
@@ -95,7 +97,7 @@ def _prepare_summary(report, version=None):
         "failed": 61,
         "passed": 497,
         "skipped": 0,
-        "version": [
+        "package_versions": [
             {
                 "name": "onnx",
                 "version": "1.5.0"
@@ -112,11 +114,11 @@ def _prepare_summary(report, version=None):
     :return: Summary with length of each list in report.
     :rtype: dict
     """
-    if not version:
-        version = []
+    if not package_versions:
+        package_versions = []
 
     summary = {"date": report.get("date", datetime.now().strftime("%m/%d/%Y %H:%M:%S"))}
-    summary["version"] = version
+    summary["package_versions"] = package_versions
     for key in report.keys():
         if isinstance(report.get(key), list):
             summary[key] = len(report.get(key))
@@ -150,7 +152,7 @@ def _save_trend(trend, results_dir, file_name="trend.json"):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "version": [
+            "package_versions": [
                 {
                     "name": "onnx",
                     "version": "1.5.0"
@@ -162,7 +164,7 @@ def _save_trend(trend, results_dir, file_name="trend.json"):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "version": [
+            "package_versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
@@ -196,10 +198,10 @@ def _load_trend(results_dir, file_name="trend.json"):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "version": [
+            "package_versions": [
                 {
                     "name": "onnx",
-                    "version": "1.5.0"
+                    "pversion": "1.5.0"
                 }
             ]
         },
@@ -208,7 +210,7 @@ def _load_trend(results_dir, file_name="trend.json"):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "version": [
+            "package_versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
@@ -244,7 +246,7 @@ def _update_trend(summary, trend):
         "failed": 61,
         "passed": 497,
         "skipped": 0,
-        "version": [
+        "package_versions": [
             {
                 "name": "onnx",
                 "version": "1.5.0"
@@ -262,7 +264,7 @@ def _update_trend(summary, trend):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "version": [
+            "package_versions": [
                 {
                     "name": "onnx",
                     "version": "1.5.0"
@@ -274,7 +276,7 @@ def _update_trend(summary, trend):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "version": [
+            "package_versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
@@ -333,8 +335,32 @@ def _load_version(version_dir, file_name="pip-list.json"):
     """
     try:
         with open(os.path.join(version_dir, file_name), "r") as version_file:
-            version = json.load(version_file)
-            print(version)
+            package_versions = json.load(version_file)
     except (IOError, json.decoder.JSONDecodeError):
-        version = []
-    return version
+        package_versions = []
+    return package_versions
+
+
+def _filter_packages(package_versions, scoreboard_config):
+    core_packages = ["onnx"]
+    for state in ["stable", "development"]:
+        core_packages += [
+            framework_config.get("core_packages", [])
+            for framework_key, framework_config in scoreboard_config.get(
+                state, {}
+            ).items()
+        ]
+    core_packages = [
+        package for package in package_versions.keys() if package in core_packages
+    ]
+    return core_packages
+
+
+def _load_scoreboard_config(file_path="./config.json"):
+    file_path = os.path.abspath(file_path)
+    try:
+        with open(file_path, "r") as config_file:
+            scoreboard_config = json.load(config_file)
+    except (IOError, json.decoder.JSONDecodeError):
+        scoreboard_config = {}
+    return scoreboard_config
