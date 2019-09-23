@@ -34,7 +34,7 @@ ENV CSVDIR=/root/results
 
 # Save packages version
 COPY ./setups /root/setups
-RUN cat /root/setups
+RUN ls /root/setups
 RUN chmod +x /root/setups/*.sh
 
 RUN printenv
@@ -47,5 +47,6 @@ RUN printenv
 # Run pytest
 COPY ./test /root/test
 COPY ./config.json /root/test
-WORKDIR /root/test
-CMD ./root/setups/save-versions.sh && printenv && pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
+# WORKDIR /root/test
+CMD . /root/setups/run.sh
+# CMD . /root/setups/save-versions.sh && printenv && pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
