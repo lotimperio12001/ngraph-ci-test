@@ -33,10 +33,13 @@ ENV RESULTS_DIR=/root/results
 ENV CSVDIR=/root/results
 
 # Save packages version
-RUN mkdir -p /root/versions
-ENV VERSIONS_DIR=/root/versions
-WORKDIR /root/version
-RUN pip list --format=json > /root/versions/pip-list.json
+COPY ./bash /root/bash
+RUN ./root/bash/save-versions.sh
+
+# RUN mkdir -p /root/versions
+# ENV VERSIONS_DIR=/root/versions
+# WORKDIR /root/version
+# RUN pip list --format=json > /root/versions/pip-list.json
 
 # Run pytest
 COPY ./test /root/test

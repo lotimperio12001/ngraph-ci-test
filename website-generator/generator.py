@@ -174,14 +174,14 @@ def prepare_database(config, state="stable"):
         results_dir = framework_config.get("results_dir")
         name = framework_config.get("name", framework_name)
         trend = load_trend(results_dir)
-        version = get_version(framework_config, trend)
+        versions = framework_config.get("versions", [])
         coverage = get_coverage_percentage(trend)
         ops = load_ops_csv(results_dir)
         report = load_report(results_dir)
 
         database[framework_name] = {
             "name": name,
-            "version": version,
+            "versions": versions,
             "trend": trend,
             "coverage": coverage,
             "ops": ops,
@@ -190,19 +190,6 @@ def prepare_database(config, state="stable"):
 
     database = sort_by_score(database)
     return database
-
-
-def get_version(conf, trend):
-    core_packages = conf.get("core_packages")
-    packages_version = trend[-1].get("version")
-    if core_packages and packages_version:
-        version = [
-            package
-            for package in packages_version
-            if package.get("name") in core_packages
-        ]
-        return version
-    return []
 
 
 def generate_page(template, output_dir, name, **template_args):
