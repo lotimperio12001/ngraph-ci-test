@@ -34,7 +34,8 @@ ENV CSVDIR=/root/results
 
 # Save packages version
 COPY ./setups /root/setups
-# RUN chmod +x /root/bash/save-versions.sh && ./root/bash/save-versions.sh
+RUN cat /root/setups
+RUN chmod +x /root/setups
 
 RUN printenv
 
