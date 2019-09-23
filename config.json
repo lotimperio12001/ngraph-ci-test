@@ -24,11 +24,11 @@
     "development": {
         "ngraph": {
             "name": "nGraph",
-            "results_dir": "./results/ngraph/development",
+            "results_dir": "./results/ngraph/development"
         },
         "pytorch": {
             "name": "Pytorch",
-            "results_dir": "./results/pytorch/development",
+            "results_dir": "./results/pytorch/development"
         }
     },
     "deploy_paths": {
