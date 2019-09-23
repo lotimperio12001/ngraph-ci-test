@@ -345,12 +345,12 @@ def _load_version(version_dir, file_name="pip-list.json"):
 def _filter_packages(package_versions, scoreboard_config):
     core_packages = ["onnx"]
     for state in ["stable", "development"]:
-        core_packages += [
+        core_packages +=
             framework_config.get("core_packages", [])
             for framework_config in scoreboard_config.get(
                 state, {}
             ).values()
-        ]
+
     print(core_packages)
     core_packages = [
         package for package in package_versions if package.get("name") in core_packages
