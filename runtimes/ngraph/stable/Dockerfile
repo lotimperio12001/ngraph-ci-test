@@ -36,7 +36,7 @@ ENV CSVDIR=/root/results
 COPY ./bash /root/bash
 RUN chmod +x /root/bash/save-versions.sh && ./root/bash/save-versions.sh
 
-RUN echo $VERSIONS_DIR
+RUN printenv
 
 # RUN mkdir -p /root/versions
 # ENV VERSIONS_DIR=/root/versions
