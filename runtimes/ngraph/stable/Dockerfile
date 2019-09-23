@@ -33,8 +33,8 @@ ENV RESULTS_DIR=/root/results
 ENV CSVDIR=/root/results
 
 # Save packages version
-COPY ./bash /root/bash
-RUN chmod +x /root/bash/save-versions.sh && ./root/bash/save-versions.sh
+COPY ./setups /root/setups
+# RUN chmod +x /root/bash/save-versions.sh && ./root/bash/save-versions.sh
 
 RUN printenv
 
@@ -47,4 +47,4 @@ RUN printenv
 COPY ./test /root/test
 COPY ./config.json /root/test
 WORKDIR /root/test
-CMD pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
+CMD ./root/setups/save-versions.sh && printenv && pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v

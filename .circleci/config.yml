@@ -73,7 +73,7 @@ jobs:
 
       - run:
           name: Run nGraph docker container
-          command: docker run --name ngraph -it -v ~/ngraph-ci-test/results/ngraph/stable:/root/results scoreboard/ngraph || true
+          command: docker run --name ngraph --env-file setups/env.list -it -v ~/ngraph-ci-test/results/ngraph/stable:/root/results scoreboard/ngraph || true
 
       - add_ssh_keys:
           fingerprints:
