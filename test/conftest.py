@@ -346,10 +346,11 @@ def _filter_packages(package_versions, scoreboard_config):
     core_packages = ["onnx"]
     for framework_config in scoreboard_config.get("stable", {}).values():
         core_packages.extend(framework_config.get("core_packages", []))
-    print(core_packages)
+    print("Before", core_packages)
     core_packages = [
         package for package in package_versions if package.get("name") in core_packages
     ]
+    print("After", core_packages)
     return core_packages
 
 
