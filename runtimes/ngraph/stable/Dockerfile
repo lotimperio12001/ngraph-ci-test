@@ -34,7 +34,7 @@ ENV CSVDIR=/root/results
 
 # Save packages version
 COPY ./bash /root/bash
-RUN chmod +x /root/bash/save-versions.sh
+RUN chmod +x /root/bash/save-versions.sh && ./root/bash/save-versions.sh
 
 # RUN mkdir -p /root/versions
 # ENV VERSIONS_DIR=/root/versions
