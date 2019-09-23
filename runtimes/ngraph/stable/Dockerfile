@@ -35,7 +35,7 @@ ENV CSVDIR=/root/results
 # Save packages version
 COPY ./setups /root/setups
 RUN cat /root/setups
-RUN chmod +x /root/setups
+RUN chmod +x /root/setups/*.sh
 
 RUN printenv
 
