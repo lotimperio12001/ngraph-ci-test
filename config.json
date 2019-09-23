@@ -25,12 +25,10 @@
         "ngraph": {
             "name": "nGraph",
             "results_dir": "./results/ngraph/development",
-            "core_packages": ["ngraph-onnx", "ngraph-core"]
         },
         "pytorch": {
             "name": "Pytorch",
             "results_dir": "./results/pytorch/development",
-            "core_packages": []
         }
     },
     "deploy_paths": {

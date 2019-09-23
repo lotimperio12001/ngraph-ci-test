@@ -45,12 +45,12 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
     # Set directories
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
-    version_dir = os.environ.get("VERSION_DIR", os.getcwd())
+    versions_dir = os.environ.get("VERSIONS_DIR", os.getcwd())
 
     # Collect and save the results
     report = _prepare_report(terminalreporter.stats)
     _save_report(report, results_dir)
-    package_versions = _load_version(version_dir)
+    package_versions = _load_versions(versions_dir)
     scoreboard_config = _load_scoreboard_config("./config.json")
     core_package_versions = _filter_packages(package_versions, scoreboard_config)
     summary = _prepare_summary(report, core_package_versions)
@@ -97,7 +97,7 @@ def _prepare_summary(report, package_versions=None):
         "failed": 61,
         "passed": 497,
         "skipped": 0,
-        "package_versions": [
+        "versions": [
             {
                 "name": "onnx",
                 "version": "1.5.0"
@@ -118,7 +118,7 @@ def _prepare_summary(report, package_versions=None):
         package_versions = []
 
     summary = {"date": report.get("date", datetime.now().strftime("%m/%d/%Y %H:%M:%S"))}
-    summary["package_versions"] = package_versions
+    summary["versions"] = package_versions
     for key in report.keys():
         if isinstance(report.get(key), list):
             summary[key] = len(report.get(key))
@@ -152,7 +152,7 @@ def _save_trend(trend, results_dir, file_name="trend.json"):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "package_versions": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.5.0"
@@ -164,7 +164,7 @@ def _save_trend(trend, results_dir, file_name="trend.json"):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "package_versions": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
@@ -198,7 +198,7 @@ def _load_trend(results_dir, file_name="trend.json"):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "package_versions": [
+            "versions": [
                 {
                     "name": "onnx",
                     "pversion": "1.5.0"
@@ -210,7 +210,7 @@ def _load_trend(results_dir, file_name="trend.json"):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "package_versions": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
@@ -246,7 +246,7 @@ def _update_trend(summary, trend):
         "failed": 61,
         "passed": 497,
         "skipped": 0,
-        "package_versions": [
+        "versions": [
             {
                 "name": "onnx",
                 "version": "1.5.0"
@@ -264,7 +264,7 @@ def _update_trend(summary, trend):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "package_versions": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.5.0"
@@ -276,7 +276,7 @@ def _update_trend(summary, trend):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "package_versions": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
@@ -309,12 +309,12 @@ def _update_trend(summary, trend):
     return trend
 
 
-def _load_version(version_dir, file_name="pip-list.json"):
+def _load_versions(versions_dir, file_name="pip-list.json"):
     """Load and return python packages versions from json file.
 
     Use `pip list --format=json > pip-list.json` to generate and
     save installed python packages versions.
-    Version example:
+    Versions example:
     [
         {
             "name": "onnx",
@@ -326,15 +326,15 @@ def _load_version(version_dir, file_name="pip-list.json"):
         },
     ]
 
-    :param version_dir: Directory of json file with pip list.
-    :type version_dir: str
+    :param versions_dir: Directory of json file with pip list.
+    :type versions_dir: str
     :param file_name: Name of json file with pip list, defaults to "pip-list.json".
     :type file_name: str, optional
     :return: List of installed python packages names and versions.
     :rtype: list
     """
     try:
-        with open(os.path.join(version_dir, file_name), "r") as version_file:
+        with open(os.path.join(versions_dir, file_name), "r") as version_file:
             package_versions = json.load(version_file)
     except (IOError, json.decoder.JSONDecodeError):
         package_versions = []

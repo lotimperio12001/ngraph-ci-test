@@ -39,7 +39,7 @@ WORKDIR /root/version
 RUN pip list --format=json > /root/version/pip-list.json
 
 # Run pytest
-WORKDIR /root/test
 COPY ./test /root/test
 COPY ./config.json /root/test
+WORKDIR /root/test
 CMD pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
