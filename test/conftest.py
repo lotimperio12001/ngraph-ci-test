@@ -51,7 +51,6 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     report = _prepare_report(terminalreporter.stats)
     _save_report(report, results_dir)
     package_versions = _load_version(version_dir)
-    print(package_versions)
     scoreboard_config = _load_scoreboard_config("./config.json")
     core_package_versions = _filter_packages(package_versions, scoreboard_config)
     summary = _prepare_summary(report, core_package_versions)
@@ -346,11 +345,9 @@ def _filter_packages(package_versions, scoreboard_config):
     core_packages = ["onnx"]
     for framework_config in scoreboard_config.get("stable", {}).values():
         core_packages.extend(framework_config.get("core_packages", []))
-    print("Before", core_packages)
     core_packages = [
         package for package in package_versions if package.get("name") in core_packages
     ]
-    print("After", core_packages)
     return core_packages
 
 
