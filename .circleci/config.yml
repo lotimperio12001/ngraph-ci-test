@@ -11,7 +11,7 @@ jobs:
 
       - run:
           name: Run docker container
-          command: docker run --name onnx-runtime --env-file setups/env.list -it -v ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
+          command: docker run --name onnx-runtime --env-file setups/env.list ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
       - add_ssh_keys:
           fingerprints:
