@@ -21,14 +21,10 @@ COPY ./setups /root/setups
 RUN chmod +x /root/setups/*.sh
 
 ############## ONNX Backend dependencies ###########
-# Set Python backend module to import in test script
 ENV ONNX_BACKEND="caffe2.python.onnx.backend"
 
 # Install dependencies
 RUN pip install onnx
-
-# Listed in docs
-# https://caffe2.ai/docs/getting-started.html?platform=ubuntu&configuration=compile
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \

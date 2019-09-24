@@ -3,13 +3,27 @@ FROM ubuntu:18.04
 # Disable interactive installation mode
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Set proxy
-ARG http_proxy
-ARG https_proxy
-ENV http_proxy ${http_proxy}
-ENV https_proxy ${https_proxy}
+# Install Python dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-dev \
+    python3-pip
 
-# nGraph dependencies
+RUN pip3 install --upgrade pip setuptools wheel
+
+# Install test report dependencies
+RUN pip install --no-cache-dir pytest && \
+    pip install --no-cache-dir tabulate
+
+# Copy local directotries
+COPY ./test /root/test
+COPY ./setups /root/setups
+RUN chmod +x /root/setups/*.sh
+
+############## ONNX Backend dependencies ###########
+ENV ONNX_BACKEND="ngraph_onnx.onnx_importer.backend"
+
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -25,20 +39,11 @@ RUN apt-get update && apt-get install -y \
     libtool \
     libtinfo-dev
 
-# Python dependencies
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-dev \
-    python3-pip
-
-RUN pip3 install --upgrade pip setuptools wheel
-
-# ONNX dependencies
 RUN apt-get update && apt-get -y install \
     protobuf-compiler \
     libprotobuf-dev
 
-# Install nGraph in root/ngraph
+# Install nGraph-ONNX
 WORKDIR /root
 RUN git clone https://github.com/NervanaSystems/ngraph.git
 RUN mkdir /root/ngraph/build
@@ -63,24 +68,7 @@ WORKDIR /root/ngraph-onnx
 RUN pip install -r requirements.txt
 RUN pip install -r requirements_test.txt
 RUN pip install -e .
+####################################################
 
-# Test report dependencies
-RUN pip install --no-cache-dir pytest && \
-    pip install --no-cache-dir tabulate
-
-# ONNX-backend test results dir
-RUN mkdir -p /root/results
-ENV RESULTS_DIR=/root/results
-ENV CSVDIR=/root/results
-
-# Save packages version
-RUN mkdir -p /root/version
-ENV VERSION_DIR=/root/version
-WORKDIR /root/version
-RUN pip list --format=json > /root/version/pip-list.json
-
-# Run pytest
-WORKDIR /root/test
-COPY ./test/conftest.py /root/test
-COPY ./test/test_backend.py /root/test
-CMD pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
+CMD . /root/setups/docker-setup.sh && \
+    pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v

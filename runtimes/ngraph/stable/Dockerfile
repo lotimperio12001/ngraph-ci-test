@@ -21,7 +21,6 @@ COPY ./setups /root/setups
 RUN chmod +x /root/setups/*.sh
 
 ############## ONNX Backend dependencies ###########
-# Set Python backend module to import in test script
 ENV ONNX_BACKEND="ngraph_onnx.onnx_importer.backend"
 
 # Install dependencies
