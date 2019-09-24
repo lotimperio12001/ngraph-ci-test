@@ -13,7 +13,11 @@
         <th scope="row">{{ data.name }}</th>
         <td>
         {% for package in data.versions %}
-            {{ package.name }}:&nbsp{{ package.version }}<br>
+            {% if in_details %}
+                {{ package.name }}:&nbsp{{ package.version }}<br>
+            {% elif package.name == "onnx" %}
+                {{ package.name }}:&nbsp{{ package.version }}<br>
+            {% endif %}
         {% endfor %}
         </td>
         <td>{{ data.trend[-1].date }}</td>
