@@ -14,11 +14,6 @@
             "name": "Tensorflow",
             "results_dir": "./results/tensorflow/stable",
             "core_packages": ["tensorflow"]
-        },
-        "pytorch": {
-            "name": "Pytorch",
-            "results_dir": "./results/pytorch/development",
-            "core_packages": ["torch"]
         }
     },
     "development": {
