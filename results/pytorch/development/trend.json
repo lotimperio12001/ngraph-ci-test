@@ -4,7 +4,7 @@
         "failed": 151,
         "passed": 407,
         "skipped": 0,
-        "version": [
+        "versions": [
             {
                 "name": "onnx",
                 "version": "1.5.0"
@@ -20,7 +20,7 @@
         "failed": 151,
         "passed": 407,
         "skipped": 0,
-        "version": [
+        "versions": [
             {
                 "name": "onnx",
                 "version": "1.5.0"

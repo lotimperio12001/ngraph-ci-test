@@ -18,7 +18,7 @@
         "pytorch": {
             "name": "Pytorch",
             "results_dir": "./results/pytorch/development",
-            "core_packages": []
+            "core_packages": ["torch"]
         }
     },
     "development": {

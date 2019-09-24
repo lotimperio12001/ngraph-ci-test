@@ -12,7 +12,7 @@
     <tr>
         <th scope="row">{{ data.name }}</th>
         <td>
-        {% for package in data.version %}
+        {% for package in data.versions %}
             {{ package.name }}:&nbsp{{ package.version }}<br>
         {% endfor %}
         </td>
