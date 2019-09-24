@@ -1,15 +1,10 @@
+####### Default Dockerfile steps ##################
 FROM ubuntu:18.04
 
 # Disable interactive installation mode
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Set proxy
-ARG http_proxy
-ARG https_proxy
-ENV http_proxy ${http_proxy}
-ENV https_proxy ${https_proxy}
-
-# Python dependencies
+# Install Python dependencies
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-dev \
@@ -17,36 +12,30 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install --upgrade pip setuptools wheel
 
+# Install test report dependencies
+RUN pip install --no-cache-dir pytest && \
+    pip install --no-cache-dir tabulate
+
+# Copy local directotries
+COPY ./test /root/test
+COPY ./setups /root/setups
+RUN chmod +x /root/setups/*.sh
+####################################################
+
+############## ONNX Backend dependencies ###########
+# Set Python backend module to import in test script
+ENV ONNX_BACKEND="ngraph_onnx.onnx_importer.backend"
+
 # Install nGraph-core
 RUN pip install ngraph-core
 
 # Install nGraph-ONNX
 RUN pip install ngraph-onnx
+####################################################
 
-# Test report dependencies
-RUN pip install --no-cache-dir pytest && \
-    pip install --no-cache-dir tabulate
 
-# ONNX-backend test results dir
-RUN mkdir -p /root/results
-ENV RESULTS_DIR=/root/results
-ENV CSVDIR=/root/results
-
-# Save packages version
-COPY ./setups /root/setups
-RUN ls /root/setups
-RUN chmod +x /root/setups/*.sh
-
-RUN printenv
-
-# RUN mkdir -p /root/versions
-# ENV VERSIONS_DIR=/root/versions
-# WORKDIR /root/version
-# RUN pip list --format=json > /root/versions/pip-list.json
-
-# Run pytest
-COPY ./test /root/test
-COPY ./config.json /root/test
 # WORKDIR /root/test
-CMD . /root/setups/run.sh
+CMD . /root/setups/docker-setup.sh && \
+    pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v
+
 # CMD . /root/setups/save-versions.sh && printenv && pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
