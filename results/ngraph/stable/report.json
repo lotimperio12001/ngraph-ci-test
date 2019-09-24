@@ -1,5 +1,5 @@
 {
-    "date": "09/24/2019 09:47:27",
+    "date": "09/24/2019 11:40:04",
     "failed": [
         "OnnxBackendNodeModelTest::test_averagepool_2d_ceil_cpu",
         "OnnxBackendNodeModelTest::test_basic_convinteger_cpu",
