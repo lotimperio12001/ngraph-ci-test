@@ -1,13 +1,33 @@
 [
     {
-        "date": "09/24/2019 09:18:53",
-        "failed": 0,
-        "passed": 0,
+        "date": "08/28/2019 13:17:01",
+        "failed": 151,
+        "passed": 407,
         "skipped": 0,
-        "versions": [
+        "version": [
             {
                 "name": "onnx",
                 "version": "1.5.0"
+            },
+            {
+                "name": "torch",
+                "version": "1.3.0a"
+            }
+        ]
+    },
+    {
+        "date": "09/20/2019 13:54:12",
+        "failed": 151,
+        "passed": 407,
+        "skipped": 0,
+        "version": [
+            {
+                "name": "onnx",
+                "version": "1.5.0"
+            },
+            {
+                "name": "torch",
+                "version": "1.3.0a"
             }
         ]
     }

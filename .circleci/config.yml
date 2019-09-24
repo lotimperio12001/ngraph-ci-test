@@ -191,7 +191,7 @@ workflows:
       - ngraph_stable
       - ngraph_dev
       - pytorch_dev
-      - tensorflow_stable  # Core dump on CircleCI
+      # - tensorflow_stable  # Core dump on CircleCI
 
   daily-update:
     jobs:
