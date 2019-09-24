@@ -58,7 +58,8 @@ ENV ONNX_BACKEND="caffe2.python.onnx.backend"
 # Install dependencies
 # Install ONNX
 RUN pip install onnx
-RUN pip install https://download.pytorch.org/whl/cpu/torch-1.0.1-cp36-cp36m-win_amd64.whl
+RUN pip install numpy
+RUN pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
 RUN pip install torchvision
 
 
