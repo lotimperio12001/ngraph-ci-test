@@ -3,13 +3,7 @@ FROM ubuntu:18.04
 # Disable interactive installation mode
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Set proxy
-ARG http_proxy
-ARG https_proxy
-ENV http_proxy ${http_proxy}
-ENV https_proxy ${https_proxy}
-
-#Python dependencies
+# Install Python dependencies
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-dev \
@@ -17,25 +11,23 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-# Download onnx-runtime
-RUN pip3 install --no-cache-dir onnx && \
-    pip3 install --no-cache-dir onnxruntime && \
-    pip3 install --no-cache-dir pytest && \
-    pip3 install --no-cache-dir tabulate
+# Install test report dependencies
+RUN pip install --no-cache-dir pytest && \
+    pip install --no-cache-dir tabulate
 
-# ONNX-backend test results dir
-RUN mkdir -p /root/results
-ENV RESULTS_DIR=/root/results
-ENV CSVDIR=/root/results
+# Copy local directotries
+COPY ./test /root/test
+COPY ./setups /root/setups
+RUN chmod +x /root/setups/*.sh
 
-# Save packages version
-RUN mkdir -p /root/version
-ENV VERSION_DIR=/root/version
-WORKDIR /root/version
-RUN pip3 list --format=json > /root/version/pip-list.json
+############## ONNX Backend dependencies ###########
+# Set Python backend module to import in test script
+ENV ONNX_BACKEND="onnxruntime.backend.backend"
 
-# Run pytest
-WORKDIR /root/test
-COPY ./test/conftest.py /root/test
-COPY ./test/test_backend.py /root/test
-CMD pytest test_backend.py --onnx_backend="onnxruntime.backend.backend" -k 'not _cuda' -v
+# Install dependencies
+RUN pip install onnx
+RUN pip install onnxruntime
+####################################################
+
+CMD . /root/setups/docker-setup.sh && \
+    pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v

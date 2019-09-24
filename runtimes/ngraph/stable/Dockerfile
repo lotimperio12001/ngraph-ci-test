@@ -1,4 +1,3 @@
-####### Default Dockerfile steps ##################
 FROM ubuntu:18.04
 
 # Disable interactive installation mode
@@ -20,22 +19,15 @@ RUN pip install --no-cache-dir pytest && \
 COPY ./test /root/test
 COPY ./setups /root/setups
 RUN chmod +x /root/setups/*.sh
-####################################################
 
 ############## ONNX Backend dependencies ###########
 # Set Python backend module to import in test script
 ENV ONNX_BACKEND="ngraph_onnx.onnx_importer.backend"
 
-# Install nGraph-core
+# Install dependencies
 RUN pip install ngraph-core
-
-# Install nGraph-ONNX
 RUN pip install ngraph-onnx
 ####################################################
 
-
-# WORKDIR /root/test
 CMD . /root/setups/docker-setup.sh && \
     pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v
-
-# CMD . /root/setups/save-versions.sh && printenv && pytest test_backend.py --onnx_backend="ngraph_onnx.onnx_importer.backend" -k 'not _cuda' -v
