@@ -1,34 +1,3 @@
-
-# # General dependencies
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     build-essential \
-#     git \
-#     libgoogle-glog-dev \
-#     libgtest-dev \
-#     libiomp-dev \
-#     libleveldb-dev \
-#     liblmdb-dev \
-#     libopencv-dev \
-#     libopenmpi-dev \
-#     libsnappy-dev \
-#     libprotobuf-dev \
-#     openmpi-bin \
-#     openmpi-doc \
-#     protobuf-compiler
-
-
-# RUN pip3 install --no-cache-dir \
-#       future \
-#       numpy \
-#       protobuf \
-#       typing \
-#       hypothesis \
-#       six \
-#       pyyaml \
-#       pytest \
-#       tabulate
-
-
 FROM ubuntu:18.04
 
 # Disable interactive installation mode
@@ -56,22 +25,44 @@ RUN chmod +x /root/setups/*.sh
 ENV ONNX_BACKEND="caffe2.python.onnx.backend"
 
 # Install dependencies
-# Install ONNX
 RUN pip install onnx
-RUN pip install numpy
-RUN pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
-RUN pip install torchvision
+
+# Listed in docs
+# https://caffe2.ai/docs/getting-started.html?platform=ubuntu&configuration=compile
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    libgoogle-glog-dev \
+    libgtest-dev \
+    libiomp-dev \
+    libleveldb-dev \
+    liblmdb-dev \
+    libopencv-dev \
+    libopenmpi-dev \
+    libsnappy-dev \
+    libprotobuf-dev \
+    openmpi-bin \
+    openmpi-doc \
+    protobuf-compiler
 
 
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     libgflags-dev \
-#     cmake
+RUN pip install --no-cache-dir \
+      future \
+      numpy \
+      protobuf \
+      typing \
+      hypothesis \
+      six \
+      pyyaml \
+      pytest \
+      tabulate
 
-# # Download pytorch
-# RUN git clone https://github.com/pytorch/pytorch.git
-# WORKDIR /pytorch
-# RUN git submodule update --init --recursive
-# RUN python3 setup.py install
+# Download pytorch
+RUN git clone https://github.com/pytorch/pytorch.git
+WORKDIR /pytorch
+RUN git submodule update --init --recursive
+RUN python3 setup.py install
 ####################################################
 
 CMD . /root/setups/docker-setup.sh && \
