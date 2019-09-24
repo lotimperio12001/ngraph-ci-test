@@ -42,7 +42,7 @@ def load_trend(file_dir, file_name="trend.json"):
             "failed": 61,
             "passed": 497,
             "skipped": 0,
-            "version": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.5.0"
@@ -54,7 +54,7 @@ def load_trend(file_dir, file_name="trend.json"):
             "failed": 51,
             "passed": 507,
             "skipped": 0,
-            "version": [
+            "versions": [
                 {
                     "name": "onnx",
                     "version": "1.6.0"
