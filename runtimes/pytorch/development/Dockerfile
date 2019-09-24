@@ -42,17 +42,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openmpi-doc \
     protobuf-compiler
 
-
 RUN pip install --no-cache-dir \
-      future \
-      numpy \
-      protobuf \
-      typing \
-      hypothesis \
-      six \
-      pyyaml \
-      pytest \
-      tabulate
+    future \
+    numpy \
+    protobuf \
+    typing \
+    hypothesis \
+    six \
+    pyyaml
+
+RUN apt-get install -y --no-install-recommends \
+    libgflags-dev \
+    cmake
 
 # Download pytorch
 RUN git clone https://github.com/pytorch/pytorch.git
