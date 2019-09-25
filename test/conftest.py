@@ -45,12 +45,12 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
     # Set directories
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
-    versions_dir = os.environ.get("VERSIONS_DIR", os.getcwd())
+    # versions_dir = os.environ.get("VERSIONS_DIR", os.getcwd())
 
     # Collect and save the results
     report = _prepare_report(terminalreporter.stats)
     _save_report(report, results_dir)
-    package_versions = _load_versions(versions_dir)
+    package_versions = _load_versions(results_dir)
     scoreboard_config = _load_scoreboard_config("./setups/config.json")
     core_package_versions = _filter_packages(package_versions, scoreboard_config)
     summary = _prepare_summary(report, core_package_versions)
