@@ -13,7 +13,7 @@ RUN pip3 install --upgrade pip setuptools wheel
 
 # Install test report dependencies
 RUN pip install --no-cache-dir pytest && \
-    pip install --no-cache-dir tabulate
+    pip install --no-cache-dir tabulate==0.8.3
 
 # Copy local directotries
 COPY ./test /root/test
