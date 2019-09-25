@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     python3-pip
 
-RUN pip install --upgrade pip setuptools wheel
+RUN pip3 install --upgrade pip setuptools wheel
 
 # Install test report dependencies
 RUN pip install --no-cache-dir pytest && \
