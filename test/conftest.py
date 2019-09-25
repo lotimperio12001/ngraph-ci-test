@@ -25,13 +25,8 @@ def pytest_addoption(parser):
     """Pytest hook function."""
     parser.addoption(
         "--onnx_backend",
-        choices=[
-            "ngraph_onnx.onnx_importer.backend",
-            "onnxruntime.backend.backend",
-            "onnx_tf.backend",
-            "caffe2.python.onnx.backend",
-        ],
-        help="Select from available backends",
+        help='"Select onnx backend module.\
+            Example:  --onnx_backend="ngraph_onnx.onnx_importer.backend"'
     )
 
 
@@ -45,7 +40,6 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Pytest hook function."""
     # Set directories
     results_dir = os.environ.get("RESULTS_DIR", os.getcwd())
-    # versions_dir = os.environ.get("VERSIONS_DIR", os.getcwd())
 
     # Collect and save the results
     report = _prepare_report(terminalreporter.stats)

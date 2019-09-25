@@ -1,6 +1,3 @@
 #!/bin/bash
 cd ~
-mkdir versions
-mkdir results
-
-. /root/setups/save-versions.sh
+pip list --format=json > ${RESULTS_DIR}/pip-list.json
