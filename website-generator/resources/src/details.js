@@ -3,11 +3,22 @@ let line_trend = document.getElementById("line_trend");
 let framework_data = JSON.parse(line_trend.getAttribute("framework_data"));
 let trend_data = framework_data.trend;
 
-let labels = trend_data.map(summary => summary.date.split(' ')[0]);
-let data = trend_data.map(summary => summary.passed);
+let labels = trend_data.map(
+    summary => summary.versions ? [
+        summary.date.split(' ')[0],
+        "\nonnx: " + summary.versions.find(version => version.name == "onnx").version
+    ] : summary.date.split(' ')[0]);
+
+let data = trend_data.map(
+    summary => (summary.passed / (summary.passed + summary.failed) * 100)
+    .toFixed(2)
+);
+
 let display_data_count = 15;
 let line_chart_data = {
-    labels: [""].concat(labels.slice(-display_data_count)),
+    labels: [
+        ["", ""]
+    ].concat(labels.slice(-display_data_count)),
     datasets: [{
         data: [0].concat(data.slice(-display_data_count)),
         label: "Passed",
@@ -39,12 +50,12 @@ let line_chart = new Chart(line_trend, {
                 ticks: {
                     beginAtZero: true,
                     suggestedMin: 0,
-                    suggestedMax: framework_data.coverage.total,
+                    suggestedMax: 100,
                 },
                 scaleLabel: {
                     fontSize: 20,
                     display: true,
-                    labelString: "passed unit tests"
+                    labelString: "unit tests %"
                 }
             }]
         },
