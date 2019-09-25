@@ -26,7 +26,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--onnx_backend",
         help='"Select onnx backend module.\
-            Example:  --onnx_backend="ngraph_onnx.onnx_importer.backend"'
+            Example:  --onnx_backend="ngraph_onnx.onnx_importer.backend"',
     )
 
 
@@ -336,6 +336,15 @@ def _load_versions(versions_dir, file_name="pip-list.json"):
 
 
 def _filter_packages(package_versions, scoreboard_config):
+    """Filter framework core packages from pip list.
+
+    :param package_versions: List of packages installed by pip.
+    :type package_versions: list
+    :param scoreboard_config: Scoreboard configuration file.
+    :type scoreboard_config: dict
+    :return: List of framework core packages installed by pip.
+    :rtype: list
+    """
     core_packages = ["onnx"]
     for framework_config in scoreboard_config.get("stable", {}).values():
         core_packages.extend(framework_config.get("core_packages", []))
@@ -346,6 +355,13 @@ def _filter_packages(package_versions, scoreboard_config):
 
 
 def _load_scoreboard_config(file_path):
+    """Load scoreboard configuration json file.
+
+    :param file_path: Path to the scoreboard configuration file.
+    :type file_path: str
+    :return: Scoreboard configuration.
+    :rtype: dict
+    """
     file_path = os.path.abspath(file_path)
     try:
         with open(file_path, "r") as config_file:

@@ -31,6 +31,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 def load_trend(file_dir, file_name="trend.json"):
     """Load and return trend list from json file.
+
     Return list of summaries loaded from tests trend json file.
     If file is broken, empty or not found then create and return new dummy trend.
     Trend is a list of report summaries per date.
@@ -88,6 +89,7 @@ def load_trend(file_dir, file_name="trend.json"):
 
 def mark_coverage(percentage):
     """Return mark from A to F based on passed tests percentage.
+
     :param percentage: Percentage of passed unit tests.
     :type percentage: float
     :return: Mark from A to F.
@@ -107,6 +109,7 @@ def mark_coverage(percentage):
 
 def get_coverage_percentage(trend):
     """Create and return dict with passed and failed tests percentage.
+
     :param trend: Trend is a list of report summaries per date.
     :type trend: list
     :return: Dictionary with passed and failed tests percentage
@@ -229,7 +232,7 @@ if __name__ == "__main__":
         "--config",
         dest="config",
         help="Load configuration from the specified json file",
-        type=str
+        type=str,
     )
     args = parser.parse_args()
 
