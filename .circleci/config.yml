@@ -187,24 +187,26 @@ workflows:
   on-commit:
     jobs:
       - generate_static_page
-      - onnxruntime_stable
-      - ngraph_stable
-      - ngraph_dev
-      - pytorch_dev
+#       - onnxruntime_stable
+#       - ngraph_stable
+#       - ngraph_dev
+#       - pytorch_dev
       # - tensorflow_stable  # Core dump on CircleCI
 
-  daily-update:
-    jobs:
-      - generate_static_page
-      # - onnxruntime_stable
-      # - ngraph_dev
-      # - pytorch_dev
-  #     - tensorflow_stable  # Core dump on CircleCI
 
-    triggers:
-      - schedule:
-          cron: "00 11 * * *"
-          filters:
-            branches:
-              only:
-                - master
+#### Enable daily updates
+#   daily-update:
+#     jobs:
+#       - generate_static_page
+#       - onnxruntime_stable
+#       - ngraph_stable
+#       - ngraph_dev
+#       - pytorch_dev
+#
+#     triggers:
+#       - schedule:
+#           cron: "00 11 * * *"
+#           filters:
+#             branches:
+#               only:
+#                 - master
