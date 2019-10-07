@@ -5,9 +5,13 @@ let trend_data = framework_data.trend;
 
 let labels = trend_data.map(
     summary => summary.versions ? [
-        summary.date.split(' ')[0],
-        "\nonnx: " + summary.versions.find(version => version.name == "onnx").version
-    ] : summary.date.split(' ')[0]);
+        summary.date.split(' ')[0]
+    ].concat(
+        summary.versions.map(
+            package => "\n" + package.name + ": " + package.version.toString()
+        )
+    ) : summary.date.split(' ')[0]
+);
 
 let data = trend_data.map(
     summary => (summary.passed / (summary.passed + summary.failed) * 100)
