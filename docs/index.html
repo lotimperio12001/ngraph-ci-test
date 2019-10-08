@@ -65,11 +65,9 @@
         <th scope="row">ONNX-Runtime</th>
         <td>
         
-            
                 onnx:&nbsp1.5.0<br>
-            
         
-            
+                onnxruntime:&nbsp0.5.0<br>
         
         </td>
         <td>09/25/2019 14:06:00</td>
@@ -93,9 +91,7 @@
         <th scope="row">Tensorflow</th>
         <td>
         
-            
                 onnx:&nbsp1.5.0<br>
-            
         
         </td>
         <td>08/23/2019 11:21:21</td>
@@ -119,13 +115,11 @@
         <th scope="row">nGraph</th>
         <td>
         
-            
+                ngraph-core:&nbsp0.25.0<br>
         
-            
+                ngraph-onnx:&nbsp0.24.0<br>
         
-            
                 onnx:&nbsp1.5.0<br>
-            
         
         </td>
         <td>09/25/2019 13:58:21</td>
@@ -182,13 +176,27 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-auto">
-            <h2>Backend unit tests list</h2>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <table class="table transposed">
+        <div class="col section">
+            <ul class="nav nav-tabs justify-content-center" id="tables-tabs-nav" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#operators" role="tab" aria-controls="operators"
+                    aria-selected="true">Backend unit tests list</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#unittests" role="tab" aria-controls="unittests"
+                    aria-selected="false">Operators coverage</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="tables-tabs">
+                <div class="tab-pane fade show active"  id="operators" role="tabpanel" aria-labelledby="operators-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <h2>Backend unit tests list</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <table class="table transposed">
     
         
             <tr>
@@ -4678,16 +4686,19 @@
             </tr>
         
 </table>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <h2>Operators coverage</h2>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <table class="table transposed">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="unittests" role="tabpanel" aria-labelledby="unittests-tab">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <h2>Operators coverage</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <table class="table transposed">
     
         
         <tr>
@@ -5817,6 +5828,11 @@
     </tr>
     
 </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

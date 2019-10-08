@@ -18,6 +18,31 @@ h5 {
     padding: 2vh;
 }
 
+.nav-tabs .nav-item .nav-link {
+    border-bottom: 0px;
+    background-color: transparent;
+    color: #00998c;
+    font-size: 10pt;
+}
+
+.nav-tabs .nav-item .nav-link:hover {
+    border-bottom: 0px;
+    background-color: transparent;
+    color: #00ffea;
+    font-size: 10pt;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    border-bottom: 0px;
+    background-color: transparent;
+    color: #00ffea;
+    font-size: 10pt;
+}
+
+.section {
+    padding: 50pt;
+}
+
 a {
     font-size: 9pt;
     color: #00ffea;
