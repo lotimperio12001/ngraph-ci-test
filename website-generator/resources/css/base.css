@@ -61,8 +61,14 @@ h5 {
     font-size: 10pt;
 }
 
-.section {
-    padding: 50pt;
+.min-section {
+    padding: 25pt;
+    max-width: 50vw;
+}
+
+.max-section {
+    padding: 25pt;
+    min-width: 90vw;
 }
 
 .navigation {
