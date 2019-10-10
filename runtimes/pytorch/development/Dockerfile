@@ -7,24 +7,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-dev \
-    python3-pip
+    python3-pip && \
+    apt-get clean autoclean && apt-get autoremove -y
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-# Install test report dependencies
-RUN pip install --no-cache-dir pytest && \
-    pip install --no-cache-dir tabulate==0.8.3
-
 # Copy local directotries
 COPY ./test /root/test
-COPY ./setups /root/setups
-RUN chmod +x /root/setups/*.sh
+COPY ./setup /root/setup
+
+# Install test report dependencies
+RUN pip3 install --no-cache-dir -r /root/setup/requirements_report.txt
 
 ############## ONNX Backend dependencies ###########
 ENV ONNX_BACKEND="caffe2.python.onnx.backend"
 
 # Install dependencies
-RUN pip install onnx
+RUN pip3 install --no-cache-dir onnx
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -40,9 +39,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libprotobuf-dev \
     openmpi-bin \
     openmpi-doc \
-    protobuf-compiler
+    protobuf-compiler && \
+    apt-get clean autoclean && apt-get autoremove -y
 
-RUN pip install --no-cache-dir \
+RUN pip3 install --no-cache-dir \
     future \
     numpy \
     protobuf \
@@ -53,7 +53,8 @@ RUN pip install --no-cache-dir \
 
 RUN apt-get install -y --no-install-recommends \
     libgflags-dev \
-    cmake
+    cmake && \
+    apt-get clean autoclean && apt-get autoremove -y
 
 # Download pytorch
 RUN git clone https://github.com/pytorch/pytorch.git

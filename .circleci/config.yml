@@ -11,7 +11,7 @@ jobs:
 
       - run:
           name: Run docker container
-          command: docker run --name onnx-runtime --env-file setups/env.list -v ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
+          command: docker run --name onnx-runtime --env-file setup/env.list -v ~/ngraph-ci-test/results/onnx-runtime/stable:/root/results scoreboard/onnx || true
 
       - add_ssh_keys:
           fingerprints:
@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Run nGraph docker container
-          command: docker run --name ngraph --env-file setups/env.list -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
+          command: docker run --name ngraph --env-file setup/env.list -it -v ~/ngraph-ci-test/results/ngraph/development:/root/results scoreboard/ngraph || true
 
       - add_ssh_keys:
           fingerprints:
@@ -73,7 +73,7 @@ jobs:
 
       - run:
           name: Run nGraph docker container
-          command: docker run --name ngraph --env-file setups/env.list -it -v ~/ngraph-ci-test/results/ngraph/stable:/root/results scoreboard/ngraph || true
+          command: docker run --name ngraph --env-file setup/env.list -it -v ~/ngraph-ci-test/results/ngraph/stable:/root/results scoreboard/ngraph || true
 
       - add_ssh_keys:
           fingerprints:
@@ -103,7 +103,7 @@ jobs:
 
       - run:
           name: Run Pytorch docker container
-          command: docker run --name pytorch --env-file setups/env.list -it -v ~/ngraph-ci-test/results/pytorch/development:/root/results scoreboard/pytorch || true
+          command: docker run --name pytorch --env-file setup/env.list -it -v ~/ngraph-ci-test/results/pytorch/development:/root/results scoreboard/pytorch || true
 
       - add_ssh_keys:
           fingerprints:
@@ -133,7 +133,7 @@ jobs:
 
       - run:
           name: Run tensorflow docker container
-          command: docker run --name tensorflow --env-file setups/env.list -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
+          command: docker run --name tensorflow --env-file setup/env.list -it -v ~/ngraph-ci-test/results/tensorflow/stable:/root/results scoreboard/tensorflow || true
 
       - add_ssh_keys:
           fingerprints:
@@ -163,7 +163,7 @@ jobs:
           command: sudo pip install --upgrade -r requirements_web.txt
       - run:
           name: Generate static page
-          command: python3 website-generator/generator.py --config ./setups/config.json
+          command: python3 website-generator/generator.py --config ./setup/config.json
 
       - add_ssh_keys:
           fingerprints:
@@ -186,12 +186,12 @@ workflows:
   version: 2
   on-commit:
     jobs:
-      - generate_static_page
-#       - onnxruntime_stable
-#       - ngraph_stable
+      # - generate_static_page
+      - onnxruntime_stable
+      - ngraph_stable
       - ngraph_dev
-#       - pytorch_dev
-      # - tensorflow_stable  # Core dump on CircleCI
+      - pytorch_dev
+      - tensorflow_stable  # Core dump on CircleCI
 
 
 #### Enable daily updates

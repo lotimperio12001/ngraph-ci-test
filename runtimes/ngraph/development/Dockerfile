@@ -12,14 +12,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-# Install test report dependencies
-RUN pip install --no-cache-dir pytest && \
-    pip install --no-cache-dir tabulate==0.8.3
-
 # Copy local directotries
 COPY ./test /root/test
-COPY ./setups /root/setups
-RUN chmod +x /root/setups/*.sh
+COPY ./setup /root/setup
+
+# Install test report dependencies
+RUN pip3 install --no-cache-dir -r /root/setup/requirements_report.txt
 
 ############## ONNX Backend dependencies ###########
 ENV ONNX_BACKEND="ngraph_onnx.onnx_importer.backend"

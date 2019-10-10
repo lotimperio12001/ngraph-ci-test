@@ -7,18 +7,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-dev \
-    python3-pip
+    python3-pip && \
+    apt-get clean autoclean && apt-get autoremove -y
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-# Install test report dependencies
-RUN pip install --no-cache-dir pytest && \
-    pip install --no-cache-dir tabulate==0.8.3
-
 # Copy local directotries
 COPY ./test /root/test
-COPY ./setups /root/setups
-RUN chmod +x /root/setups/*.sh
+COPY ./setup /root/setup
+
+# Install test report dependencies
+RUN pip3 install --no-cache-dir -r /root/setup/requirements_report.txt
 
 ############## ONNX Backend dependencies ###########
 ENV ONNX_BACKEND="onnxruntime.backend.backend"
