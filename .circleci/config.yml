@@ -187,9 +187,9 @@ workflows:
   on-commit:
     jobs:
       - generate_static_page
-      - onnxruntime_stable
+#       - onnxruntime_stable
 #       - ngraph_stable
-#       - ngraph_dev
+      - ngraph_dev
 #       - pytorch_dev
       # - tensorflow_stable  # Core dump on CircleCI
 
