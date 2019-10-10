@@ -7,7 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-dev \
-    python3-pip
+    python3-pip && \
+    apt-get clean autoclean && apt-get autoremove -y
 
 RUN pip3 install --upgrade pip setuptools wheel
 
@@ -37,13 +38,16 @@ RUN apt-get update && apt-get install -y \
     zlib1g \
     zlib1g-dev \
     libtool \
-    libtinfo-dev
+    libtinfo-dev && \
+    apt-get clean autoclean && apt-get autoremove -y
 
+# ONNX dependencies
 RUN apt-get update && apt-get -y install \
     protobuf-compiler \
-    libprotobuf-dev
+    libprotobuf-dev && \
+    apt-get clean autoclean && apt-get autoremove -y
 
-# Install nGraph-ONNX
+# Build nGraph
 WORKDIR /root
 RUN git clone https://github.com/NervanaSystems/ngraph.git
 RUN mkdir /root/ngraph/build
