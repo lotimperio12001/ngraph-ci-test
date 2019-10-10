@@ -96,7 +96,7 @@ new Chart(bar_chart, {
     }
 });
 
-// Filter tables
+// Table search
 let onSearch = (inputId, tableId) => {
     let input = document.getElementById(inputId);
     let filter = input.value.toLowerCase();
