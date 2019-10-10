@@ -13,6 +13,26 @@ a:hover {
     text-decoration: none;
 }
 
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid #00998c;
+    background-color: transparent;
+    color: #00ffea;
+    font-size: 10pt;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search {
+    display: block;
+    margin: auto;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    min-width: 15vw;
+}
+
 h1 {
     margin: 2vh;
     padding: 3vh;
@@ -33,11 +53,12 @@ h5 {
 }
 
 .centered {
-    height: 50pt;
+    height: 60pt;
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
+    overflow: auto;
 }
 
 .nav-tabs .nav-item .nav-link {
