@@ -63,5 +63,5 @@ RUN git submodule update --init --recursive
 RUN python3 setup.py install
 ####################################################
 
-CMD . /root/setups/docker-setup.sh && \
+CMD . /root/setup/docker-setup.sh && \
     pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v

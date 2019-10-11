@@ -72,5 +72,5 @@ RUN pip install -r requirements_test.txt
 RUN pip install -e .
 ####################################################
 
-CMD . /root/setups/docker-setup.sh && \
+CMD . /root/setup/docker-setup.sh && \
     pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v

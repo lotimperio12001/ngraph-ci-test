@@ -27,5 +27,5 @@ RUN pip3 install ngraph-core
 RUN pip3 install ngraph-onnx
 ####################################################
 
-CMD . /root/setups/docker-setup.sh && \
+CMD . /root/setup/docker-setup.sh && \
     pytest /root/test/test_backend.py --onnx_backend=${ONNX_BACKEND} -k 'not _cuda' -v
