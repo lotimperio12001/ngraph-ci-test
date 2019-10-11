@@ -58,5 +58,17 @@
                 "version": "1.5.0"
             }
         ]
+    },
+    {
+        "date": "10/11/2019 11:40:56",
+        "failed": 258,
+        "passed": 443,
+        "skipped": 0,
+        "versions": [
+            {
+                "name": "onnx",
+                "version": "1.6.0"
+            }
+        ]
     }
 ]
