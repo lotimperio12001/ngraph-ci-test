@@ -25,7 +25,7 @@ ENV ONNX_BACKEND="onnx_tf.backend"
 # Install dependencies
 RUN pip3 install --no-cache-dir \
     onnx \
-    tensorflow \
+    tensorflow==1.14 \
     onnx-tf
 ####################################################
 
