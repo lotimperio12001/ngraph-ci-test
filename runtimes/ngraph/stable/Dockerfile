@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install --upgrade pip setuptools wheel
 
-# Copy local directotries
+# Copy local directories
 COPY ./test /root/test
 COPY ./setup /root/setup
 
