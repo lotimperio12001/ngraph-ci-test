@@ -23,8 +23,8 @@ RUN pip3 install --no-cache-dir -r /root/setup/requirements_report.txt
 ENV ONNX_BACKEND="onnxruntime.backend.backend"
 
 # Install dependencies
-RUN pip install onnx
-RUN pip install onnxruntime
+RUN pip3 install onnx
+RUN pip3 install onnxruntime
 ####################################################
 
 CMD . /root/setup/docker-setup.sh && \
