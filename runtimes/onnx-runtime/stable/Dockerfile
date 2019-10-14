@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install --upgrade pip setuptools wheel
 
+RUN pip3 install --no-cache-dir pytest==5.2.1 tabulate==0.8.3
+
 # Copy local directories
 COPY ./test /root/test
 
