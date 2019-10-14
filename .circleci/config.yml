@@ -188,10 +188,10 @@ workflows:
     jobs:
       # - generate_static_page
       - onnxruntime_stable
-      - ngraph_stable
-      - ngraph_dev
-      - pytorch_dev
-      - tensorflow_stable  # Core dump on CircleCI
+      # - ngraph_stable
+      # - ngraph_dev
+      # - pytorch_dev
+      # - tensorflow_stable  # Core dump on CircleCI
 
 
 #### Enable daily updates

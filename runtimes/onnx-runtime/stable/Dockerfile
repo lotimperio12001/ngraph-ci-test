@@ -56,7 +56,7 @@ WORKDIR /root
 RUN git clone --recursive https://github.com/Microsoft/onnxruntime
 WORKDIR /root/onnxruntime
 
-RUN ./build.sh --config RelWithDebInfo --build_shared_lib --parallel.
+RUN ./build.sh --config RelWithDebInfo --build_shared_lib --enable_onnx_tests --build_wheel
 
 
 ####################################################
