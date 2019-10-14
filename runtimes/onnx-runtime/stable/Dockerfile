@@ -25,10 +25,10 @@ ENV ONNX_BACKEND="onnxruntime.backend.backend"
 # Install dependencies
 RUN pip3 install onnx
 
-RUN add-apt-repository ppa:george-edison55/cmake-3.x
+RUN deb http://ppa.launchpad.net/george-edison55/cmake-3.x/ubuntu xenial main
+RUN deb-src http://ppa.launchpad.net/george-edison55/cmake-3.x/ubuntu xenial main
 
-RUN DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:george-edison55/cmake-3.x && \
-    apt-get -y update && apt-get -y upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && apt-get -y upgrade
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
