@@ -24,7 +24,41 @@ ENV ONNX_BACKEND="onnxruntime.backend.backend"
 
 # Install dependencies
 RUN pip3 install onnx
-RUN pip3 install onnxruntime
+
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    clang-3.9 \
+    git \
+    unzip \
+    curl \
+    autogen \
+    automake \
+    autoconf \
+    zlib1g \
+    zlib1g-dev \
+    libtool \
+    libtinfo-dev && \
+    apt-get clean autoclean && apt-get autoremove -y
+
+# ONNX dependencies
+RUN apt-get update && apt-get -y install \
+    protobuf-compiler \
+    libprotobuf-dev && \
+    apt-get clean autoclean && apt-get autoremove -y
+
+
+
+# Build
+WORKDIR /root
+RUN git clone --recursive https://github.com/Microsoft/onnxruntime
+WORKDIR /root/onnxruntime
+
+RUN ./build.sh --config RelWithDebInfo --build_shared_lib --parallel.
+
+
 ####################################################
 
 CMD . /root/setup/docker-setup.sh && \
