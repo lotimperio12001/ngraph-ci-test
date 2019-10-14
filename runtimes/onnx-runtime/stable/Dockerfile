@@ -25,7 +25,7 @@ ENV ONNX_BACKEND="onnxruntime.backend.backend"
 # Install dependencies
 RUN pip3 install onnx
 
-RUN apt-get -y upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && apt-get -y upgrade
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
