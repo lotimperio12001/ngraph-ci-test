@@ -22,4 +22,4 @@ RUN pip3 install onnx
 RUN pip3 install onnxruntime
 ####################################################
 
-CMD pytest /root/test/test_backend.py -k 'not _cuda' -v
+CMD pytest /root/test/onnxruntime_test_backend.py -k 'not _cuda' -v
