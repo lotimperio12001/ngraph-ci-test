@@ -11,11 +11,10 @@ RUN apt-get update && apt-get install -y \
     apt-get clean autoclean && apt-get autoremove -y
 
 RUN pip3 install --upgrade pip setuptools wheel
+RUN pip3 install --no-cache-dir pytest
 
-RUN pip3 install --no-cache-dir pytest==5.2.1 tabulate==0.8.3
-
-# Copy local directories
-COPY ./test /root/test
+# Copy test script
+COPY onnxruntime_test_backend.py /root/test/
 
 ############## ONNX Backend dependencies ###########
 RUN pip3 install onnx
