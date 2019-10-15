@@ -19,8 +19,7 @@ COPY onnxruntime_test_backend.py /root/test/
 ############## ONNX Backend dependencies ###########
 RUN pip3 install onnx
 # RUN pip3 install onnxruntime
-RUN pip3 install -i https://test.pypi.org/simple/ ort-nightly==0.5.0.dev1014
-####################################################
+RUN pip3 install -i https://test.pypi.org/simple/ ort-nightly==0.5.0.dev1013####################################################
 
 # Run all cpu tests
 CMD pytest /root/test/onnxruntime_test_backend.py -k 'not _cuda' -v
