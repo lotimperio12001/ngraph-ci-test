@@ -18,8 +18,12 @@ COPY onnxruntime_test_backend.py /root/test/
 
 ############## ONNX Backend dependencies ###########
 RUN pip3 install onnx
-RUN pip3 install onnxruntime
+# RUN pip3 install onnxruntime
+RUN pip3 install -i https://test.pypi.org/simple/ ort-nightly==0.5.0.dev1014
 ####################################################
 
-# CMD pytest /root/test/onnxruntime_test_backend.py -k 'not _cuda' -v
-CMD pytest /root/test/onnxruntime_test_backend.py::OnnxBackendNodeModelTest::test_compress_negative_axis_cpu -v
+# Run all cpu tests
+CMD pytest /root/test/onnxruntime_test_backend.py -k 'not _cuda' -v
+
+# Run only one test
+# CMD pytest /root/test/onnxruntime_test_backend.py::OnnxBackendNodeModelTest::test_compress_negative_axis_cpu -v
