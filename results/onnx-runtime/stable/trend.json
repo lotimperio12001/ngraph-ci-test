@@ -72,6 +72,10 @@
             {
                 "name": "onnx",
                 "version": "1.6.0"
+            },
+            {
+                "name": "onnxruntime",
+                "version": "0.5.0"
             }
         ]
     }

@@ -47,29 +47,29 @@ RUN apt-get update && apt-get -y install \
 
 # Build nGraph
 WORKDIR /root
-RUN git clone https://github.com/NervanaSystems/ngraph.git
+RUN git clone --depth 1 https://github.com/NervanaSystems/ngraph.git
 RUN mkdir /root/ngraph/build
 WORKDIR /root/ngraph/build
-RUN cmake -DNGRAPH_USE_PREBUILT_LLVM=TRUE -DNGRAPH_CPU_ENABLE=TRUE  -DCMAKE_INSTALL_PREFIX=/root/ngraph_dist -DNGRAPH_ONNX_IMPORT_ENABLE=TRUE -DCMAKE_BUILD_TYPE=Release ..
+RUN cmake -DCMAKE_INSTALL_PREFIX=/root/ngraph_dist -DNGRAPH_USE_PREBUILT_LLVM=TRUE -DNGRAPH_CPU_ENABLE=TRUE -DNGRAPH_ONNX_IMPORT_ENABLE=TRUE -DCMAKE_BUILD_TYPE=Release ..
 RUN make -j"$(nproc)"
 RUN make install
 
-# Build Python package (Binary wheel) for nGraph
+# Build Python bindings for nGraph
 WORKDIR /root/ngraph/python
-RUN git clone https://github.com/pybind/pybind11.git
+RUN git clone --depth 1 --branch v2.2.4 https://github.com/pybind/pybind11.git
 ENV NGRAPH_ONNX_IMPORT_ENABLE=TRUE
 ENV PYBIND_HEADERS_PATH=/root/ngraph/python/pybind11
 ENV NGRAPH_CPP_BUILD_PATH=/root/ngraph_dist
 ENV LD_LIBRARY_PATH=/root/ngraph_dist/lib
-RUN python3 setup.py develop
+RUN pip install .
 
 # Install nGraph-ONNX
 WORKDIR /root
-RUN git clone -b master --single-branch --depth 1 https://github.com/NervanaSystems/ngraph-onnx.git
+RUN git clone --depth 1 https://github.com/NervanaSystems/ngraph-onnx.git
 WORKDIR /root/ngraph-onnx
 RUN pip install -r requirements.txt
 RUN pip install -r requirements_test.txt
-RUN pip install -e .
+RUN pip install .
 ####################################################
 
 CMD . /root/setup/docker-setup.sh && \
