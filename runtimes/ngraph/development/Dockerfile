@@ -45,6 +45,8 @@ RUN apt-get update && apt-get -y install \
     libprotobuf-dev && \
     apt-get clean autoclean && apt-get autoremove -y
 
+RUN pip3 install onnx
+
 # Build nGraph
 WORKDIR /root
 RUN git clone --depth 1 https://github.com/NervanaSystems/ngraph.git

@@ -39,8 +39,8 @@ h1 {
 }
 
 h2 {
-    margin: 1vh;
-    padding: 3vh;
+    margin: 10pt;
+    padding: 5pt;
 }
 
 h5 {
@@ -53,7 +53,7 @@ h5 {
 }
 
 .centered {
-    height: 60pt;
+    height: 80pt;
     display: flex;
     text-align: center;
     align-items: center;
@@ -83,13 +83,13 @@ h5 {
 }
 
 .min-section {
-    padding: 25pt;
+    padding: 10pt;
     max-width: 50vw;
 }
 
 .max-section {
-    padding: 25pt;
-    min-width: 90vw;
+    padding: 50pt;
+    min-width: 98vw;
 }
 
 .navigation {
@@ -100,6 +100,16 @@ h5 {
 .navigation:hover {
     font-size: 9pt;
     fill: #00998c;
+}
+
+.bar-chart {
+    height: 400pt;
+    width: 500pt;
+}
+
+.table-chart {
+    width: 30pt;
+    height: 30pt;
 }
 
 .table {
@@ -133,17 +143,17 @@ h5 {
 }
 
 .B {
-    color: #fbff00;
+    color: #d0ff00;
     font-size: 30pt;
 }
 
 .C {
-    color: #ff8800;
+    color: #fbff00;
     font-size: 30pt;
 }
 
 .D {
-    color: #e93e27;
+    color: #e9ac27;
     font-size: 30pt;
 }
 

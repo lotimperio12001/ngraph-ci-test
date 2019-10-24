@@ -1,121 +1,120 @@
 // Get scoreboard database
-let charts = document.getElementById("charts");
-let database = JSON.parse(charts.getAttribute("database"));
+const charts = document.getElementById('charts')
+const database = JSON.parse(charts.getAttribute('database'))
 
-let palette = {
-    passed: '#adff2f',
-    failed: '#e93d27',
-    font: '#c7d4d3'
+const palette = {
+  passed: '#adff2f',
+  failed: '#e93d27',
+  font: '#c7d4d3'
 }
-Chart.defaults.global.defaultFontColor = palette.font;
+Chart.defaults.global.defaultFontColor = palette.font
 
 // Generate circle charts
-for (let framework in database) {
-    let circle_chart = document.getElementById('circle_' + database[framework].name);
-    let trend = database[framework].trend;
-    let last_idx = trend.length - 1;
-    let chart_data = {
-        labels: ['Passed', 'Failed'],
-        datasets: [{
-            backgroundColor: [palette.passed, palette.failed],
-            borderWidth: 0,
-            data: [trend[last_idx].passed,
-                trend[last_idx].failed
-            ]
-        }]
-    }
+for (const framework in database) {
+  const circleChart = document.getElementById('circle_' + database[framework].name)
+  const trend = database[framework].trend
+  const lastIdx = trend.length - 1
+  const chartData = {
+    labels: ['Passed', 'Failed'],
+    datasets: [{
+      backgroundColor: [palette.passed, palette.failed],
+      borderWidth: 0,
+      data: [trend[lastIdx].passed,
+        trend[lastIdx].failed
+      ]
+    }]
+  }
 
-    new Chart(circle_chart, {
-        type: 'doughnut',
-        data: chart_data,
-        options: {
-            legend: { position: 'bottom' },
-            cutoutPercentage: 80,
-            title: {
-                display: true,
-                text: database[framework].name
-            }
-        }
-    });
+  new Chart(circleChart, {
+    type: 'doughnut',
+    data: chartData,
+    options: {
+      legend: { display: false, position: 'bottom' },
+      cutoutPercentage: 80,
+      title: {
+        display: false,
+        text: database[framework].name
+      }
+    }
+  })
 }
 
 // Generate bar chart
-let bar_chart = document.getElementById('bar_chart');
-let bar_chart_labels = [];
-let bar_chart_datasets = [{
-        data: [],
-        backgroundColor: palette.passed,
-        label: "Passed"
-    },
-    {
-        data: [],
-        backgroundColor: palette.failed,
-        label: "Failed"
-    }
+const barChart = document.getElementById('bar_chart')
+const barChartLabels = []
+const barChartDatasets = [{
+  data: [],
+  backgroundColor: palette.passed,
+  label: 'Passed'
+},
+{
+  data: [],
+  backgroundColor: palette.failed,
+  label: 'Failed'
+}
 ]
-for (let framework in database) {
-    let trend = database[framework].trend;
-    let last_idx = trend.length - 1;
-    bar_chart_labels.push(database[framework].name)
-    bar_chart_datasets[0].data.push(trend[last_idx].passed);
-    bar_chart_datasets[1].data.push(trend[last_idx].failed);
+for (const framework in database) {
+  const trend = database[framework].trend
+  const lastIdx = trend.length - 1
+  barChartLabels.push(database[framework].name)
+  barChartDatasets[0].data.push(trend[lastIdx].passed)
+  barChartDatasets[1].data.push(trend[lastIdx].failed)
 }
 
-new Chart(bar_chart, {
-    type: 'bar',
-    data: {
-        labels: bar_chart_labels,
-        datasets: bar_chart_datasets
+new Chart(barChart, {
+  type: 'bar',
+  data: {
+    labels: barChartLabels,
+    datasets: barChartDatasets
+  },
+  options: {
+    title: {
+      fontSize: 40,
+      display: false,
+      text: ''
     },
-    options: {
-        title: {
-            fontSize: 40,
-            display: true,
-            text: ""
+    legend: {
+      display: true,
+      position: 'bottom'
+    },
+    scales: {
+      xAxes: [{
+        barPercentage: 0.4,
+        categoryPercentage: 0.5
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
         },
-        legend: {
-            display: true,
-            position: 'bottom'
-        },
-        scales: {
-            xAxes: [{
-                barPercentage: 0.4,
-                categoryPercentage: 0.5
-            }],
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                },
-                scaleLabel: {
-                    fontSize: 20,
-                    display: true,
-                    labelString: "unit tests"
-                }
-            }]
+        scaleLabel: {
+          fontSize: 20,
+          display: true,
+          labelString: 'unit tests'
         }
+      }]
     }
-});
+  }
+})
 
 // Table search
-let onSearch = (inputId, tableId) => {
-    let input = document.getElementById(inputId);
-    let filter = input.value.toLowerCase();
-    let table = document.getElementById(tableId);
-    let testNames = table.getElementsByClassName("testName")
-    let allFrameworkResults = table.getElementsByClassName("frameworkResults");
+function onSearch (inputId, tableId) {
+  const input = document.getElementById(inputId)
+  const filter = input.value.toLowerCase()
+  const table = document.getElementById(tableId)
+  const testNames = table.getElementsByClassName('testName')
+  const allFrameworkResults = table.getElementsByClassName('frameworkResults')
 
-    for (let i=0; i < testNames.length; i++) {
-        let testNameText = testNames[i].textContent || testNames[i].innerText;
-        for (let j = 0; j < allFrameworkResults.length; j++) {
-            let frameworkResults = allFrameworkResults[j].getElementsByClassName("testResult");
-            if (testNameText.toLowerCase().indexOf(filter) < 0) {
-                testNames[i].style.display = "none";
-                frameworkResults[i].style.display = "none";
-            }
-            else {
-                testNames[i].style.display = "";
-                frameworkResults[i].style.display = "";
-            }
-        }
+  for (let i = 0; i < testNames.length; i++) {
+    const testNameText = testNames[i].textContent || testNames[i].innerText
+    for (let j = 0; j < allFrameworkResults.length; j++) {
+      const frameworkResults = allFrameworkResults[j].getElementsByClassName('testResult')
+      if (testNameText.toLowerCase().indexOf(filter) < 0) {
+        testNames[i].style.display = 'none'
+        frameworkResults[i].style.display = 'none'
+      } else {
+        testNames[i].style.display = ''
+        frameworkResults[i].style.display = ''
+      }
     }
+  }
 }

@@ -24,7 +24,8 @@ ENV ONNX_BACKEND="onnxruntime.backend.backend"
 
 # Install dependencies
 RUN pip3 install onnx
-RUN pip3 install onnxruntime
+RUN pip3 install -i https://test.pypi.org/simple/ ort-nightly==0.5.0.dev1014
+# RUN pip3 install onnxruntime
 ####################################################
 
 CMD . /root/setup/docker-setup.sh && \
