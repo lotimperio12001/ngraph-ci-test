@@ -12,7 +12,7 @@ Use dockerfile template from the exmples to create Dockerfile for new runtime.
 * If you use release version of packages paste created Dockerfile in the new directory <br/> 
 `onnx-backend-scoreboard/runtimes/{new_framework}/stable` <br/>
 otherwise use <br/> 
-`onnx-backend-scoreboard//runtimes/{new_framework}/development`.
+`onnx-backend-scoreboard/runtimes/{new_framework}/development`.
 
 ```
 ############## ONNX Backend dependencies ###########
