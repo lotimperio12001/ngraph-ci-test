@@ -44,6 +44,8 @@ RUN apt-get update && apt-get -y install \
     protobuf-compiler \
     libprotobuf-dev && \
     apt-get clean autoclean && apt-get autoremove -y
+    
+RUN pip3 install onnx
 
 RUN pip3 install onnx
 
