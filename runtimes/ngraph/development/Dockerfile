@@ -47,8 +47,6 @@ RUN apt-get update && apt-get -y install \
     
 RUN pip3 install onnx
 
-RUN pip3 install onnx
-
 # Build nGraph
 WORKDIR /root
 RUN git clone --depth 1 https://github.com/NervanaSystems/ngraph.git
