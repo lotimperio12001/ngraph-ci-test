@@ -1,7 +1,7 @@
 # ONNX Backend Scoreboard
 https://postrational.github.io/ngraph-ci-test/
 
-## Adding new frameweork to the scoreboard
+## Adding new framework to the scoreboard
 
 ### 1. Prepare Dockerfile
 Use dockerfile template from the exmples to create Dockerfile for new runtime.
