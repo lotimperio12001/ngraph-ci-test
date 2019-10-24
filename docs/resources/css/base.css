@@ -116,6 +116,10 @@ h5 {
     color: #c7d4d3;
 }
 
+.transposed {
+    font-size: 9pt;
+}
+
 .transposed tr {
     display: block;
     float: left;
