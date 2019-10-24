@@ -4,7 +4,8 @@ https://postrational.github.io/ngraph-ci-test/
 ## Adding new frameweork to the scoreboard
 
 ### 1. Prepare Dockerfile
-Use dockerfile template link from the exmples to create Dockerfile for new runtime.
+Use dockerfile template from the exmples to create Dockerfile for new runtime.
+
 #### Find and edit code marked `## ONNX Backend dependencies ##`.
 * Set `ONNX_BACKEND` env with python onnx backend module needed to be import in the test script. <br/>
 * Write commands required to install all dependencies. <br/>
