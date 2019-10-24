@@ -45,8 +45,6 @@ RUN apt-get update && apt-get -y install \
     libprotobuf-dev && \
     apt-get clean autoclean && apt-get autoremove -y
     
-RUN pip3 install onnx
-
 # Build nGraph
 WORKDIR /root
 RUN git clone --depth 1 https://github.com/NervanaSystems/ngraph.git
@@ -72,6 +70,8 @@ WORKDIR /root/ngraph-onnx
 RUN pip install -r requirements.txt
 RUN pip install -r requirements_test.txt
 RUN pip install .
+
+RUN pip install onnx==1.6.0
 ####################################################
 
 CMD . /root/setup/docker-setup.sh && \
