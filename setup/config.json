@@ -3,7 +3,7 @@
         "onnxruntime": {
             "name": "ONNX-Runtime",
             "results_dir": "./results/onnx-runtime/stable",
-            "core_packages": ["onnxruntime", "ort-nightly"]
+            "core_packages": ["onnxruntime"]
         },
         "ngraph": {
             "name": "nGraph",
@@ -19,13 +19,11 @@
     "development": {
         "ngraph": {
             "name": "nGraph",
-            "results_dir": "./results/ngraph/development",
-            "core_packages": ["ngraph-onnx", "ngraph-core"]
+            "results_dir": "./results/ngraph/development"
         },
         "pytorch": {
             "name": "Pytorch",
-            "results_dir": "./results/pytorch/development",
-            "core_packages": ["torch"]
+            "results_dir": "./results/pytorch/development"
         }
     },
     "deploy_paths": {
