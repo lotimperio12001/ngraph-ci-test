@@ -1,7 +1,11 @@
 // Generate circle charts
-for (const framework in database) {
-    const circleChart = document.getElementById('circle_' + database[framework].name)
-    const trend = database[framework].trend
+(function () {
+  const content = document.getElementById('content')
+  const database = JSON.parse(content.getAttribute('database'))
+
+  for (const backend in database) {
+    const circleChart = document.getElementById('circle_' + database[backend].name)
+    const trend = database[backend].trend
     const lastIdx = trend.length - 1
     const chartData = {
       labels: ['Passed', 'Failed'],
@@ -22,8 +26,9 @@ for (const framework in database) {
         cutoutPercentage: 80,
         title: {
           display: false,
-          text: database[framework].name
+          text: database[backend].name
         }
       }
     })
   }
+})()
